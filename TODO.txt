@@ -1,0 +1,2 @@
+* improve THREE js demo
+* still random pictures using that lib?

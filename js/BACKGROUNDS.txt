@@ -1,0 +1,3 @@
+0 = weird particle unoptimzed cube zoomed in
+1 = weird particle ring
+2 = world of round spheres and torus knots with changing colors
