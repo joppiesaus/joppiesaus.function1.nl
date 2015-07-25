@@ -1,0 +1,43 @@
+.box
+{
+	float: left;
+	position: relative;
+	width: 20%;
+	padding-bottom: 20%;
+}
+
+.boxInner
+{
+	position: absolute;
+	left: 10px;
+	right: 10px;
+	top: 10px;
+	bottom: 10px;
+	overflow: hidden;
+}
+
+.boxInner img
+{
+	width: 100%;
+}
+
+.boxInner .titleBox
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin-bottom: -50px;
+	background: rgba(0,0,0,0.5);
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+	font-weight: bold;
+
+	transition: margin-bottom 0.2s ease-out;
+}
+
+.boxInner:hover .titleBox
+{
+	margin-bottom: 0;
+}

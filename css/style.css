@@ -1,18 +1,37 @@
+/*
+NOT designed for old browsers(unlike my old website). Requires > IE 8. 
+My target is to make a good site for everyone, so for the colorblind, the dyslectic, the you.
+*/
+
 body, html
 {
     margin: 0;
     padding: 0;
     height: 100%;
     min-height: 100%;
+
+    background-color: Black;/* something dark-blueish? rgb(6, 5, 23);*/
+    color: White;
+    font-weight: 1.3em;
+    /*font-family: Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';*/
+    font-family: "Trebuchet MS", "Trebuchet", Helvetica, sans-serif;
 }
+div
+{
+    margin: 0;
+    padding: 0;
+}
+
 
 section
 {
     width: 100%;
-    min-height: 100%;
+    /*min-height: 100%;*/
     overflow: hidden;
     position: relative;
     z-index: 2; /* background 'n stuff*/
+
+    /*border-bottom: 1px solid brown;*/
 }
 
 .x-align
@@ -28,9 +47,83 @@ section
     width: 100%;
 }
 
+#landing
+{
+    min-height: 100%;
+}
+
+#background
+{
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+#nav
+{
+    position: fixed; /* absolute for section, fixed for scrollable */
+    z-index: 3;
+    right: 0;
+    top: 0;
+
+    /*centering(obsolete)*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, 0);*/
+}
+#nav div
+{
+    text-align: center;
+    display: inline-block;
+    border: 2px solid #0F0;
+    background-color: rgba(0,0,0,0.1);    
+
+    /* TODO: Make it respond faster? I don't like slow animations */
+    transition: background-color 0.22s cubic-bezier(0, 0.99, 1, 1), border 0.3s linear;
+}
+#nav div:hover
+{
+    background-color: #F0F;
+    border: 2px solid #F0F;
+}
+#nav #menuonoff
+{
+    /* TODO: Some colorblinds only see difference when hovering */
+    border: 2px solid #F0F;
+}
+#nav #menuonoff:hover
+{
+    background-color: #0F0;
+    border: 2px solid #0F0;
+    cursor: pointer;
+    transition: none;
+}
+
+#nav a, a:visited, a:active, a:hover
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+#links
+{
+    margin: 10px;
+}
+#links img
+{
+}
+
 #logoarea
 {
     text-align: center;
+}
+
+#logo
+{
+}
+
+#logo>span
+{
+    position: relative;
 }
 
 #sillyquote
@@ -42,7 +135,136 @@ section
     content: "\"";/*not pretty*/
 }
 
-/* inline styling */
+#about
+{
+    background-color: rgba(26, 86, 188, 0.33);
+    max-width: 100%;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+}
+#aboutcontainer
+{
+    margin: 10px;
+    background-color: #1A56BC;
+}
+#about h1
+{
+    padding-left: 10px;
+    line-height: 1.3em;
+    background-color: #FFA80C;
+    background: linear-gradient(90deg, #FFA80C, rgba(0,0,0,0.0));*/
+}
+#about img
+{
+    float: left;
+}
+
+/****************
+grid page specific
+****************/
+.boxInner
+{
+    background-color: brown;
+}
+
+/****************
+media breakpoints
+****************/
+
+/* SMARTPHONES PORTRAIT */
+@media only screen and (min-width: 300px) {
+
+    #nav div
+    {
+        font-size: 11pt;
+        margin: 5px;
+        width: 64px;
+        line-height: 30px;
+    }
+
+    #links
+    {
+        margin: 4px;
+    }
+
+    #logo
+    {
+        font-size: 0.8em;
+    }
+}
+
+/* SMARTPHONES LANDSCAPE */
+@media only screen and (min-width: 480px) {
+
+    #logo
+    {
+        font-size: 1em;
+    }
+}
+
+/* TABLETS PORTRAIT */
+@media only screen and (min-width: 768px) {
+
+    #links
+    {
+        margin: 10px;
+    }
+
+    #logo
+    {
+        font-size: 1.5em;
+    }
+
+    #nav div
+    {
+        font-size: 13pt;
+        margin: 10px;
+        width: 120px;
+        line-height: 50px;
+    }
+}
+
+/* TABLET LANDSCAPE / DESKTOP */
+@media only screen and (min-width: 1024px) {
+    #links img
+    {
+        image-rendering: pixelated;
+        width: 32px;
+    }
+    #logo
+    {
+        font-size: 2em;
+    }
+}
+
+/* LARGE, LARGE MONITORS */
+@media only screen and (min-width: 2560px) {
+    #nav div
+    {
+        font-size: 16pt;
+        margin: 12px;
+        width: 180px;
+        line-height: 70px;
+    }
+
+    #logo
+    {
+        font-size: 3em;
+    }
+}
+
+/* Oh my god it's 4K */
+@media only screen and (min-width: 3840px) {
+    #logo
+    {
+        font-size: 4em;
+    }
+}
+
+/****************
+inline styling 
+****************/
 .warning
 {
     color: #FFF;
