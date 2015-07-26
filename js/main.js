@@ -4,6 +4,15 @@ function ge(id)
 	return document.getElementById(id);
 }
 
+// Requires a script
+function freq(f,c)
+{
+	var s = document.createElement("script");
+	s.src= f + ".js";
+	s.onreadystagechanged = s.onload = c;
+	document.body.appendChild(s);
+}
+
 var LOGO_TWINKLE_OFFSET = "5px";
 
 var logo = 

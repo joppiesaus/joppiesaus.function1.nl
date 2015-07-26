@@ -47,6 +47,21 @@ section
     width: 100%;
 }
 
+#drawCanvas
+{
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    padding: 0;
+    overflow: hidden;
+}
+#drawCanvas>canvas
+{
+    margin: 0;
+    overflow: hidden;
+}
+
 #landing
 {
     min-height: 100%;

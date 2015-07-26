@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <!--
 TODO:
+* 3D cube as characters as background...?
+* THINK!
 * Background
 * Make them title pretty
 * navbar
@@ -16,7 +18,7 @@ TODO:
 	<link rel="stylesheet" type="text/css" href="css/grid.css">
 </head>
 <body>
-    <div id="background"></div>
+    <div id="drawCanvas"></div>
 	
 	<div id="nav"><!-- nice "projects | about | derp" bar above -->
         <a href="#about"><div>About</div></a>
@@ -66,6 +68,10 @@ TODO:
 		<div id="aboutcontainer">
 			<p>Hi! I'm Job van der Zweep AKA joppiesaus, a <span id="joppiesausesAge">?</span> year old geek from holland.</p>
 			<p>I like to program. And to do stuff with electronics. And to make other stuff. And I like computers.</p>
+			<p>Today I have trouble writing this text. I have also trouble with what I want with this website. I made stuff, but most of it is just <code>hurr durr bad code but i learnd its crap but i learnedd haeh</code>-stuff.
+			<em>What project am I the most proud of?</em>
+			Right know the feeling is this: I don't know even which tools I prefer to work with. I don't know what I want.
+			But that's ok. That's the feeling I have <em>right now</em>, which gets weaker as this text is going to finish. And you know, when you're programming, usually stuff like this happens.</p>
 		</div>
     <!--<p>im <span id="joppiesausesAge">?</span> years old xdd</p>-->
     </section>	
@@ -74,13 +80,15 @@ TODO:
         <div class="box">
             <div class="boxInner">
                 <p><code>hurrdurr</code> <span class="warning">llamas may escape and terrorize you.</span></p>
+				<p>People online seem creepier.</p>
 				<div class="titleBox">hurr durr imma sheep</div>
             </div>
         </div>
 		<div class="box">
             <div class="boxInner">
-                <p><code>hurrdurr</code> <span class="warning">llamas may escape and terrorize you.</span></p>
-				<div class="titleBox">meeeeh</div>
+                <p>James bond could be watching you right know.</p>
+				<code>Is the background nice? Isn't it too flashy?</code>
+				<div class="titleBox">ILLUMINATI</div>
             </div>
         </div>
     </section>
@@ -91,6 +99,11 @@ window.onload = function()
 {
 	ge("joppiesausesAge").textContent = joppiesausesAge();
 	setupLogo();
+	
+	if (window.WebGLRenderingContext)
+	{
+		freq("/js/background3.min");
+	}
 };
     </script>
 </body>
