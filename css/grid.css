@@ -1,43 +1,60 @@
 .box
 {
-	float: left;
-	position: relative;
-	width: 20%;
-	padding-bottom: 20%;
+    float: left;
+    position: relative;
+    width: 20%;
+    padding-bottom: 20%;
+}
+
+.smallBox
+{
+    float: left;
+    position: relative;
+    width: 50%;
+    padding-bottom: 50%;
+}
+.smallBox .boxInner
+{
+    background-color: #00f;
+}
+.smallBox .boxInner:hover
+{
+    background-color: #0f0;
 }
 
 .boxInner
 {
-	position: absolute;
-	left: 10px;
-	right: 10px;
-	top: 10px;
-	bottom: 10px;
-	overflow: hidden;
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+    overflow: hidden;
+    padding: 5px;
 }
 
 .boxInner img
 {
-	width: 100%;
+    width: 100%;
 }
 
 .boxInner .titleBox
 {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin-bottom: -50px;
-	background: rgba(0,0,0,0.5);
-	color: #fff;
-	padding: 10px;
-	text-align: center;
-	font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: -50px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
 
-	transition: margin-bottom 0.2s ease-out;
+    transition: margin-bottom 0.2s ease-out;
 }
 
 .boxInner:hover .titleBox
 {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }

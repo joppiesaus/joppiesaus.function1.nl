@@ -14,55 +14,58 @@ TODO:
     <title>joppiesaus!</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/grid.css">
+    <link rel="stylesheet" type="text/css" href="css/grid.css">
 </head>
 <body>
     <div id="drawCanvas"></div>
-	
-	<div id="nav"><!-- nice "projects | about | derp" bar above -->
-        <a href="#about"><div>About</div></a>
-		<a href="#works"><div>Projects</div></a>
-		<div id="menuonoff" onclick="togglemenu()">Explore</div>
-    </div>
-	
-    <section id="landing">
-	
-        <div id="links"><!-- on the left somewhere -->
-			<a href="http://stackexchange.com/users/3097979/joppiesaus"><img src="/img/ico/stackexchange.png" alt="" title="Stack Exchange"/></a>
-			<a href="http://steamcommunity.com/id/joppiesausisok"><img src="/img/ico/steam.png" alt="" title="Steam"/></a>
-			<a href="https://www.youtube.com/c/DJoppiesaus"><img src="/img/ico/youtube.png" alt="" title="YouTube"/></a>
-			<a href="http://twitch.tv/joppiesausisok/"><img src="/img/ico/twitch.png" alt="" title="Twitch"/></a>
-			<a href="http://ludumdare.com/compo/author/job_/"><img src="/img/ico/ld.png" alt="" title="Ludum Dare"/></a>
-			<a href="https://www.khanacademy.org/profile/joppiesaus/"><img src="/img/ico/khan.png" alt="" title="Khan Academy"/></a>
-			<a href="https://github.com/joppiesaus/"><img src="/img/ico/github.png" alt="" title="GitHub"/></a>
-			<a href="mailto:job@function1.nl"><img src="/img/ico/email.png" alt="" title="Email me(job@function1.nl)"/></a>
-        </div>
     
-        <div class="y-align">
-            <div id="logoarea">
-                <p id="sillyquote">That wasn't the best idea, was it?</p>
-                
-                <!-- IDEA:
+    <noscript>I recommend turning JavaScript on, I'm doing nothing evil!</noscript>
+    
+    <div id="nav"><!-- nice "projects | about | derp" bar above -->
+        <a href="#about"><div>About</div></a>
+        <a href="#works"><div>Projects</div></a>
+        <div id="menuonoff" onclick="togglemenu()">Explore</div>
+    </div>
+    
+    <section id="landing">
+    
+    <div id="links"><!-- on the left somewhere -->
+        <a href="http://stackexchange.com/users/3097979/joppiesaus"><img src="/img/ico/stackexchange.png" alt="" title="Stack Exchange"/></a>
+        <a href="http://steamcommunity.com/id/joppiesausisok"><img src="/img/ico/steam.png" alt="" title="Steam"/></a>
+        <a href="https://www.youtube.com/c/DJoppiesaus"><img src="/img/ico/youtube.png" alt="" title="YouTube"/></a>
+        <a href="http://twitch.tv/joppiesausisok/"><img src="/img/ico/twitch.png" alt="" title="Twitch"/></a>
+        <a href="http://ludumdare.com/compo/author/job_/"><img src="/img/ico/ld.png" alt="" title="Ludum Dare"/></a>
+        <a href="https://www.khanacademy.org/profile/joppiesaus/"><img src="/img/ico/khan.png" alt="" title="Khan Academy"/></a>
+        <a href="https://github.com/joppiesaus/"><img src="/img/ico/github.png" alt="" title="GitHub"/></a>
+        <a href="mailto:job@function1.nl"><img src="/img/ico/email.png" alt="" title="Email me(job@function1.nl)"/></a>
+    </div>
+    
+    <div class="y-align">
+        <div id="logoarea">
+            <p id="sillyquote">That wasn't the best idea, was it?</p>
             
-                joppiesaus logo with interval flickering things
-                changing colors and stuff, per character
+            <!-- IDEA:
+        
+            joppiesaus logo with interval flickering things
+            changing colors and stuff, per character
+        
+            -->
             
-                -->
-                
-                <pre id="logo">░░░░▒▀░░▒███░░▒████░░▒████░░▒▀░▒████░▒████░░▒███░░▒█░░▒█░▒████
+            <pre id="logo">░░░░▒▀░░▒███░░▒████░░▒████░░▒▀░▒████░▒████░░▒███░░▒█░░▒█░▒████
 ░░░░▒█░▒█░░▒█░▒█░░▒█░▒█░░▒█░▒█░▒█░░░░▒█░░░░▒█░░▒█░▒█░░▒█░▒█░░░
 ░░░░▒█░▒█░░▒█░▒████░░▒████░░▒█░▒████░░▒██░░▒█████░▒█░░▒█░░▒██░
 ▒█░░▒█░▒█░░▒█░▒█░░░░░▒█░░░░░▒█░▒█░░░░░░░▒█░▒█░░▒█░▒█░░▒█░░░░▒█
 ░▒███░░░▒███░░▒█░░░░░▒█░░░░░▒█░▒████░▒████░▒█░░▒█░░▒███░░▒████</pre>
-                
-                <p id="logoslogan">I like to program 'n stuff</p>
-            </div>
+            
+            <p id="logoslogan">I like to program 'n stuff</p>
         </div>
+    </div>
         
     </section>
 	
-	<section id="about">
+	<!--<section id="about">
 		<h1>About</h1>
 		<img src="/img/me.png" alt="A picture of me" />
 		<div id="aboutcontainer">
@@ -76,34 +79,55 @@ TODO:
     <!--<p>im <span id="joppiesausesAge">?</span> years old xdd</p>-->
     </section>	
     <section id="works">
-		<h1>Projects</h1>
+        <h1>Projects</h1>
         <div class="box">
             <div class="boxInner">
                 <p><code>hurrdurr</code> <span class="warning">llamas may escape and terrorize you.</span></p>
-				<p>People online seem creepier.</p>
-				<div class="titleBox">hurr durr imma sheep</div>
+                <p>People online seem creepier.</p>
+                <div class="titleBox">hurr durr imma sheep</div>
             </div>
         </div>
-		<div class="box">
+        <div class="box">
             <div class="boxInner">
                 <p>James bond could be watching you right know.</p>
-				<code>Is the background nice? Isn't it too flashy?</code>
-				<div class="titleBox">ILLUMINATI</div>
+                <code>Is the background nice? Isn't it too flashy?</code>
+                <div class="titleBox">ILLUMINATI</div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="boxInner">
+                <div class="smallBox">
+                    <div class="boxInner">
+                    oh
+                    </div>
+                </div>
+                <div class="smallBox">
+                    <div class="boxInner">
+                    no
+                    </div>
+                </div>
+                <div class="smallBox">
+                    <div class="boxInner">
+                    what
+                    </div>
+                </div>
+                <div class="smallBox">
+                    <div class="boxInner">
+                    help
+                    </div>
+                </div>
+                
+                <div class="titleBox">ILLUMINATI - copy.exe</div>
             </div>
         </div>
     </section>
-
-	<script src="js/main.js"></script>
+    
+    <script src="js/main.js"></script>
     <script>
 window.onload = function()
 {
-	ge("joppiesausesAge").textContent = joppiesausesAge();
-	setupLogo();
-	
-	if (window.WebGLRenderingContext)
-	{
-		freq("/js/background3.min");
-	}
+    //ge("joppiesausesAge").textContent = joppiesausesAge();
+    setupLogo();
 };
     </script>
 </body>

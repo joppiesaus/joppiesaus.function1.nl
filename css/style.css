@@ -136,9 +136,13 @@ section
 {
 }
 
-#logo>span
+#logo > span
 {
     position: relative;
+}
+#logo > span:hover
+{
+    color: #00f;
 }
 
 #sillyquote
@@ -150,7 +154,7 @@ section
     content: "\"";/*not pretty*/
 }
 
-#about
+/*#about
 {
     background-color: rgba(26, 86, 188, 0.33);
     max-width: 100%;
@@ -168,12 +172,12 @@ section
     padding-left: 10px;
     line-height: 1.3em;
     background-color: #FFA80C;
-    background: linear-gradient(90deg, #FFA80C, rgba(0,0,0,0.0));*/
+    background: linear-gradient(90deg, #FFA80C, rgba(0,0,0,0.0));
 }
 #about img
 {
     float: left;
-}
+}*/
 
 /****************
 grid page specific
