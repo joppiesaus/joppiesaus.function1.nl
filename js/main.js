@@ -83,8 +83,8 @@ function setupLogo()
 		newHTML += '<span id="logo_' + x++ + ',' + y + '">' + l[i] + '</span>'; 
 	}
 	
-	logo.width = x + 1;
-	logo.height = y + 1;
+	logo.width = x;
+	logo.height = y;
 	
 	logo.element.innerHTML = newHTML;
 	
