@@ -1,6 +1,6 @@
 /* I took great inspiration from dataworld(http://mrdoob.com/files/temp/xplsv_dataworld/index.html) for this one*/
 
-freq("/lib/three/71",function(){
+freq("/lib/three/71", function(){
 
 var FIELD_WIDTH = 800;
 
@@ -14,7 +14,7 @@ var group;
 var clock = new THREE.Clock();
 
 function init()
-{	
+{
 	var container = document.getElementById( "drawCanvas" );
 	
 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
@@ -164,20 +164,18 @@ function animate()
 		e.rotation.z += 0.4 * delta;
 		
 		e.position.z += 100 * delta;
-		if ( e.position.z > FIELD_WIDTH )
+		while ( e.position.z > FIELD_WIDTH )
 		{
-			e.position.z = 0;
+			e.position.z -= FIELD_WIDTH;
 		}
 		
 		applyChannels( e, emissive );
-		//e.children[ 0 ].material.emissive[ e.choosenColor ] = emissive;
-		//e.children[ 0 ].scale.set( scale, scale, scale );
 		
 	} );
 	
 	if ( ( prevLightChange += delta ) > 1 )
 	{
-		prevLightChange -= 1;
+		prevLightChange = 0; // Not -= 1, because otherwise it will keep flickering when switching pages
 		light.color.setHex( Math.random() * 0xffffff );
 		light.position.x = Math.random() * FIELD_WIDTH - FIELD_WIDTH / 2;
 		light.position.y = Math.random() * FIELD_WIDTH - FIELD_WIDTH / 2;
