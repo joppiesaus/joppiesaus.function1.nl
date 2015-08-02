@@ -1,4 +1,4 @@
-freq("/lib/three/71",function(){
+freq("lib/three/71",function(){
 
 // Inspired by & based on: http://threejs.org/examples/webgl_lod.html
 

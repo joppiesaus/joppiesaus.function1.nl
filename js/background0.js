@@ -1,4 +1,4 @@
-freq("/lib/three/67",function(){
+freq("lib/three/67",function(){
 
 var Particles = 50000;
 var camera, scene, renderer, particleSystem;

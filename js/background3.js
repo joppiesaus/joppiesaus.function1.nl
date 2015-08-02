@@ -1,6 +1,6 @@
 /* I took great inspiration from dataworld(http://mrdoob.com/files/temp/xplsv_dataworld/index.html) for this one*/
 
-freq("/lib/three/71", function(){
+freq("lib/three/71", function(){
 
 var FIELD_WIDTH = 800;
 
