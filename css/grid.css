@@ -1,3 +1,5 @@
+/* inspiration taken from http://spirare.js.org Coincidence? I think not!!!1!~1!~` */
+
 .box
 {
     float: left;
@@ -6,18 +8,34 @@
     padding-bottom: 20%;
 }
 
-.smallBox
+.boxBig
+{
+    float: left;
+    position: relative;
+    width: 40%;
+    padding-bottom: 20%;
+}
+
+.boxHuge
+{
+    float: left;
+    position: relative;
+    width: 60%;
+    padding-bottom: 20%;
+}
+
+.childBox
 {
     float: left;
     position: relative;
     width: 50%;
     padding-bottom: 50%;
 }
-.smallBox .boxInner
+.childBox .boxInner
 {
     background-color: #00f;
 }
-.smallBox .boxInner:hover
+.childBox .boxInner:hover
 {
     background-color: #0f0;
 }
@@ -36,6 +54,10 @@
 .boxInner img
 {
     width: 100%;
+    margin: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
 }
 
 .boxInner .titleBox
@@ -57,4 +79,51 @@
 .boxInner:hover .titleBox
 {
     margin-bottom: 0;
+}
+
+
+
+/* TODO: media breakpoints for larger tiles, check if size and stuff is correct */
+
+/****************
+media breakpoints
+****************/
+@media only screen and (max-width : 480px) {
+  /* Smartphone view: 1 tile */
+  .box {
+    width: 100%;
+    padding-bottom: 100%;
+  }
+}
+
+@media only screen and (max-width : 650px) and (min-width : 481px) {
+  /* Tablet view: 2 tiles */
+  .box {
+    width: 50%;
+    padding-bottom: 50%;
+  }
+}
+
+@media only screen and (max-width : 1050px) and (min-width : 651px) {
+  /* Small desktop / ipad view: 3 tiles */
+  .box {
+    width: 33.3%;
+    padding-bottom: 33.3%;
+  }
+}
+
+@media only screen and (max-width : 1290px) and (min-width : 1051px) {
+  /* Medium desktop: 4 tiles */
+  .box {
+    width: 25%;
+    padding-bottom: 25%;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+    /* Big monitors! Moar tiles! */
+    .box {
+        width: 20%;
+        padding-bottom: 20%;
+    }
 }

@@ -76,7 +76,7 @@ section
 
 #nav
 {
-    position: fixed; /* absolute for section, fixed for scrollable */
+    position: absolute; /* absolute for section, fixed for scrollable */
     z-index: 3;
     right: 0;
     top: 0;
@@ -121,6 +121,8 @@ section
 
 #links
 {
+    z-index: 3;
+    position: fixed;
     margin: 10px;
 }
 #links img
@@ -154,30 +156,6 @@ section
     content: "\"";/*not pretty*/
 }
 
-/*#about
-{
-    background-color: rgba(26, 86, 188, 0.33);
-    max-width: 100%;
-    padding-bottom: 10px;
-    padding-left: 0;
-    padding-right: 0;
-}
-#aboutcontainer
-{
-    margin: 10px;
-    background-color: #1A56BC;
-}
-#about h1
-{
-    padding-left: 10px;
-    line-height: 1.3em;
-    background-color: #FFA80C;
-    background: linear-gradient(90deg, #FFA80C, rgba(0,0,0,0.0));
-}
-#about img
-{
-    float: left;
-}*/
 
 /****************
 grid page specific
@@ -308,4 +286,25 @@ code
     margin: 0;
     border-radius: 3px;
     background-color: rgba(0,0,0,0.04);
+}
+
+/* TODO: Something shady is going on. Fix this */
+.dark
+{
+    color: #000;
+}
+.light
+{
+    color: #fff;
+}
+
+.light a, .light a:visited, .dark a:hover, .dark a:active
+{
+    color: #000;
+    background-color: rgba(255,255,255,0.5);
+}
+.light a:hover, .light a:active, .dark a, .dark a:visited
+{
+    color: #fff;
+    background-color: rgba(0,0,0,0.5);
 }
