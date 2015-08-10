@@ -94,6 +94,16 @@ media breakpoints
     width: 100%;
     padding-bottom: 100%;
   }
+
+  .boxBig {
+    width: 100%;
+    padding-bottom: 200%;
+  }
+
+  .boxHuge {
+    width: 100%;
+    padding-bottom: 300%;
+  }
 }
 
 @media only screen and (max-width : 650px) and (min-width : 481px) {
@@ -102,12 +112,32 @@ media breakpoints
     width: 50%;
     padding-bottom: 50%;
   }
+
+  .boxBig {
+    width: 100%;
+    padding-bottom: 50%;
+  }
+
+  .boxHuge {
+    width: 100%;
+    padding-bottom: 100%;
+  }
 }
 
 @media only screen and (max-width : 1050px) and (min-width : 651px) {
   /* Small desktop / ipad view: 3 tiles */
   .box {
     width: 33.3%;
+    padding-bottom: 33.3%;
+  }
+
+  .boxBig {
+    width: 66.6%;
+    padding-bottom: 33.3%;
+  }
+
+  .boxHuge {
+    width: 100%;
     padding-bottom: 33.3%;
   }
 }
@@ -118,12 +148,34 @@ media breakpoints
     width: 25%;
     padding-bottom: 25%;
   }
+
+  .boxBig {
+    width: 50%;
+    padding-bottom: 25%;
+  }
+
+  .boxHuge {
+    width: 75%;
+    padding-bottom: 25%;
+  }
 }
 
-@media only screen and (min-width: 1440px) {
-    /* Big monitors! Moar tiles! */
-    .box {
-        width: 20%;
-        padding-bottom: 20%;
-    }
+/* ... Default 5 tiles ... */
+
+@media only screen and (min-width: 2560px) {
+  /* Big monitors! Moar tiles! 6 of 'em! */
+  .box {
+    width: 16.6%;
+    padding-bottom: 16.6%;
+  }
+
+  .boxBig {
+    width: 33.2%;
+    padding-bottom: 16.6%;
+  }
+
+  .boxHuge {
+    width: 49.8%;
+    padding-bottom: 16.6%;
+  }
 }
