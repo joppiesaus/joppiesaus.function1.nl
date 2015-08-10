@@ -288,23 +288,13 @@ code
     background-color: rgba(0,0,0,0.04);
 }
 
-/* TODO: Something shady is going on. Fix this */
-.dark
+.grid a, .grid a:visited
 {
     color: #000;
+    background-color: rgba(255, 255, 255, 0.5);
 }
-.light
+.grid a:hover, .grid a:active
 {
     color: #fff;
-}
-
-.light a, .light a:visited, .dark a:hover, .dark a:active
-{
-    color: #000;
-    background-color: rgba(255,255,255,0.5);
-}
-.light a:hover, .light a:active, .dark a, .dark a:visited
-{
-    color: #fff;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.50);
 }
