@@ -1,6 +1,12 @@
 /*
 NOT designed for old browsers(unlike my old website). Requires > IE 8. 
 My target is to make a good site for everyone, so for the colorblind, the dyslectic, the you.
+
+Gosh CSS is hard. I mean, why do so many items need two divs instead of one to reach the desired effect?
+
+Interesting:
+http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/
+https://css-tricks.com/seamless-responsive-photo-grid/
 */
 
 body, html
