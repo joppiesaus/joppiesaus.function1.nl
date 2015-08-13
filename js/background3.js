@@ -2,7 +2,8 @@
 
 freq("lib/three/71", function(){
 
-var FIELD_WIDTH = 800;
+var FIELD_SIZE = 800;
+var RETURN_POINT = FIELD_SIZE + 100;
 
 var E_CHANNELS_ARR = [];
 
@@ -18,7 +19,7 @@ function init()
 	var container = document.getElementById( "drawCanvas" );
 	
 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-	camera.position.set( FIELD_WIDTH / 2, FIELD_WIDTH / 2, FIELD_WIDTH + 10);
+	camera.position.set( FIELD_SIZE / 2, FIELD_SIZE / 2, FIELD_SIZE + 10);
 	camera.rotation.set( 0, 0, 0 );
 	
 	// Create colors!
@@ -73,9 +74,9 @@ function init()
 	scene.add( light );
 	
 	light.color.setHex( Math.random() * 0xffffff );
-	light.position.x = Math.random() * FIELD_WIDTH - FIELD_WIDTH / 2;
-	light.position.y = Math.random() * FIELD_WIDTH - FIELD_WIDTH / 2;
-	light.position.z = Math.random() * FIELD_WIDTH - FIELD_WIDTH / 2;
+	light.position.x = Math.random() * FIELD_SIZE - FIELD_SIZE / 2;
+	light.position.y = Math.random() * FIELD_SIZE - FIELD_SIZE / 2;
+	light.position.z = Math.random() * FIELD_SIZE - FIELD_SIZE / 2;
 	
 	group = new THREE.Group();
 	scene.add( group );
@@ -164,9 +165,9 @@ function animate()
 		e.rotation.z += 0.4 * delta;
 		
 		e.position.z += 100 * delta;
-		while ( e.position.z > FIELD_WIDTH )
+		while ( e.position.z > RETURN_POINT )
 		{
-			e.position.z -= FIELD_WIDTH;
+			e.position.z -= RETURN_POINT;
 		}
 		
 		applyChannels( e, emissive );
@@ -177,9 +178,9 @@ function animate()
 	{
 		prevLightChange = 0; // Not -= 1, because otherwise it will keep flickering when switching pages
 		light.color.setHex( Math.random() * 0xffffff );
-		light.position.x = Math.random() * FIELD_WIDTH - FIELD_WIDTH / 2;
-		light.position.y = Math.random() * FIELD_WIDTH - FIELD_WIDTH / 2;
-		light.position.z = Math.random() * FIELD_WIDTH - FIELD_WIDTH / 2;
+		light.position.x = Math.random() * FIELD_SIZE - FIELD_SIZE / 2;
+		light.position.y = Math.random() * FIELD_SIZE - FIELD_SIZE / 2;
+		light.position.z = Math.random() * FIELD_SIZE - FIELD_SIZE / 2;
 		
 		group.children.forEach( function ( e ) {
 			randomChannels( e );
