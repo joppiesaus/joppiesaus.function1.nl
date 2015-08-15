@@ -3,6 +3,8 @@
 TODO:
 * Fix showoff class(entering goes smooth, but leaving not)
 * Fix titleBox for childBox(hovering on boxInner instead; only on things with a titleBox)
+* Links add odd
+o think about json generation!
 * Other content!!1
 -->
 <html>
@@ -139,12 +141,12 @@ TODO:
                     <div class="titleBox">ASCII 3D chair</div>
                 </div>
                 <div class="childBox">
-                    <div class="boxInner">
-                    again
+                    <div class="boxInner projectPopup" data-project-popup='{"name":"TOLD YOU ☻","description":"DONT DO THAT EVER AGAIN","links":[["i promis","img/InternetDOSIcon.PNG"]]}'>
+                        don't click herereERER~~~!1
                     </div>
                 </div>
                 <div class="childBox">
-                    <div class="boxInner">
+                    <div class="boxInner projectPopup" data-project-popup='{"description":"im a ninja"}'>
                     -ish
                     </div>
                 </div>
@@ -190,19 +192,84 @@ TODO:
     <section id="footer">
         <a href="">Give me the old layout back!</a>
     </section>-->
-    
+
+    <!-- WARNING: Selecting goes by element index, not by class name! -->
+    <div id="projectPopup">
+        <h1 class="projectName"></h1>
+        <p class="projectDescription"></p>
+
+        <ul id="links"></ul>
+
+        <div class="closeButton" onclick="closeProjectPopup()">Close</div>
+    </div>
+
     <script src="js/main.js"></script>
     <script>
+
 window.onload = function()
 {
     if (window.WebGLRenderingContext)
     {
         freq("js/background3");
     }
+
     setupLogo();
     ge("joppiesausesAge").textContent = joppiesausesAge();
 
+    
+    // Y U NO .forEach???1! I CRY
+    var projectPopups = document.querySelectorAll(".projectPopup");
+
+    // Query all elements that have a popup defined, and give them their click listener with the data so that they function
+    for (var i = 0; i < projectPopups.length; i++)
+    {
+        var e = projectPopups[i];
+
+        // Is javascript ever going to have nice closures?
+        e.onclick = (function(a)
+            {
+                return function()
+                {
+                    // Passing in the pointer to the argument so it's modifyable for the code guru who visits this page
+                    openProjectPopup(a.dataset.projectPopup);
+                };
+            })(e);
+
+        // And why not make a CSS class?
+        // Because javascript may be disabled.
+        e.style.cursor = "pointer"; 
+    }
 };
+
+// Opens the project popup and fills it in with data json
+function openProjectPopup(json)
+{
+    var data = JSON.parse(json);
+
+    var pEl = ge("projectPopup");
+
+    pEl.children[0].textContent = data.name;
+    pEl.children[1].textContent = data.description;
+
+    // Erase old link data if there's any
+    pEl.children[2].innerHTML = "";
+
+    if (data.links)
+    {
+        data.links.forEach(function(e){
+            pEl.children[2].innerHTML += "<li><a href=\"" + e[1] + "\">" + e[0] + "</a>";
+        });
+    }
+
+    // And display it
+    pEl.style.display = "block";
+}
+
+// Closes the project popup
+function closeProjectPopup()
+{
+    ge("projectPopup").style.display = "none";
+}
     </script>
 </body>
 </html>
