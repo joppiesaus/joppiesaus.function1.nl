@@ -68,6 +68,16 @@ section
     overflow: hidden;
 }
 
+noscript
+{
+    display: inline-block;
+    background-color: #00e;
+    color: #fff;
+    width: 100%;
+    padding: 8px;
+    font-weight: bold;
+}
+
 #landing
 {
     min-height: 100%;
