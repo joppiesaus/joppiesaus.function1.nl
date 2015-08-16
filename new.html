@@ -4,7 +4,8 @@ TODO:
 * Fix showoff class(entering goes smooth, but leaving not)
 * Fix titleBox for childBox(hovering on boxInner instead; only on things with a titleBox)
 * Links add odd
-o think about json generation!
+* improve json generation
+* cleanup code(moving stuff to scripts?)
 * Other content!!1
 -->
 <html>
@@ -23,7 +24,7 @@ o think about json generation!
     
     <div id="nav"><!-- nice "projects | about | derp" bar above -->
         <a href="#about"><div>About</div></a>
-        <a href="#works"><div>Projects</div></a>
+        <a href="#projects"><div>Projects</div></a>
         <div id="menuonoff" onclick="togglemenu()">Explore</div>
     </div>
     
@@ -64,7 +65,7 @@ o think about json generation!
 
 
     </section>	
-    <section id="works" class="grid">
+    <section id="projects" class="grid">
         <div class="box">
             <a href="img/athing.png">
                 <div class="boxInner">
@@ -204,6 +205,20 @@ o think about json generation!
 
     <script src="js/main.js"></script>
     <script>
+var smallTiles = 
+[
+    {
+        "title": "ur a sheep",
+        "description": "sheeps are sheeps, because they are used to sheep. Unfortunatelly, sheeps didn\'t like the sheep very much, so they kicked him. But the sheep executed <code>xeyes</code>, so they\'re all doomed.",
+        "links": [["hi","#"],["i luv sheep","https://en.wikipedia.org/wiki/Sheep"]],
+        "image": "img/aoe2sheep.png"
+    },
+    {
+        "title": "BEWARE THE COWS",
+        "description": "Lorem ipsum dolor sit am- COOOOOOOOOOWWWWWWWWSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS DO SOMETHING THE END IS NEARRRRRRRRRRR",
+        "links": [["COWSSSS","https://en.wikipedia.org/wiki/Cow"],["COOOOOOOOOWSSSS","http://www.saawinternational.org/cow2.jpg"]]
+    }
+];
 
 window.onload = function()
 {
@@ -215,7 +230,6 @@ window.onload = function()
     setupLogo();
     ge("joppiesausesAge").textContent = joppiesausesAge();
 
-    
     // Y U NO .forEach???1! I CRY
     var projectPopups = document.querySelectorAll(".projectPopup");
 
@@ -229,22 +243,82 @@ window.onload = function()
             {
                 return function()
                 {
-                    // Passing in the pointer to the argument so it's modifyable for the code guru who visits this page
-                    openProjectPopup(a.dataset.projectPopup);
+                    openProjectPopup(a);
                 };
-            })(e);
+            })(JSON.parse(e.dataset.projectPopup));
 
         // And why not make a CSS class?
         // Because javascript may be disabled.
         e.style.cursor = "pointer"; 
     }
+
+    // Create small project tiles out of the data
+    var grid = ge("projects");
+    var currentTile = null; // actually the boxInner of the curren tile
+    var tileCount = 3;
+
+    var createTile = function(parent, classes)
+    {
+        var tile = document.createElement("div");
+        tile.className = classes;
+
+        var ct = document.createElement("div");
+        ct.className = "boxInner";
+
+        tile.appendChild(ct);
+        parent.appendChild(tile);
+
+        return ct;
+    };
+
+    /* It's valid jason, so if you want to load it differently, just pass it in JSON.parse.
+    JSON.parse(smallTiles)
+    */
+    smallTiles.forEach(function(e)
+        {
+            tileCount++;
+            if (tileCount >= 4)
+            {
+                currentTile = createTile(grid, "box boxDisable");
+                tileCount = 0;
+            }
+
+            var innerTile = createTile(currentTile, "childBox");
+            innerTile.className += " projectPopup";
+            innerTile.style.cursor = "pointer";
+            innerTile.onclick = (function(a)
+                {
+                    return function()
+                    {
+                        openProjectPopup(a);
+                    }
+                })(e);
+
+            // Title box
+            var tEl = document.createElement("div");
+            tEl.className = "titleBox";
+            tEl.innerHTML = e.title;
+            innerTile.parentNode.appendChild(tEl);
+
+            // Image
+            if (e.image)
+            {
+                var img = document.createElement("img");
+                img.className = "tileImage";
+                img.src = e.image;
+                innerTile.appendChild(img);
+            }
+            else // When no image provided, fall back to a title
+            {
+                innerTile.innerHTML += e.title;
+            }
+        }
+    );
 };
 
-// Opens the project popup and fills it in with data json
-function openProjectPopup(json)
+// Opens the project popup and fills it in with data obj
+function openProjectPopup(data)
 {
-    var data = JSON.parse(json);
-
     var pEl = ge("projectPopup");
 
     pEl.children[0].textContent = data.title;
