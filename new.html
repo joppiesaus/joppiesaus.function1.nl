@@ -141,7 +141,7 @@ o think about json generation!
                     <div class="titleBox">ASCII 3D chair</div>
                 </div>
                 <div class="childBox">
-                    <div class="boxInner projectPopup" data-project-popup='{"name":"TOLD YOU ☻","description":"DONT DO THAT EVER AGAIN","links":[["i promis","img/InternetDOSIcon.PNG"]]}'>
+                    <div class="boxInner projectPopup" data-project-popup='{"title":"I am sorry","description":"It was a nice \"Test project\", where I did all sorts of (useless) stuff. It was originally intended to create this page&#39;s background, but I managed to make a nice game from it. Comes with a *nice* *config format* and reasonable code.<span class=\"warning\">hurr durr</span>","links":[["i promis","img/InternetDOSIcon.PNG"],["diwnload","img/athing.png"]]}'>
                         don't click herereERER~~~!1
                     </div>
                 </div>
@@ -195,10 +195,9 @@ o think about json generation!
 
     <!-- WARNING: Selecting goes by element index, not by class name! -->
     <div id="projectPopup">
-        <h1 class="projectName"></h1>
-        <p class="projectDescription"></p>
-
-        <ul id="links"></ul>
+        <h2 class="projectTitle"></h2>
+        <ul class="links"></ul>
+        <p class="projectDescription"></p>        
 
         <div class="closeButton" onclick="closeProjectPopup()">Close</div>
     </div>
@@ -248,16 +247,16 @@ function openProjectPopup(json)
 
     var pEl = ge("projectPopup");
 
-    pEl.children[0].textContent = data.name;
-    pEl.children[1].textContent = data.description;
+    pEl.children[0].textContent = data.title;
+    pEl.children[2].innerHTML = data.description;
 
     // Erase old link data if there's any
-    pEl.children[2].innerHTML = "";
+    pEl.children[1].innerHTML = "";
 
     if (data.links)
     {
         data.links.forEach(function(e){
-            pEl.children[2].innerHTML += "<li><a href=\"" + e[1] + "\">" + e[0] + "</a>";
+            pEl.children[1].innerHTML += "<li><a href=\"" + e[1] + "\">" + e[0] + "</a>";
         });
     }
 

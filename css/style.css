@@ -181,18 +181,67 @@ project popup
 #projectPopup
 {
     z-index: 4;
-    color: #fff;
-    background-color: #11a;
+    color: #000;
+    background-color: #fff;
     display: none;
 
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
 
-    /* hurr durr */
-    width: calc(100% - 71px);
+    transform: translate(-50%, -50%);
+}
+
+#projectPopup p
+{
     padding: 10px;
+}
+
+#projectPopup .closeButton
+{
+    background-color: #6700D6;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+#projectPopup .closeButton:hover
+{
+    background-color: #f0f;
+}
+
+#projectPopup .projectTitle
+{
+    color: #fff;
+
+    background: repeating-linear-gradient(
+        45deg,
+        #606dbc,
+        #606dbc 10px,
+        #495298 10px,
+        #3D468C 20px
+    );
+
+    padding: 1rem;
+    padding-right: 5rem;
+    margin: 0 0 0.5rem 0;
+}
+
+#projectPopup .links
+{
+    float: right;
+    list-style: none;
+    padding: 0;
+    padding-right: 10px;
+    margin: 0;
+}
+
+#projectPopup .links li
+{
+    padding-left: 0;
 }
 
 
@@ -327,12 +376,12 @@ code
     background-color: rgba(0,0,0,0.04);
 }
 
-.grid a, .grid a:visited
+.grid a, .grid a:visited, #projectPopup a, #projectPopup a:visited
 {
     color: #000;
     background-color: rgba(255, 255, 255, 0.5);
 }
-.grid a:hover, .grid a:active
+.grid a:hover, .grid a:active, #projectPopup a:hover, #projectPopup a:active
 {
     color: #fff;
     background-color: rgba(0, 0, 0, 0.50);
