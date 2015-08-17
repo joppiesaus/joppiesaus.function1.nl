@@ -129,7 +129,7 @@ noscript
     transition: none;
 }
 
-#nav a, a:visited, a:active, a:hover
+#nav a, #nav a:visited, #nav a:active, #nav a:hover
 {
     text-decoration: none;
     color: inherit;
@@ -248,6 +248,11 @@ project popup
 /****************
 grid page specific
 ****************/
+.grid
+{
+    padding-bottom: 30px;
+}
+
 .boxInner
 {
     background-color: brown;
@@ -376,12 +381,12 @@ code
     background-color: rgba(0,0,0,0.04);
 }
 
-.grid a, .grid a:visited, #projectPopup a, #projectPopup a:visited
+.grid a, .grid a:visited
 {
     color: #000;
     background-color: rgba(255, 255, 255, 0.5);
 }
-.grid a:hover, .grid a:active, #projectPopup a:hover, #projectPopup a:active
+.grid a:hover, .grid a:active
 {
     color: #fff;
     background-color: rgba(0, 0, 0, 0.50);

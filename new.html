@@ -3,9 +3,11 @@
 TODO:
 * Fix showoff class(entering goes smooth, but leaving not)
 * Fix titleBox for childBox(hovering on boxInner instead; only on things with a titleBox)
-* Links add odd
+    [] Bottom row doesn't work
 * improve json generation
+* improve popup(links not clear enough)
 * cleanup code(moving stuff to scripts?)
+* Tags!
 * Other content!!1
 -->
 <html>
@@ -14,6 +16,8 @@ TODO:
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+    <link rel="shortcut icon" type="image/png" href="img/ico/joppiesaus.png">
+
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/grid.css">
 </head>
@@ -191,7 +195,7 @@ TODO:
     <!--
     TODO: Something with license...?
     <section id="footer">
-        <a href="">Give me the old layout back!</a>
+        <a href="index.htm">Give me the old layout back!</a>
     </section>-->
 
     <!-- WARNING: Selecting goes by element index, not by class name! -->
@@ -205,19 +209,47 @@ TODO:
 
     <script src="js/main.js"></script>
     <script>
+// I wonder if the wayback machine will like this
 var smallTiles = 
 [
     {
         "title": "ur a sheep",
-        "description": "sheeps are sheeps, because they are used to sheep. Unfortunatelly, sheeps didn\'t like the sheep very much, so they kicked him. But the sheep executed <code>xeyes</code>, so they\'re all doomed.",
-        "links": [["hi","#"],["i luv sheep","https://en.wikipedia.org/wiki/Sheep"]],
-        "image": "img/aoe2sheep.png"
+        "description": "sheeps are sheeps, because they are used to sheep. Unfortunatelly, sheeps didn't like the sheep very much, so they kicked him. But the sheep executed <code>xeyes</code>, so they're all doomed.",
+        "image": "img/aoe2sheep.png",
+        "links": [["hi","#"],["i luv sheep","https://en.wikipedia.org/wiki/Sheep"]]
     },
     {
         "title": "BEWARE THE COWS",
         "description": "Lorem ipsum dolor sit am- COOOOOOOOOOWWWWWWWWSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS DO SOMETHING THE END IS NEARRRRRRRRRRR",
         "links": [["COWSSSS","https://en.wikipedia.org/wiki/Cow"],["COOOOOOOOOWSSSS","http://www.saawinternational.org/cow2.jpg"]]
-    }
+    },
+
+    /* TODO: Turn these two into a seperate block called "hopeless console rpgs" */
+    {
+        "title": "Motorcycle",
+        "description": "Motorcycle is a C# console (kindof)RPG where you can do what you want. You can race, upgrade your motor, and that's it I believe. It was my first console game, and it is really boring actually. It also features bad code. Bad. Bad code. But hey! I've learned from it!",
+        "image": "img/motorcycle.PNG",
+        "links": [["Download", "dl/SuperSOURCE.zip"]]
+    },
+    {
+        "title": "SuperHero",
+        "description": "SuperHero is my second C# console RPG which is a lot better than Motorcycle. With random and weird things, easter eggs, and some other geeky stuff! It was never finished actually. If you are interested, you can develop it by yourself and if you <a href=\"mailto:job@function1.nl\">send me an email</a> I will post it on my website! I'll be very happy if you do that.<br>Have fun enyoying your <u><b>SUPERPOWERRRSSS</b></u>!!!1",
+        "image": "img/powerz.PNG",
+        "links": [["Download", "dl/cycle_SRC.zip"]]
+    },
+
+    {
+        "title": "Windows XP's 3D \"Space Cadet\" Pinball",
+        "description": "YES! Another wormhole! One of my favorite games when I was 5 or something. Hours of fun! Runs on Windows 7, 8 and even Linux(via Wine)! Have fun!",
+        "image": "img/Pinball.PNG",
+        "links": [["English", "dl/Pinball_en.zip"], ["Dutch", "dl/Pinball_nl.zip"]]
+    },
+    {
+        "title": "I AM A SPACECRAFT",
+        "description": "So I browsed my projects directory, and I suddenly saw this! It's my very first (XNA) game! I remember it getting declined on indieDB... I also figured out the comets are stolen from <a href=\"http://defcom1.net/xnalessons/xnalevel1lesson05.php\">here</a>, wait... this whole game is from here! Well not completely(*relieving sigh*), because mine has enemys, and powerups, screenshots, and much, much more!<br>Unfortunatly I lost the source code for that. :( It's actually a playable game(!!!), so I decided to give it a honourfull place like here. My highscore is somewhere arround 3000. Have fun with it!",
+        "image": "img/immaspacecraaft.PNG",
+        "links": [["Binary", "dl/I_AM_A_SPACECRAFT.zip"]]
+    },
 ];
 
 window.onload = function()
@@ -254,8 +286,8 @@ window.onload = function()
 
     // Create small project tiles out of the data
     var grid = ge("projects");
-    var currentTile = null; // actually the boxInner of the curren tile
-    var tileCount = 3;
+    var currentTile = null; // The current tile to add the small tiles in(Actually the boxInner of the current tile)
+    var subTileCount = 3; // How many small tiles there are in the currenTile, in order to add a new one later
 
     var createTile = function(parent, classes)
     {
@@ -276,11 +308,11 @@ window.onload = function()
     */
     smallTiles.forEach(function(e)
         {
-            tileCount++;
-            if (tileCount >= 4)
+            subTileCount++;
+            if (subTileCount >= 4)
             {
                 currentTile = createTile(grid, "box boxDisable");
-                tileCount = 0;
+                subTileCount = 0;
             }
 
             var innerTile = createTile(currentTile, "childBox");
