@@ -209,8 +209,28 @@ TODO:
 
     <script src="js/main.js"></script>
     <script>
+/***************************************
+*** Content generation documentation ***
+****************************************
+The content is generated using JSON and then parsed on the page via JavaScript.
+
+Everything is optional, but that doesn't mean some things are encouraged.
+
+| Property      | Description
+
+title:          The title of the tile. Displayed on hover and on project popup.
+description:    The description of the project, displayed on project popup.
+image:          The background image of the tile. If no image, title text is used.
+links:          Array of link objects, these will be links generated on the project popup
+                To define a link, make an array with two objects, the first is the title of the link, the second is the destination.
+                Example: ["COW!", "https://en.wikipedia.org/wiki/Cow"]
+
+url:            When the user clicks on the tile, it will direct to the specified url. If no url specified, it will open a project popup.
+
+*/
+
 // I wonder if the wayback machine will like this
-var smallTiles = 
+var tileData = 
 [
     {
         "title": "ur a sheep",
@@ -244,11 +264,16 @@ var smallTiles =
         "image": "img/Pinball.PNG",
         "links": [["English", "dl/Pinball_en.zip"], ["Dutch", "dl/Pinball_nl.zip"]]
     },
-    {
+    {                
         "title": "I AM A SPACECRAFT",
         "description": "So I browsed my projects directory, and I suddenly saw this! It's my very first (XNA) game! I remember it getting declined on indieDB... I also figured out the comets are stolen from <a href=\"http://defcom1.net/xnalessons/xnalevel1lesson05.php\">here</a>, wait... this whole game is from here! Well not completely(*relieving sigh*), because mine has enemys, and powerups, screenshots, and much, much more!<br>Unfortunatly I lost the source code for that. :( It's actually a playable game(!!!), so I decided to give it a honourfull place like here. My highscore is somewhere arround 3000. Have fun with it!",
         "image": "img/immaspacecraaft.PNG",
         "links": [["Binary", "dl/I_AM_A_SPACECRAFT.zip"]]
+    },
+    {
+        "title": "sheep",
+        "image": "img/aoe2sheep.png",
+        "url": "https://en.wikipedia.org/wiki/Sheep.png" /* URL means link the file, don't create a popup */
     },
 ];
 
@@ -304,9 +329,9 @@ window.onload = function()
     };
 
     /* It's valid jason, so if you want to load it differently, just pass it in JSON.parse.
-    JSON.parse(smallTiles)
+    JSON.parse(tileData)
     */
-    smallTiles.forEach(function(e)
+    tileData.forEach(function(e)
         {
             subTileCount++;
             if (subTileCount >= 4)
@@ -314,23 +339,37 @@ window.onload = function()
                 currentTile = createTile(grid, "box boxDisable");
                 subTileCount = 0;
             }
-
+            
+            
             var innerTile = createTile(currentTile, "childBox");
-            innerTile.className += " projectPopup";
+            var parent = innerTile.parentNode;
             innerTile.style.cursor = "pointer";
-            innerTile.onclick = (function(a)
-                {
-                    return function()
+            
+            if (e.url)
+            {
+                var a = document.createElement("a");
+                a.href = e.url;
+                parent.removeChild(innerTile);
+                a.appendChild(innerTile);
+                parent.appendChild(a);
+            }
+            else
+            {
+                innerTile.className += " projectPopup";
+                innerTile.onclick = (function(a)
                     {
-                        openProjectPopup(a);
-                    }
-                })(e);
+                        return function()
+                        {
+                            openProjectPopup(a);
+                        }
+                    })(e);
+            }
 
             // Title box
             var tEl = document.createElement("div");
             tEl.className = "titleBox";
             tEl.innerHTML = e.title;
-            innerTile.parentNode.appendChild(tEl);
+            parent.appendChild(tEl);
 
             // Image
             if (e.image)
