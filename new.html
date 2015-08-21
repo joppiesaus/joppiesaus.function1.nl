@@ -7,6 +7,7 @@ TODO:
 * improve popup(links not clear enough)
 * cleanup code(moving stuff to scripts?)
 * Tags!
+* Fix responsiveness
 * Make pretty!
 * Other content!!1
 -->
@@ -199,6 +200,9 @@ TODO:
     </section>-->
 
     <!-- WARNING: Selecting goes by element index, not by class name! -->
+    <div id="projectPopupLayer" onclick="closeProjectPopup()" style="display: none">
+        
+    </div>
     <div id="projectPopup">
         <h2 class="projectTitle"></h2>
         <ul class="links"></ul>
@@ -406,12 +410,18 @@ function openProjectPopup(data)
     }
 
     // And display it
+    var plEl = ge("projectPopupLayer");
+    plEl.style.display = "block";
+    plEl.style.animation = "fadeIn 0.5s";
     pEl.style.display = "block";
 }
 
 // Closes the project popup
 function closeProjectPopup()
 {
+    var plEl = ge("projectPopupLayer");
+    plEl.style.display = "none";
+    plEl.style.animation = "";
     ge("projectPopup").style.display = "none";
 }
     </script>
