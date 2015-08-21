@@ -13,8 +13,6 @@ function freq(f,c)
     document.body.appendChild(s);
 }
 
-var LOGO_TWINKLE_OFFSET = "5px";
-
 var logo = 
 {
     width: 0,
@@ -56,27 +54,12 @@ var logo =
     
     setTwinkling: function(e)
     {
-        var d;
-
         switch (this.rnd(4))
         {
-            case 0: d = "top"; break;
-            case 1: d = "bottom"; break;
-            case 2: d = "right"; break;
-            case 3: d = "left"; break;
-        }
-
-        if (e.length)
-        {
-            e.forEach(function(f){
-                f.direction = d;
-                f.retrackted = true;
-            });
-        }
-        else
-        {
-            e.direction = d;
-            e.retrackted = true;
+            case 0: e.direction = "top"; break;
+            case 1: e.direction = "bottom"; break;
+            case 2: e.direction = "right"; break;
+            case 3: e.direction = "left"; break;
         }
         
         this.twinklers.push(e);
@@ -87,15 +70,19 @@ var logo =
         this.twinklers.forEach(function(e){
             if (Math.random() < 0.33)
             {
-                if (e.retrackted === true)
+                var m = (e.retrackted=!e.retrackted) ? "0" : "5px";
+
+                if (e.length)
                 {
-                    e.style[e.direction] = LOGO_TWINKLE_OFFSET;
-                    e.retrackted = false;
+                    e.forEach(function(a)
+                        {
+                            a.style[e.direction] = m;
+                        }
+                    );
                 }
                 else
                 {
-                    e.style[e.direction] = "0";
-                    e.retrackted = true;
+                    e.style[e.direction] = m;
                 }
             }
         });
@@ -135,11 +122,7 @@ function setupLogo()
     }
     for (var i = 0; i < 5; i++)
     {
-        logo.pickRandomLine(logo.rnd(3) + 4).forEach(function(e)
-            {
-                logo.setTwinkling(e);
-            }
-        );
+        logo.setTwinkling(logo.pickRandomLine(logo.rnd(3) + 4));
     }
     
     setInterval(logoInterval, 250);
