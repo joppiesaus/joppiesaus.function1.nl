@@ -134,17 +134,17 @@ TODO:
                     <a href="https://www.khanacademy.org/computer-programming/3d-learning/5194335302844416">
                         <div class="boxInner">
                             <img class="tileImage" src="img/3Dlearningstuffchair.PNG" alt="3d-rendered chair">
+                            <div class="titleBox">3D chair</div>
                         </div>
                     </a>
-                    <div class="titleBox">3D chair on khanacademy</div>
                 </div>
                 <div class="childBox">
                     <a href="https://www.khanacademy.org/computer-programming/3d-out-of-text/4723472598171648">
                         <div class="boxInner">
-                            <img class="tileImage" src="img/3Dlearningstufftextchair.PNG" alt="3d-rendered chair out of text">--
+                            <img class="tileImage" src="img/3Dlearningstufftextchair.PNG" alt="3d-rendered chair out of text">
+                            <div class="titleBox">ASCII 3D chair</div>
                         </div>
                     </a>
-                    <div class="titleBox">ASCII 3D chair</div>
                 </div>
                 <div class="childBox">
                     <div class="boxInner projectPopup" data-project-popup='{"title":"I am sorry","description":"It was a nice \"Test project\", where I did all sorts of (useless) stuff. It was originally intended to create this page&#39;s background, but I managed to make a nice game from it. Comes with a *nice* *config format* and reasonable code.<span class=\"warning\">hurr durr</span>","links":[["i promis","img/InternetDOSIcon.PNG"],["diwnload","img/athing.png"]]}'>
@@ -380,12 +380,6 @@ window.onload = function()
                     })(e);
             }
 
-            // Title box
-            var tEl = document.createElement("div");
-            tEl.className = "titleBox";
-            tEl.innerHTML = e.title;
-            parent.appendChild(tEl);
-
             // Image
             if (e.image)
             {
@@ -398,6 +392,13 @@ window.onload = function()
             {
                 innerTile.innerHTML += e.title;
             }
+
+            // Title box
+            var tEl = document.createElement("div");
+            tEl.className = "titleBox";
+            tEl.innerHTML = e.title;
+            innerTile.appendChild(tEl);
+
         }
     );
 };

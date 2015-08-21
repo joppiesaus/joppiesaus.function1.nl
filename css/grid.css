@@ -66,7 +66,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    margin-bottom: -50px;
+    margin-bottom: calc(-3em - 20px); /* TODO: Make height-dependent instead of hard value */
     background: rgba(0, 0, 0, 0.5);
     
     color: #fff;
@@ -74,7 +74,13 @@
     text-align: center;
     font-weight: bold;
 
-    transition: margin-bottom 0.2s ease-out;
+    transition: margin-bottom 0.3s ease-out;
+}
+
+.childBox .titleBox
+{
+    padding: 5px;
+    margin-bottom: calc(-3em - 10px);
 }
 
 .boxInner .showoffTitle
@@ -116,34 +122,9 @@
     transition: margin-bottom 0.2s ease-out;
 }
 
-.boxInner:hover .titleBox, .boxInner:hover .showoffTitle, .boxInner:hover .showoffDescription
+.boxInner:hover > .titleBox, .boxInner:hover > .showoffTitle, .boxInner:hover > .showoffDescription
 {
     margin: 0;
-}
-
-.childBox > .titleBox
-{
-    display: none;
-    float: left;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    padding-bottom: 3px;
-    padding-top: 3px;
-    text-align: center;
-    background: rgba(255, 0, 0, 0.9);
-    font-weight: bold;
-    color: #fff;
-    z-index: 5;
-}
-.childBox:hover > .titleBox
-{
-    display: block;
-}
-.childBox:hover
-{
-    background-color: rgba(255, 0, 0, 0.9);
 }
 
 .boxLight > .boxInner
