@@ -20,23 +20,64 @@ var logo =
     width: 0,
     height: 0,
     twinklers: [],
+
+    rnd: function(n)
+    {
+        return Math.floor(Math.random() * n);
+    },
     
     pickRandom: function()
     {
-        return ge("logo_" + Math.floor(Math.random() * this.width) + "," + Math.floor(Math.random() * this.height));
+        return ge("logo_" + this.rnd(this.width) + "," + this.rnd(this.height));
+    },
+
+    pickRandomLine: function(n)
+    {
+        var arr = [];
+        var x = this.rnd(this.width);
+        var y = this.rnd(this.height);
+
+        for (var i = 0; i < n; i++)
+        {
+            arr.push(ge("logo_" + x++ + "," + y));
+
+            if (x >= this.width)
+            {
+                x = 0;
+                if (++y >= this.height)
+                {
+                    break;
+                }
+            }
+        }
+
+        return arr;
     },
     
     setTwinkling: function(e)
     {
-        switch (Math.floor(Math.random() * 4))
+        var d;
+
+        switch (this.rnd(4))
         {
-            case 0: e.direction = "top"; break;
-            case 1: e.direction = "bottom"; break;
-            case 2: e.direction = "right"; break;
-            case 3: e.direction = "left"; break;
+            case 0: d = "top"; break;
+            case 1: d = "bottom"; break;
+            case 2: d = "right"; break;
+            case 3: d = "left"; break;
         }
-        
-        e.retrackted = true;
+
+        if (e.length)
+        {
+            e.forEach(function(f){
+                f.direction = d;
+                f.retrackted = true;
+            });
+        }
+        else
+        {
+            e.direction = d;
+            e.retrackted = true;
+        }
         
         this.twinklers.push(e);
     },
@@ -88,9 +129,17 @@ function setupLogo()
     logo.element.innerHTML = newHTML;
     
     // TODO: MOre of this crap, and make prettier
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < 5; i++)
     {
         logo.setTwinkling(logo.pickRandom());
+    }
+    for (var i = 0; i < 5; i++)
+    {
+        logo.pickRandomLine(logo.rnd(3) + 4).forEach(function(e)
+            {
+                logo.setTwinkling(e);
+            }
+        );
     }
     
     setInterval(logoInterval, 250);
