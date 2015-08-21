@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <!--
+Oh boy... JavaScript is taking over my site! And soon... the world! PANIC THE USERS PANIC WHAT IF THEY DISABLE PANIC HELP PANIC
+
 TODO:
-* Fix titleBox for childBox(hovering on boxInner instead; only on things with a titleBox)
-    [] Bottom row doesn't work
+* And now... STYLE!
+* Fix titleBox
+    ! in a category tile, the bottom subtile isn't displayed properly
+    [] must use relative height
+* Styling!
 * improve json generation
 * improve popup(links not clear enough)
 * cleanup code(moving stuff to scripts?)
@@ -79,54 +84,6 @@ TODO:
                     <div class="showoffDescription">A 3D First-Person Shooter</div>
                 </div>
             </a>
-        </div>
-        <div class="box">
-            <div class="boxInner">
-                <p><code>hurrdurr</code> <span class="warning">llamas may escape and terrorize you.</span></p>
-                <p>People online seem creepier.</p>
-                <p><a href="shadysite.com">Totally not a link to a shady size(you cannot hold me liable for this)</a>
-                <div class="titleBox">hurr durr imma sheep</div>
-            </div>
-        </div>
-        <div class="box">
-            <div class="boxInner" style="background-color: green;">
-                <p>James bond could be watching you right know.</p>
-                <code>Is the background nice? Isn't it too flashy?</code>
-                <div class="titleBox">ILLUMINATI</div>
-            </div>
-        </div>
-        <div class="box boxLight">
-            <div class="boxInner">
-                <div class="childBox">
-                    <div class="boxInner">
-                    oh
-                    </div>
-                </div>
-                <div class="childBox">
-                    <div class="boxInner">
-                    no
-                    </div>
-                </div>
-                <div class="childBox">
-                    <div class="boxInner">
-                    what
-                    </div>
-                </div>
-                <div class="childBox">
-                    <div class="boxInner">
-                    help
-                    </div>
-                </div>
-                
-                <div class="titleBox">ILLUMINATI - copy.exe</div>
-            </div>
-        </div>
-        <div class="box">
-            <div class="boxInner">
-                <p><b>DON'T PEEK YOU CASUAL</b></p>
-                <img src="img/InternetDOSIcon.PNG" />
-                <div class="titleBox">lllammmaaa</div>
-            </div>
         </div>
         <div class="box boxDisable">
             <div class="boxInner">
@@ -233,6 +190,9 @@ url:            When the user clicks on the tile, it will direct to the specifie
 onclick:        When onclick is defined, it will execute javascript inside onclick when the tile is clicked.
                 Overrides project popup. (function(){...}) not necessary.
 
+mode:           The mode of the tile. Default is childBox. Choose between box, boxBig, boxHuge - like in the grid.css class.
+children:       The child tiles of the target tile.
+content:        The HTML content of the tile.
 
 */
 
@@ -251,18 +211,46 @@ var tileData =
         "links": [["COWSSSS","https://en.wikipedia.org/wiki/Cow"],["COOOOOOOOOWSSSS","http://www.saawinternational.org/cow2.jpg"]]
     },
 
-    /* TODO: Turn these two into a seperate block called "hopeless console rpgs" */
     {
-        "title": "Motorcycle",
-        "description": "Motorcycle is a C# console (kindof)RPG where you can do what you want. You can race, upgrade your motor, and that's it I believe. It was my first console game, and it is really boring actually. It also features bad code. Bad. Bad code. But hey! I've learned from it!",
-        "image": "img/motorcycle.PNG",
-        "links": [["Download", "dl/SuperSOURCE.zip"]]
+        "mode": "box",
+        "title": "Learning 3D stuff!",
+        "children": [
+            {
+                "title": "3D chair",
+                "image": "img/3Dlearningstuffchair.PNG",
+                "url": "https://www.khanacademy.org/computer-programming/3d-learning/5194335302844416"
+            },
+            {
+                "title": "ASCII 3D chair",
+                "image": "img/3Dlearningstufftextchair.PNG",
+                "url": "https://www.khanacademy.org/computer-programming/3d-out-of-text/4723472598171648"
+            }
+        ]
     },
+
     {
-        "title": "SuperHero",
-        "description": "SuperHero is my second C# console RPG which is a lot better than Motorcycle. With random and weird things, easter eggs, and some other geeky stuff! It was never finished actually. If you are interested, you can develop it by yourself and if you <a href=\"mailto:job@function1.nl\">send me an email</a> I will post it on my website! I'll be very happy if you do that.<br>Have fun enyoying your <u><b>SUPERPOWERRRSSS</b></u>!!!1",
-        "image": "img/powerz.PNG",
-        "links": [["Download", "dl/cycle_SRC.zip"]]
+        "mode": "box",
+        "title": "Hopeless console RPG's",
+        "children": [
+            {
+                "title": "Motorcycle",
+                "description": "Motorcycle is a C# console (kindof)RPG where you can do what you want. You can race, upgrade your motor, and that's it I believe. It was my first console game, and it is really boring actually. It also features bad code. Bad. Bad code. But hey! I've learned from it!",
+                "image": "img/motorcycle.PNG",
+                "links": [["Download", "dl/SuperSOURCE.zip"]]
+            },
+            {
+                "title": "Foo",
+                "description": "bar",
+                "image": "baz",
+                "links": [["quz", "norf"]]
+            },
+            {
+                "title": "SuperHero",
+                "description": "SuperHero is my second C# console RPG which is a lot better than Motorcycle. With random and weird things, easter eggs, and some other geeky stuff! It was never finished actually. If you are interested, you can develop it by yourself and if you <a href=\"mailto:job@function1.nl\">send me an email</a> I will post it on my website! I'll be very happy if you do that.<br>Have fun enyoying your <u><b>SUPERPOWERRRSSS</b></u>!!!1",
+                "image": "img/powerz.PNG",
+                "links": [["Download", "dl/cycle_SRC.zip"]]
+            }
+        ]
     },
 
     {
@@ -283,8 +271,14 @@ var tileData =
         "url": "https://en.wikipedia.org/wiki/Sheep.png" /* URL means link the file, don't create a popup */
     },
     {
+        "mode": "box",
         "title": "I like this site",
         "onclick": "var a=['github.com','glslsandbox.com','youtu.be','khanacademy.org','ludumdare.com','cachemonet.com'];window.open('http://'+a[Math.floor(Math.random()*a.length)])" 
+    },
+
+    {
+        "title": "hurr durr",
+        "content": "derp"
     },
 ];
 
@@ -320,6 +314,7 @@ window.onload = function()
         e.style.cursor = "pointer"; 
     }
 
+
     // Create small project tiles out of the data
     var grid = ge("projects");
     var currentTile = null; // The current tile to add the small tiles in(Actually the boxInner of the current tile)
@@ -339,66 +334,101 @@ window.onload = function()
         return ct;
     };
 
+    var procedureTile = function(e, tile)
+    {
+        var parent = tile.parentNode;
+        tile.style.cursor = "pointer";
+        
+        if (e.url)
+        {
+            var a = document.createElement("a");
+            a.href = e.url;
+            parent.removeChild(tile);
+            a.appendChild(tile);
+            parent.appendChild(a);
+        }
+        else if (e.onclick)
+        {
+            tile.onclick = eval("(function(){" + e.onclick + "})");
+        }
+        else if (e.children || e.content)
+        {
+            tile.style.cursor = "";
+        }
+        else
+        {
+            tile.className += " projectPopup";
+            tile.onclick = (function(a)
+                {
+                    return function()
+                    {
+                        openProjectPopup(a);
+                    }
+                })(e);
+        }
+
+        // Image
+        if (e.image)
+        {
+            var img = document.createElement("img");
+            img.className = "tileImage";
+            img.src = e.image;
+            tile.appendChild(img);
+        }
+        else if (e.content)
+        {
+            tile.innerHTML += e.content;
+        }
+        else if (!e.children) // When no image provided, fall back to a title
+        {
+            /* TODO: Style */
+            tile.innerHTML += e.title;
+        }
+
+
+        // Title box
+        if (e.title && (e.image || e.children || e.content))
+        {
+            var tEl = document.createElement("div");
+            tEl.className = "titleBox";
+            tEl.innerHTML = e.title;
+            tile.appendChild(tEl);
+        }
+    };
+
     /* It's valid jason, so if you want to load it differently, just pass it in JSON.parse.
     JSON.parse(tileData)
     */
     tileData.forEach(function(e)
         {
-            subTileCount++;
-            if (subTileCount >= 4)
+            var tile;
+
+            if (!e.mode)
             {
-                currentTile = createTile(grid, "box boxDisable");
-                subTileCount = 0;
-            }
-            
-            
-            var innerTile = createTile(currentTile, "childBox");
-            var parent = innerTile.parentNode;
-            innerTile.style.cursor = "pointer";
-            
-            if (e.url)
-            {
-                var a = document.createElement("a");
-                a.href = e.url;
-                parent.removeChild(innerTile);
-                a.appendChild(innerTile);
-                parent.appendChild(a);
-            }
-            else if (e.onclick)
-            {
-                innerTile.onclick = eval("(function(){" + e.onclick + "})");
+                subTileCount++;
+                if (subTileCount >= 4)
+                {
+                    currentTile = createTile(grid, "box boxDisable");
+                    subTileCount = 0;
+                }
+
+                tile = createTile(currentTile, "childBox");
             }
             else
             {
-                innerTile.className += " projectPopup";
-                innerTile.onclick = (function(a)
-                    {
-                        return function()
+                tile = createTile(grid, e.mode);
+
+                if (e.children)
+                {
+                    e.children.forEach(function(f)
                         {
-                            openProjectPopup(a);
+                            procedureTile(f, createTile(tile, "childBox"));
                         }
-                    })(e);
+                    );
+                }
             }
 
-            // Image
-            if (e.image)
-            {
-                var img = document.createElement("img");
-                img.className = "tileImage";
-                img.src = e.image;
-                innerTile.appendChild(img);
-            }
-            else // When no image provided, fall back to a title
-            {
-                innerTile.innerHTML += e.title;
-            }
-
-            // Title box
-            var tEl = document.createElement("div");
-            tEl.className = "titleBox";
-            tEl.innerHTML = e.title;
-            innerTile.appendChild(tEl);
-
+            procedureTile(e, tile);
         }
     );
 };
