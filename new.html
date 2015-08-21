@@ -230,6 +230,9 @@ links:          Array of link objects, these will be links generated on the proj
                 Example: ["COW!", "https://en.wikipedia.org/wiki/Cow"]
 
 url:            When the user clicks on the tile, it will direct to the specified url. If no url specified, it will open a project popup.
+onclick:        When onclick is defined, it will execute javascript inside onclick when the tile is clicked.
+                Overrides project popup. (function(){...}) not necessary.
+
 
 */
 
@@ -278,6 +281,10 @@ var tileData =
         "title": "sheep",
         "image": "img/aoe2sheep.png",
         "url": "https://en.wikipedia.org/wiki/Sheep.png" /* URL means link the file, don't create a popup */
+    },
+    {
+        "title": "I like this site",
+        "onclick": "var a=['github.com','glslsandbox.com','youtu.be','khanacademy.org','ludumdare.com','cachemonet.com'];window.open('http://'+a[Math.floor(Math.random()*a.length)])" 
     },
 ];
 
@@ -356,6 +363,10 @@ window.onload = function()
                 parent.removeChild(innerTile);
                 a.appendChild(innerTile);
                 parent.appendChild(a);
+            }
+            else if (e.onclick)
+            {
+                innerTile.onclick = eval("(function(){" + e.onclick + "})");
             }
             else
             {
