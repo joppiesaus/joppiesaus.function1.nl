@@ -13,6 +13,18 @@ function freq(f,c)
     document.body.appendChild(s);
 }
 
+var LEET = 
+[
+    ['j', '_)'],
+    ['o', '0'],
+    ['p', '|>'],
+    ['i', '!'],
+    ['e', '3'],
+    ['s', '5'],
+    ['a', '4'],
+    ['u', '|_|']
+];
+
 var logo = 
 {
     width: 0,
@@ -126,11 +138,29 @@ function setupLogo()
     }
     
     setInterval(logoInterval, 250);
+    setInterval(titleInterval, 250);
 };
 
 function logoInterval()
 {
     logo.updateTwinklers();
+}
+
+function titleInterval()
+{
+    var title = document.title.slice(0, -1);
+
+    for (var i = 0; i < LEET.length; i++)
+    {
+        if (Math.random() < 0.2)
+        {
+            var j = title.indexOf(LEET[i][0]) === -1 ? 1 : 0;
+
+            title = title.split(LEET[i][j]).join(LEET[i][!j | 0]);
+        }
+    }
+
+    document.title = title + "!";
 }
 
 // Returnss joppiesaus's age
