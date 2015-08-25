@@ -400,6 +400,12 @@ window.onload = function()
             tEl.innerHTML = e.title;
             tile.appendChild(tEl);
         }
+
+        // ID
+        if (e.id)
+        {
+            parent.id = e.id;
+        }
     };
 
     /* It's valid jason, so if you want to load it differently, just pass it in JSON.parse.
