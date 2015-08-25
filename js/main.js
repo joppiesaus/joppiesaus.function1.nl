@@ -13,6 +13,23 @@ function freq(f,c)
     document.body.appendChild(s);
 }
 
+// Shuffles an array
+Array.prototype.shuffle = function()
+{
+    var m = this.length, t, i;
+
+    while (m)
+    {
+        // Pick a remaining element
+        i = Math.floor(Math.random() * m--);
+
+        // Swap it
+        t = this[m];
+        this[m] = this[i];
+        this[i] = t;
+    }
+};
+
 var LEET = 
 [
     ['j', '_)'],

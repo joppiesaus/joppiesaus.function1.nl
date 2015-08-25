@@ -96,10 +96,6 @@ noscript
     z-index: 3;
     right: 0;
     top: 0;
-
-    /*centering(obsolete)*/
-    /*left: 50%;*/
-    /*transform: translate(-50%, 0);*/
 }
 #nav div
 {
@@ -158,10 +154,6 @@ noscript
 {
     position: relative;
 }
-#logo > span:hover
-{
-    color: #00f;
-}
 
 #sillyquote
 {
@@ -170,6 +162,33 @@ noscript
 #sillyquote::before, #sillyquote::after
 {
     content: "\"";/*not pretty*/
+}
+
+#footer
+{
+    background-color: rgba(41, 28, 8, 0.94);
+    color: #31FF00;
+    width: 100%;
+    min-width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+#footer a, #footer a:visited
+{
+    color: #fff;
+}
+
+#footer a:hover, #footer a:active
+{
+    color: #FF00D2;
+}
+
+#footer span
+{
+    float: left;
+    margin-left: 5px;
 }
 
 

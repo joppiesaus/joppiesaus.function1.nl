@@ -4,16 +4,19 @@ Oh boy... JavaScript is taking over my site! And soon... the world! PANIC THE US
 
 TODO:
 * And now... STYLE!
+* Themes for tiles? 3 different colors or something?
+* Start parsing content from the old site
 * Fix titleBox
     ! in a category tile, the bottom subtile isn't displayed properly
     [] must use relative height
-* Styling!
+* Is the title effect to distracting/too confusing/inaccessible?
 * improve json generation
 * improve popup(links not clear enough)
-* cleanup code(moving stuff to scripts?)
+* cleanup code(moving stuff to scripts? -> no, require the bare minimum to load this page, then the fancy stuff.)
 * Tags!
+* Searching!
+* ID's in URL bar won't work if it's a tile(tile with id derp, types in #derp, nothing happens)
 * Fix responsiveness
-* Make pretty!
 * Other content!!1
 -->
 <html>
@@ -85,38 +88,6 @@ TODO:
                 </div>
             </a>
         </div>
-        <div class="box boxDisable">
-            <div class="boxInner">
-                <div class="childBox">
-                    <a href="https://www.khanacademy.org/computer-programming/3d-learning/5194335302844416">
-                        <div class="boxInner">
-                            <img class="tileImage" src="img/3Dlearningstuffchair.PNG" alt="3d-rendered chair">
-                            <div class="titleBox">3D chair</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="childBox">
-                    <a href="https://www.khanacademy.org/computer-programming/3d-out-of-text/4723472598171648">
-                        <div class="boxInner">
-                            <img class="tileImage" src="img/3Dlearningstufftextchair.PNG" alt="3d-rendered chair out of text">
-                            <div class="titleBox">ASCII 3D chair</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="childBox">
-                    <div class="boxInner projectPopup" data-project-popup='{"title":"I am sorry","description":"It was a nice \"Test project\", where I did all sorts of (useless) stuff. It was originally intended to create this page&#39;s background, but I managed to make a nice game from it. Comes with a *nice* *config format* and reasonable code.<span class=\"warning\">hurr durr</span>","links":[["i promis","img/InternetDOSIcon.PNG"],["diwnload","img/athing.png"]]}'>
-                        don't click herereERER~~~!1
-                    </div>
-                </div>
-                <div class="childBox">
-                    <div class="boxInner projectPopup" data-project-popup='{"description":"im a ninja"}'>
-                    -ish
-                    </div>
-                </div>
-                
-                <div class="titleBox">3D learning stuff</div>
-            </div>
-        </div>
         <div class="boxBig" id="about">
             <!-- TODO: Add image -->
             <div class="boxInner" style="background-color: rgb(129, 13, 253);">
@@ -136,25 +107,17 @@ TODO:
                 <p>All stuff on this page - except otherwise noted - is licensed under <a href="http://function1.nl/p/unlicense.txt">the unlicense</a>. This doesn't mean I don't like credit, but it does mean you can quickly "steal" stuff without attribution, since most of it is made to learn anyway.</p>
 
                 <p><a href="https://github.com/joppiesaus/joppiesaus.function1.nl">This website</a> however is licensed under the <a href="LICENSE.md">MIT license</a>.</p>
-                
-                <p>If you <em>really</em> like my work, and you can give me your trash on <a href="https://steamcommunity.com/tradeoffer/new/?partner=150881846&token=LdOYlDqJ">steam</a>(also not-so trash accepted)!</p>
+
+                <p>I encourage to make your software <a href="http://www.gnu.org/philosophy/free-sw.html">free</a>(as in not having to pay for it and as in freedom). Because, who <em>doesn't</em> like freedom?<p>
 
                 <div class="titleBox">License</div>
             </div>
         </div>
-        <!--<div class="box">
-            <div class="boxInner">
-                <a href="http://khanacademy.org/">Khan Academy</a>, and <a href="https://www.khanacademy.org/profile/spirare123/projects">some examples</a>!
-                
-                <div class="titleBox">I wanna lurn programming!!!</div>
-            </div>
-        </div>-->
     </section>
-    <!--
-    TODO: Something with license...?
     <section id="footer">
-        <a href="index.htm">Give me the old layout back!</a>
-    </section>-->
+        <span><a href="mailto:job@function1.nl">Email me</a></span>
+        Programs are licensed under <a href="http://function1.nl/p/unlicense.txt">the unlicense</a> if no license provided, <a href="https://github.com/joppiesaus/joppiesaus.function1.nl">website code</a> under the <!--<a href="http://function1.nl/p/mit-license.txt">--><a href="LICENSE.md">MIT license</a>. Looking for more stuff? Check out <a href="archive/1/">the old website</a>.
+    </section>
 
     <!-- WARNING: Selecting goes by element index, not by class name! -->
     <div id="projectPopupLayer" onclick="closeProjectPopup()" style="display: none">
@@ -200,21 +163,10 @@ content:        The HTML content of the tile.
 var tileData = 
 [
     {
-        "title": "ur a sheep",
-        "description": "sheeps are sheeps, because they are used to sheep. Unfortunatelly, sheeps didn't like the sheep very much, so they kicked him. But the sheep executed <code>xeyes</code>, so they're all doomed.",
-        "image": "img/aoe2sheep.png",
-        "links": [["hi","#"],["i luv sheep","https://en.wikipedia.org/wiki/Sheep"]]
-    },
-    {
-        "title": "BEWARE THE COWS",
-        "description": "Lorem ipsum dolor sit am- COOOOOOOOOOWWWWWWWWSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS DO SOMETHING THE END IS NEARRRRRRRRRRR",
-        "links": [["COWSSSS","https://en.wikipedia.org/wiki/Cow"],["COOOOOOOOOWSSSS","http://www.saawinternational.org/cow2.jpg"]]
-    },
-
-    {
         "mode": "box",
         "title": "Learning 3D stuff!",
-        "children": [
+        "children":
+        [
             {
                 "title": "3D chair",
                 "image": "img/3Dlearningstuffchair.PNG",
@@ -239,12 +191,6 @@ var tileData =
                 "links": [["Download", "dl/SuperSOURCE.zip"]]
             },
             {
-                "title": "Foo",
-                "description": "bar",
-                "image": "baz",
-                "links": [["quz", "norf"]]
-            },
-            {
                 "title": "SuperHero",
                 "description": "SuperHero is my second C# console RPG which is a lot better than Motorcycle. With random and weird things, easter eggs, and some other geeky stuff! It was never finished actually. If you are interested, you can develop it by yourself and if you <a href=\"mailto:job@function1.nl\">send me an email</a> I will post it on my website! I'll be very happy if you do that.<br>Have fun enyoying your <u><b>SUPERPOWERRRSSS</b></u>!!!1",
                 "image": "img/powerz.PNG",
@@ -266,16 +212,93 @@ var tileData =
         "links": [["Binary", "dl/I_AM_A_SPACECRAFT.zip"]]
     },
     {
-        "title": "sheep",
-        "image": "img/aoe2sheep.png",
-        "url": "https://en.wikipedia.org/wiki/Sheep.png" /* URL means link the file, don't create a popup */
-    },
-    {
         "title": "chiken simulater",
         "image": "img/csgochiken.png",
         "description": "You can now be a chiken! Search your favorite streamer, enter his ID and turn auto chiken on! Made in an hour or so.",
         "links": [["Binary", "dl/chiken_simulater.zip"], ["Source", "dl/chiken_simulater_src.zip"]]
     },
+    {
+        "title": "Click Game",
+        "image": "img/click.PNG", // Bad name. Bad name.
+        "description": "A stupid game I made in C#. It's stupid. It yells at you. It's frustrating, and intense. But it has a degree of fun and polish. Your objective is to click the buttons in order in a certain time, which get's harder over the rounds you've played.",
+        "links": [["Binary", "dl/Click_Game.zip"], ["Source", "dl/Click_Game_SRC.zip"]]
+    },
+    {
+        "title": "Low-Memory Candy",
+        "image": "img/fry.PNG",
+        "description": "You are a man, whose memory is weird. It needs candies! Otherwise it will forget stuff! Can you keep his memory intact?<br>Made for the <a href=\"http://itch.io/jam/candyjam\">Candyjam</a>!",
+        "links": [["Binary", "dl/LMC_bin.zip"], ["Source", "dl/LMC_src.zip"], ["Submission page", "http://joppiesaus.itch.io/low-memory-candy"]]
+    },
+    {
+        "title": "\"Zombie Game\"",
+        "image": "img/zombiegaem.PNG",
+        "description": "A simple little zombie game I made using <a href=\"\">these</a> tutorials to learn more about C++ game development! It was really fun to make! And the game <em>is</em> really fun too!",
+        "links": [["Page", "dl/zombiegame"]]
+    },
+    {
+        "title": "FAG.com",
+        "image": "img/fagfagfag.PNG",
+        "description": "This DOS program written in 8086 Assembly calls you a <em>fag</em>(a loser, a bundle sticks of wood) 3 times with an \"!\" after it. Since it's written in 8086 Assembly, it's only for OS-es which support 16 bit.<br>It may be violent, stupid, and ridiculous, but hey, it's only 32 bytes.",
+        "links": [["FAG.com", "dl/FAG.com"], ["FAG.asm", "dl/FAG.asm"], ["FAG.asm zipped", "dl/FAG_src.zip"]]
+    },
+    {
+        "title": "universe.zip",
+        "description": "This is what happens when you give me time and confidence and a secret ingredient(which I don't know). You get things like a zip file of 295 KB, which contains 16^19 GiB(67108864 Yobibyte) of useless compressed data(all 0's).<br>It's so useless, you could even bully it because only what it does is using space. That's all.",
+        "links": [["universe.zip", "dl/universe.zip"], ["1 GiB file gen cpp", "dl/Useless1GiBDataGenerator.cpp"]]
+    },
+    {
+        "title": "C++ Windows 7 Spider Solitaire trainer-hacker 2015 XTREME MLG EDITION",
+        "image": "img/mlghckr.PNG",
+        "description": "The trainer you use when you're bored. I've learned A LOT from it. I spend days working with code and even <a href=\"http://stackoverflow.com/q/26782399/2622807\">asking and answering my own stackoverflow question</a>... It's the neatest thing I've ever programmed.",
+        "links": [["x64", "dl/CPPW7SSTH2015XTREMEMLGEDITIONx64.zip"], ["x86", "dl/CPPW7SSTH2015XTREMEMLGEDITIONx86.zip"], ["Source", "dl/CPPW7SSTH2015XTREMEMLGEDITION.cpp"]]
+    },
+    {
+        "title": "RedBull Santa",
+        "image": "img/santa.PNG",
+        "description": "RedBull Santa! A C# XNA game, which is very trippy and sound-dynamic! You must prevent santa from falling-of the \"roof\", while drinking as many as possible Red Bull!<br><span class=\"warning\">Contains flashing images.</span>",
+        "links": [["Binary", "dl/RedBull_Santa.zip"], ["Source", "dl/RBS_src.zip"]]
+    },
+    {
+        "title": "\"Stars.EXE\"",
+        "image": "img/stars.PNG",
+        "description": "It was a nice \"Test project\", where I did all sorts of (useless) stuff. It was originally created to create my old website's background, but I managed to make a *nice* game from it. Comes with a *nice* *config format*, a bad name and reasonable code.",
+        "links": [["Binary", "dl/Stars.zip"], ["Source", "dl/Stars_4_src.zip"]]
+    },
+    {
+        "title": "Console Four in a Row",
+        "image": "img/row.PNG",
+        "description": "Something revolutionary... You can play four in a row on your PC! It includes the source code & executable. You can define how many columns and rows you want. You can even pick 1000!",
+        "links": [["Download", "dl/4InARow_Src.zip"]]
+    },
+
+
+    {
+        "mode": "box",
+        "title": "Malicious code",
+        "children":
+        [
+            {
+                "title": "C++ Apple Loser",
+                "image": "img/bravepcuser.PNG",
+                "description": "<span class=\"warning\">This program creates milions of apples but forgets where they are located. Notice your RAM.</span><br>I LOVE pointers! This is made to learn more about pointers. What this program does:<ol><li>Create a new apple and assign it to a pointer<li>Create a new apple and assign it to the same pointer<li>Goto 1</ol>This program will fire up your RAM and will throw a <code>bad_alloc</code>",
+                "links": [["Binary(Windows)", "dl/apple_loser.zip"], ["Source", "dl/apple_loser_cpp.zip"]]
+            },
+            {
+                "title": "never_thrust_batch_files.bat",
+                "description": "So I thought: How can I let someone rage while not harming the whole computer? It's easy! So I came up with this: Your disk drive will open, you are unable to type correctly, you get spammed and the computer yells to you, and much more... I present to you: never_thrust_batch_files.bat!<br>Please use this for \"fun\" purposes, not to harm people. It's easy to fix, just open run and type in \"msconfig\", then open the tab \"startup\" and remove never_thrust_batch_files.bat from the list. I still haven't tested it, thought.",
+                "image": "img/ntbf.PNG",
+                "links": [["Download", "dl/never_thrust_batch_files.bat"]]
+            },
+            {
+                "title": "installer.bat",
+                "description": "Bing bar? Conduit toolbar!? Norton Antivirus!?! That trash wouldn't be able to beat THIS! Designed just for you, to generate trash. If you have an old computer, you want to bomb, just enter -1 trash! <em>Die in style</em>.",
+                "image": "img/itrash.PNG",
+                "links": [["Download!", "dl/installer.bat"]]
+            }
+        ]
+    },
+
+
     {
         "mode": "box",
         "title": "I like this site",
@@ -283,8 +306,14 @@ var tileData =
     },
 
     {
-        "title": "hurr durr",
-        "content": "derp"
+        "mode": "box",
+        "title": "Donations",
+        "content": "If you <em>really</em> like my work, you can donate me your crappy CSGO skins(I love crappy CSGO skins), give me TF2 items, give me your stupid games, or other trash or not-so-trash on <a href=\"https://steamcommunity.com/tradeoffer/new/?partner=150881846&token=LdOYlDqJ\">steam</a>!"
+    },
+    {
+        "mode": "box",
+        "title": "Why is everything Windows?",
+        "content": "I grew up with Windows. I got a late discovery of Linux, and never thought about other platforms. It was all to learn, really. That's why."
     },
 ];
 
@@ -385,11 +414,17 @@ window.onload = function()
         {
             tile.innerHTML += e.content;
         }
-        else if (!e.children) // When no image provided, fall back to a title
+        else if (e.children)
+        {
+            tile.className += " groupTile";
+        }
+        else // When no image provided, fall back to a title
         {
             /* TODO: Style */
-            tile.innerHTML += e.title;
+            tile.innerHTML += '<span class="title">' + e.title + '</span>';
         }
+
+        tile.className += " gridTheme" + Math.floor(Math.random() * 3);
 
 
         // Title box
@@ -407,6 +442,20 @@ window.onload = function()
             parent.id = e.id;
         }
     };
+    
+    // Shuffle the tiles!
+    
+    tileData.forEach(function(e)
+        {
+            if (e.children)
+            {
+                e.children.shuffle();
+            }
+        }
+    );
+
+    tileData.shuffle();
+    
 
     /* It's valid jason, so if you want to load it differently, just pass it in JSON.parse.
     JSON.parse(tileData)

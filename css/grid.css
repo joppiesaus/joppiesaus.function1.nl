@@ -32,14 +32,14 @@
     padding-bottom: 50%;
 }
 /* temp */
-.childBox .boxInner
+/*.childBox .boxInner
 {
     background-color: #00f;
 }
 .childBox .boxInner:hover
 {
     background-color: #0f0;
-}
+}*/
 
 .boxInner
 {
@@ -50,6 +50,11 @@
     bottom: 5px;
     overflow: hidden;
     padding: 5px;
+}
+
+.boxInner > .title
+{
+    font-weight: bold;
 }
 
 .boxInner .tileImage
@@ -147,7 +152,25 @@
     display: none;
 }
 
-
+/****************
+grid themes
+****************/
+.gridTheme0
+{
+    background-color: #A52A2A;
+}
+.gridTheme1
+{
+    background-color: #3B7B33;
+}
+.gridTheme2
+{
+    background-color: #810DFD;
+}
+.groupTile
+{
+    background-color: rgba(74, 27, 70, 0.62);
+}
 
 /* TODO: media breakpoints for larger tiles, check if size and stuff is correct */
 
@@ -172,7 +195,7 @@ media breakpoints
   }
 }
 
-@media only screen and (max-width : 650px) and (min-width : 481px) {
+@media only screen and (max-width : 700px) and (min-width : 481px) {
   /* Tablet view: 2 tiles */
   .box {
     width: 50%;
@@ -190,7 +213,7 @@ media breakpoints
   }
 }
 
-@media only screen and (max-width : 1050px) and (min-width : 651px) {
+@media only screen and (max-width : 1050px) and (min-width : 700px) {
   /* Small desktop / ipad view: 3 tiles */
   .box {
     width: 33.3%;
