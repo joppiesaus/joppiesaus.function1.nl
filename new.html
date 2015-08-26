@@ -79,7 +79,8 @@ TODO:
 
     </section>	
     <section id="projects" class="grid">
-        <div class="box">
+        <noscript>I told you nothing would be here without JavaScript!</noscript>
+        <!--<div class="box">
             <a href="img/athing.png">
                 <div class="boxInner">
                     <img src="img/athing.png" alt="a picture created in mtpaint">
@@ -87,42 +88,17 @@ TODO:
                     <div class="showoffDescription">A 3D First-Person Shooter</div>
                 </div>
             </a>
-        </div>
-        <div class="boxBig" id="about">
-            <!-- TODO: Add image -->
-            <div class="boxInner" style="background-color: rgb(129, 13, 253);">
-                <p>I'm Job van der Zweep, AKA joppiesaus. I'm <span id="joppiesausesAge">?</span> year old. I like to program. On this page you can find stuff I programmed, along with other stuff I did.</p>
-                <p>On the top-left you can find various links of websites I like to go to. I have various stuff lying arround there, too.</p>
-                <p>Other than programming I like to play video games, paint, longboard, watching videos, eat food, mess arround with electronics, be outside, doing nothing, and other stuff. But it's a list that won't ever be up-to-date thought, it constantly changes.</p>
-
-                <p>If you want a chat, you can email me! <a href="mailto:job@function1.nl"><code>job@function1.nl</code></a></p>
-
-                <p>I hope you have a lot of fun watching this page. Have a nice day!</p>
-
-                <div class="titleBox">About</div>
-            </div>
-        </div>
-        <div class="box" id="license">
-            <div class="boxInner" style="background-color: #545454;">
-                <p>All stuff on this page - except otherwise noted - is licensed under <a href="http://function1.nl/p/unlicense.txt">the unlicense</a>. This doesn't mean I don't like credit, but it does mean you can quickly "steal" stuff without attribution, since most of it is made to learn anyway.</p>
-
-                <p><a href="https://github.com/joppiesaus/joppiesaus.function1.nl">This website</a> however is licensed under the <a href="LICENSE.md">MIT license</a>.</p>
-
-                <p>I encourage to make your software <a href="http://www.gnu.org/philosophy/free-sw.html">free</a>(as in not having to pay for it and as in freedom). Because, who <em>doesn't</em> like freedom?<p>
-
-                <div class="titleBox">License</div>
-            </div>
-        </div>
+        </div>-->
     </section>
     <section id="footer">
         <span><a href="mailto:job@function1.nl">Email me</a></span>
         Programs are licensed under <a href="http://function1.nl/p/unlicense.txt">the unlicense</a> if no license provided, <a href="https://github.com/joppiesaus/joppiesaus.function1.nl">website code</a> under the <!--<a href="http://function1.nl/p/mit-license.txt">--><a href="LICENSE.md">MIT license</a>. Looking for more stuff? Check out <a href="archive/1/">the old website</a>.
     </section>
+    
+    
+    <div id="projectPopupLayer" onclick="closeProjectPopup()" style="display: none"></div>
 
     <!-- WARNING: Selecting goes by element index, not by class name! -->
-    <div id="projectPopupLayer" onclick="closeProjectPopup()" style="display: none">
-        
-    </div>
     <div id="projectPopup">
         <h2 class="projectTitle"></h2>
         <ul class="links"></ul>
@@ -163,6 +139,17 @@ content:        The HTML content of the tile.
 var tileData = 
 [
     {
+        "mode": "boxBig",
+        "title": "About",
+        "content": "<p>I'm Job van der Zweep, AKA joppiesaus. I'm <span id=\"joppiesausesAge\">?</span> year old. I like to program. On this page you can find stuff I programmed, along with other stuff I did.</p><p>On the top-left you can find various links of websites I like to go to. I have various stuff lying arround there, too.</p><p>Other than programming I like to play video games, paint, longboard, watching videos, eat food, mess arround with electronics, be outside, doing nothing, and other stuff. But it's a list that won't ever be up-to-date thought, it constantly changes.</p><p>If you want a chat, you can email me! <a href=\"mailto:job@function1.nl\"><code>job@function1.nl</code></a></p><p>I hope you have a lot of fun watching this page. Have a nice day!</p>"
+    },
+    {
+        "mode": "box",
+        "title": "License",
+        "content": "<p>All stuff on this page - except otherwise noted - is licensed under <a href=\"http://function1.nl/p/unlicense.txt\">the unlicense</a>. This doesn't mean I don't like credit, but it does mean you can quickly \"steal\" stuff without attribution, since most of it is made to learn anyway.</p><p><a href=\"https://github.com/joppiesaus/joppiesaus.function1.nl\">This website</a> however is licensed under the <a href=\"LICENSE.md\">MIT license</a>.</p><p>I encourage to make your software <a href=\"http://www.gnu.org/philosophy/free-sw.html\">free</a>(as in not having to pay for it and as in freedom). Because, who <em>doesn't</em> like freedom?<p>"
+    },
+
+    {
         "mode": "box",
         "title": "Learning 3D stuff!",
         "children":
@@ -170,12 +157,14 @@ var tileData =
             {
                 "title": "3D chair",
                 "image": "img/3Dlearningstuffchair.PNG",
-                "url": "https://www.khanacademy.org/computer-programming/3d-learning/5194335302844416"
+                "url": "https://www.khanacademy.org/computer-programming/3d-learning/5194335302844416",
+                "tags": ["Web"]
             },
             {
                 "title": "ASCII 3D chair",
                 "image": "img/3Dlearningstufftextchair.PNG",
-                "url": "https://www.khanacademy.org/computer-programming/3d-out-of-text/4723472598171648"
+                "url": "https://www.khanacademy.org/computer-programming/3d-out-of-text/4723472598171648",
+                "tags": ["Web"]
             }
         ]
     },
@@ -188,13 +177,15 @@ var tileData =
                 "title": "Motorcycle",
                 "description": "Motorcycle is a C# console (kindof)RPG where you can do what you want. You can race, upgrade your motor, and that's it I believe. It was my first console game, and it is really boring actually. It also features bad code. Bad. Bad code. But hey! I've learned from it!",
                 "image": "img/motorcycle.PNG",
-                "links": [["Download", "dl/SuperSOURCE.zip"]]
+                "links": [["Download", "dl/SuperSOURCE.zip"]],
+                "tags": ["Windows", "C#"]
             },
             {
                 "title": "SuperHero",
                 "description": "SuperHero is my second C# console RPG which is a lot better than Motorcycle. With random and weird things, easter eggs, and some other geeky stuff! It was never finished actually. If you are interested, you can develop it by yourself and if you <a href=\"mailto:job@function1.nl\">send me an email</a> I will post it on my website! I'll be very happy if you do that.<br>Have fun enyoying your <u><b>SUPERPOWERRRSSS</b></u>!!!1",
                 "image": "img/powerz.PNG",
-                "links": [["Download", "dl/cycle_SRC.zip"]]
+                "links": [["Download", "dl/cycle_SRC.zip"]],
+                "tags": ["Windows", "C#"]
             }
         ]
     },
@@ -203,13 +194,14 @@ var tileData =
         "title": "Windows XP's 3D \"Space Cadet\" Pinball",
         "description": "YES! Another wormhole! One of my favorite games when I was 5 or something. Hours of fun! Runs on Windows 7, 8 and even Linux(via Wine)! Have fun!",
         "image": "img/Pinball.PNG",
-        "links": [["English", "dl/Pinball_en.zip"], ["Dutch", "dl/Pinball_nl.zip"]]
+        "links": [["English", "dl/Pinball_en.zip"], ["Dutch", "dl/Pinball_nl.zip"]],
+        "tags": ["Windows"]
     },
     {                
         "title": "I AM A SPACECRAFT",
         "description": "So I browsed my projects directory, and I suddenly saw this! It's my very first (XNA) game! I remember it getting declined on indieDB... I also figured out the comets are stolen from <a href=\"http://defcom1.net/xnalessons/xnalevel1lesson05.php\">here</a>, wait... this whole game is from here! Well not completely(*relieving sigh*), because mine has enemys, and powerups, screenshots, and much, much more!<br>Unfortunatly I lost the source code for that. :( It's actually a playable game(!!!), so I decided to give it a honourfull place like here. My highscore is somewhere arround 3000. Have fun with it!",
         "image": "img/immaspacecraaft.PNG",
-        "links": [["Binary", "dl/I_AM_A_SPACECRAFT.zip"]]
+        "links": [["Binary", "dl/I_AM_A_SPACECRAFT.zip"]],
     },
     {
         "title": "chiken simulater",
@@ -325,7 +317,6 @@ window.onload = function()
     }
 
     setupLogo();
-    ge("joppiesausesAge").textContent = joppiesausesAge();
 
     // Y U NO .forEach???1! I CRY
     var projectPopups = document.querySelectorAll(".projectPopup");
@@ -493,6 +484,8 @@ window.onload = function()
             procedureTile(e, tile);
         }
     );
+
+    ge("joppiesausesAge").textContent = joppiesausesAge();
 };
 
 // Opens the project popup and fills it in with data obj
