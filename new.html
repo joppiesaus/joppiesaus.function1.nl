@@ -3,6 +3,7 @@
 Oh boy... JavaScript is taking over my site! And soon... the world! PANIC THE USERS PANIC WHAT IF THEY DISABLE PANIC HELP PANIC
 
 TODO:
+* find a way to randomize ALL tiles and not just the dom scramble way
 * And now... STYLE!
 * Themes for tiles? 3 different colors or something?
 * Start parsing content from the old site
@@ -10,10 +11,10 @@ TODO:
     ! in a category tile, the bottom subtile isn't displayed properly
     [] must use relative height
 * Is the title effect to distracting/too confusing/inaccessible?
-* improve json generation
 * improve popup(links not clear enough)
 * cleanup code(moving stuff to scripts? -> no, require the bare minimum to load this page, then the fancy stuff.)
 * Tags!
+    [] searching, filtering...
 * Searching!
 * ID's in URL bar won't work if it's a tile(tile with id derp, types in #derp, nothing happens)
 * Fix responsiveness
@@ -80,6 +81,11 @@ TODO:
     </section>	
     <section id="projects" class="grid">
         <noscript>I told you nothing would be here without JavaScript!</noscript>
+        
+        <!-- 2ugly4me -->
+        <input type="text" id="searchBox">
+        <input type="button" onclick="search(document.getElementById('searchBox').value)" value="search">
+        <input type="button" onclick="restore()" value="restore">
         <!--<div class="box">
             <a href="img/athing.png">
                 <div class="boxInner">
@@ -91,7 +97,7 @@ TODO:
         </div>-->
     </section>
     <section id="footer">
-        <span><a href="mailto:job@function1.nl">Email me</a></span>
+        <span><a href="mailto:job@function1.nl">job@function1.nl</a></span>
         Programs are licensed under <a href="http://function1.nl/p/unlicense.txt">the unlicense</a> if no license provided, <a href="https://github.com/joppiesaus/joppiesaus.function1.nl">website code</a> under the <!--<a href="http://function1.nl/p/mit-license.txt">--><a href="LICENSE.md">MIT license</a>. Looking for more stuff? Check out <a href="archive/1/">the old website</a>.
     </section>
     
@@ -133,6 +139,7 @@ mode:           The mode of the tile. Default is childBox. Choose between box, b
 children:       The child tiles of the target tile.
 content:        The HTML content of the tile.
 
+domElement:     After the initial generation, every tile gets a pointer to the DOM element to the tile on the page.
 */
 
 // I wonder if the wayback machine will like this
@@ -316,6 +323,10 @@ var tileData =
     },
 ];
 
+var smallTileHolders = [];
+var smallTilesFragment;
+var grid;
+
 window.onload = function()
 {
     if (window.WebGLRenderingContext)
@@ -349,24 +360,11 @@ window.onload = function()
 
 
     // Create small project tiles out of the data
-    var grid = ge("projects");
+    grid = ge("projects");
     var currentTile = null; // The current tile to add the small tiles in(Actually the boxInner of the current tile)
     var subTileCount = 3; // How many small tiles there are in the currenTile, in order to add a new one later
 
-    var createTile = function(parent, classes)
-    {
-        var tile = document.createElement("div");
-        tile.className = classes;
-
-        var ct = document.createElement("div");
-        ct.className = "boxInner";
-
-        tile.appendChild(ct);
-        parent.appendChild(tile);
-
-        return ct;
-    };
-
+    // Processes the tile to make it functional by it's properties
     var procedureTile = function(e, tile)
     {
         var parent = tile.parentNode;
@@ -423,6 +421,7 @@ window.onload = function()
             tile.innerHTML += '<span class="title">' + e.title + '</span>';
         }
 
+        // Assign random "theme"(CSS class color)
         tile.className += " gridTheme" + Math.floor(Math.random() * 3);
 
 
@@ -441,9 +440,9 @@ window.onload = function()
             parent.id = e.id;
         }
     };
-    
+
+    // TODO: find a way to shuffle them properly
     // Shuffle the tiles!
-    
     tileData.forEach(function(e)
         {
             if (e.children)
@@ -454,7 +453,6 @@ window.onload = function()
     );
 
     tileData.shuffle();
-    
 
     /* It's valid jason, so if you want to load it differently, just pass it in JSON.parse.
     JSON.parse(tileData)
@@ -465,35 +463,132 @@ window.onload = function()
 
             if (!e.mode)
             {
-                subTileCount++;
-                if (subTileCount >= 4)
-                {
-                    currentTile = createTile(grid, "box boxDisable");
-                    subTileCount = 0;
-                }
-
-                tile = createTile(currentTile, "childBox");
+                tile = createTile("childBox");
             }
             else
             {
-                tile = createTile(grid, e.mode);
+                tile = createTile(e.mode, grid);
 
                 if (e.children)
                 {
                     e.children.forEach(function(f)
                         {
-                            procedureTile(f, createTile(tile, "childBox"));
+                            procedureTile(f, createTile("childBox", tile));
                         }
                     );
                 }
             }
 
+            // Procedure its properties
             procedureTile(e, tile);
+
+            // Give the data back a pointer to it
+            e.domElement = tile.parentNode;
         }
     );
 
+    coupleTiles();
+
     ge("joppiesausesAge").textContent = joppiesausesAge();
 };
+
+// Creates the tile and appends it to parent if defined
+function createTile(classes, parent)
+{
+    var tile = document.createElement("div");
+    tile.className = classes;
+
+    var ct = document.createElement("div");
+    ct.className = "boxInner";
+
+    tile.appendChild(ct);
+
+    if (parent)
+    {
+        parent.appendChild(tile);
+    }
+
+    return ct;
+}
+
+function coupleTiles()
+{
+    var tile;
+    var subTileCount = 3;
+
+    // loop trough tiles
+    // TODO: Find other way to go trough all small tiles
+    tileData.forEach(function(e)
+        {
+            // If not a small tile, or not visible, continue
+            if (!hasClass(e.domElement, "childBox") || e.domElement.style.display === "none")
+            {
+                return;
+            }
+
+            if (++subTileCount >= 4)
+            {
+                tile = createTile("box boxDisable", grid);
+                smallTileHolders.push(tile);
+                subTileCount = 0;
+            }
+
+            tile.appendChild(e.domElement);
+        }
+    );
+
+    smallTilesFragment = null;
+}
+
+function decoupleTiles()
+{
+    smallTilesFragment = document.createDocumentFragment();
+
+    // iterate trough the holders, leaving the childs
+    smallTileHolders.forEach(function(e)
+        {
+            while (e.firstChild)
+            {
+                smallTilesFragment.appendChild(e.firstChild);
+            }
+            e.parentNode.remove();
+        }
+    );
+
+    // Empty it, since they don't exist anymore
+    smallTileHolders = [];
+}
+
+function search(title)
+{
+    decoupleTiles();
+
+    tileData.forEach(function(e)
+        {
+            var el = e.domElement;
+
+            if (e.title.indexOf(title) === -1)
+            {
+                el.style.display = "none";
+            }
+        }
+    );
+
+    coupleTiles();
+}
+
+function restore()
+{
+    decoupleTiles();
+
+    tileData.forEach(function(e)
+        {
+            e.domElement.style.display = "block";
+        }
+    );
+
+    coupleTiles();
+}
 
 // Opens the project popup and fills it in with data obj
 function openProjectPopup(data)

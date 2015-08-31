@@ -13,6 +13,12 @@ function freq(f,c)
     document.body.appendChild(s);
 }
 
+// Returns true if the element e has class c
+function hasClass(e, c)
+{
+    return (e.className.indexOf(c) !== -1);
+}
+
 // Shuffles an array
 Array.prototype.shuffle = function()
 {
