@@ -566,10 +566,24 @@ function search(title)
     tileData.forEach(function(e)
         {
             var el = e.domElement;
-
+            
             if (e.title.indexOf(title) === -1)
             {
-                el.style.display = "none";
+                if (e.children)
+                {
+                    e.children.forEach(function(f)
+                        {
+                            if (f.title.indexOf(title) === -1)
+                            {
+                                el.style.display = "none";
+                            }
+                        }
+                    );
+                }
+                else
+                {
+                    el.style.display = "none";
+                }
             }
         }
     );
