@@ -15,6 +15,8 @@ TODO:
 * cleanup code(moving stuff to scripts? -> no, require the bare minimum to load this page, then the fancy stuff.)
 * Tags!
     [] searching, filtering...
+    [] style them
+* ordering!
 * ID's in URL bar won't work if it's a tile(tile with id derp, types in #derp, nothing happens)
 * Fix responsiveness
 * Other content!!1
@@ -82,10 +84,12 @@ TODO:
         <noscript>I told you nothing would be here without JavaScript!</noscript>
         
         <!-- 2ugly4me -->
-        <input type="text" id="searchBox">
-        <input type="button" onclick="search(ge('searchBox').value)" value="search by title">
-        <input type="button" onclick="searchByTag(ge('searchBox').value)" value="search by tag">
-        <input type="button" onclick="restore()" value="restore">
+        <span class="searchDialog">
+            <input type="text" id="searchBox" placeholder="Search...">
+            <input type="button" onclick="search(ge('searchBox').value)" value="search by title">
+            <input type="button" onclick="searchByTag(ge('searchBox').value)" value="search by tag">
+            <input type="button" onclick="restore()" value="restore">
+        </span>
         <!--<div class="box">
             <a href="img/athing.png">
                 <div class="boxInner">
@@ -304,7 +308,7 @@ var tileData =
             },
             {
                 "title": "never_thrust_batch_files.bat",
-                "description": "So I thought: How can I let someone rage while not harming the whole computer? It's easy! So I came up with this: Your disk drive will open, you are unable to type correctly, you get spammed and the computer yells to you, and much more... I present to you: never_thrust_batch_files.bat!<br>Please use this for \"fun\" purposes, not to harm people. It's easy to fix, just open run and type in \"msconfig\", then open the tab \"startup\" and remove never_thrust_batch_files.bat from the list. I still haven't tested it, thought.",
+                "description": "So I thought: How can I let someone rage while not harming the whole computer? It's easy! So I came up with this: Your disk drive will open, you are unable to type correctly, you get spammed and the computer yells to you, and much more... I present to you: never_thrust_batch_files.bat!<br>Please use this for \"fun\" purposes, not to harm people. It's easy to fix, just open run and type in <code>msconfig</code>, then open the tab \"startup\" and <code>remove never_thrust_batch_files.bat</code> from the list. I still haven't tested it, thought.",
                 "image": "img/ntbf.PNG",
                 "links": [["Download", "dl/never_thrust_batch_files.bat"]],
                 "tags": ["Windows", "Batch"]
@@ -678,7 +682,7 @@ function restore()
 {
     decoupleTiles();
 
-    tileData.forEach(function(e)
+    forEachTile(function(e)
         {
             e.domElement.style.display = "block";
         }
@@ -710,7 +714,7 @@ function openProjectPopup(data)
     if (data.tags)
     {
         data.tags.forEach(function(e){
-            pEl.children[3].innerHTML += "<li onclick=\"closeProjectPopup();searchByTag('" + e + "')\">" + e;
+            pEl.children[3].innerHTML += "<li class=\"tag\" onclick=\"closeProjectPopup();searchByTag('" + e + "')\">" + e;
         });
     }
 

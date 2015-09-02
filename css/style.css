@@ -192,11 +192,33 @@ noscript
 }
 
 
+#searchBox
+{
+    padding: 8px;
+    background-color: #f0f;
+    color: white;
+    border: 1px solid #e0e;
+    font-weight: bold;
+}
+.searchDialog input[type="button"]
+{
+    color: white;
+    background-color: #00f;
+    border: none;
+    padding: 9px;
+    
+    transition:background-color 0.12s cubic-bezier(0, 0.99, 1, 1), border 0.3s linear;
+}
+.searchDialog input[type="button"]:hover
+{
+    cursor: pointer;
+    background-color: #0F0;
+}
+
+
 /****************
 project popup
 ****************/
-
-/* TODO: Style */
 #projectPopup
 {
     display: none;
@@ -267,9 +289,9 @@ project popup
 #projectPopup .links
 {
     float: right;
+    padding-right: 10px;
     list-style: none;
     padding: 0;
-    padding-right: 10px;
     margin: 0;
 }
 
@@ -278,6 +300,21 @@ project popup
     padding-left: 0;
 }
 
+#projectPopup .tags
+{
+    margin: 5px;
+    list-style: none;
+    padding: 0;
+}
+
+.tag
+{
+    margin: 5px;
+    padding: 3px;
+    display: inline-block;
+    
+    text-align: center;
+}
 
 /****************
 grid page specific
