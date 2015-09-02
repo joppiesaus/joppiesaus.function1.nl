@@ -15,7 +15,7 @@ TODO:
 * cleanup code(moving stuff to scripts? -> no, require the bare minimum to load this page, then the fancy stuff.)
 * Tags!
     [] searching, filtering...
-* Searching!
+* Fix searching
 * ID's in URL bar won't work if it's a tile(tile with id derp, types in #derp, nothing happens)
 * Fix responsiveness
 * Other content!!1
@@ -78,13 +78,14 @@ TODO:
     </section>
 
 
-    </section>	
+    </section>
     <section id="projects" class="grid">
         <noscript>I told you nothing would be here without JavaScript!</noscript>
         
         <!-- 2ugly4me -->
         <input type="text" id="searchBox">
-        <input type="button" onclick="search(document.getElementById('searchBox').value)" value="search">
+        <input type="button" onclick="search(ge('searchBox').value)" value="search by title">
+        <input type="button" onclick="searchByTag(ge('searchBox').value)" value="search by tag">
         <input type="button" onclick="restore()" value="restore">
         <!--<div class="box">
             <a href="img/athing.png">
@@ -108,7 +109,8 @@ TODO:
     <div id="projectPopup">
         <h2 class="projectTitle"></h2>
         <ul class="links"></ul>
-        <p class="projectDescription"></p>        
+        <ul class="tags"></ul>
+        <p class="projectDescription"></p>
 
         <div class="closeButton" onclick="closeProjectPopup()">Close</div>
     </div>
@@ -138,6 +140,7 @@ onclick:        When onclick is defined, it will execute javascript inside oncli
 mode:           The mode of the tile. Default is childBox. Choose between box, boxBig, boxHuge - like in the grid.css class.
 children:       The child tiles of the target tile.
 content:        The HTML content of the tile.
+tags:           The tags used for searching or categorizing your tiles.
 
 domElement:     After the initial generation, every tile gets a pointer to the DOM element to the tile on the page.
 */
@@ -165,13 +168,13 @@ var tileData =
                 "title": "3D chair",
                 "image": "img/3Dlearningstuffchair.PNG",
                 "url": "https://www.khanacademy.org/computer-programming/3d-learning/5194335302844416",
-                "tags": ["Web"]
+                "tags": ["Web", "JavaScript", "Toy"]
             },
             {
                 "title": "ASCII 3D chair",
                 "image": "img/3Dlearningstufftextchair.PNG",
                 "url": "https://www.khanacademy.org/computer-programming/3d-out-of-text/4723472598171648",
-                "tags": ["Web"]
+                "tags": ["Web", "JavaScript", "Toy"]
             }
         ]
     },
@@ -185,14 +188,14 @@ var tileData =
                 "description": "Motorcycle is a C# console (kindof)RPG where you can do what you want. You can race, upgrade your motor, and that's it I believe. It was my first console game, and it is really boring actually. It also features bad code. Bad. Bad code. But hey! I've learned from it!",
                 "image": "img/motorcycle.PNG",
                 "links": [["Download", "dl/SuperSOURCE.zip"]],
-                "tags": ["Windows", "C#"]
+                "tags": ["Windows", "Console", "C#", "Game"]
             },
             {
                 "title": "SuperHero",
                 "description": "SuperHero is my second C# console RPG which is a lot better than Motorcycle. With random and weird things, easter eggs, and some other geeky stuff! It was never finished actually. If you are interested, you can develop it by yourself and if you <a href=\"mailto:job@function1.nl\">send me an email</a> I will post it on my website! I'll be very happy if you do that.<br>Have fun enyoying your <u><b>SUPERPOWERRRSSS</b></u>!!!1",
                 "image": "img/powerz.PNG",
                 "links": [["Download", "dl/cycle_SRC.zip"]],
-                "tags": ["Windows", "C#"]
+                "tags": ["Windows", "Console", "C#", "Game"]
             }
         ]
     },
@@ -202,37 +205,42 @@ var tileData =
         "description": "YES! Another wormhole! One of my favorite games when I was 5 or something. Hours of fun! Runs on Windows 7, 8 and even Linux(via Wine)! Have fun!",
         "image": "img/Pinball.PNG",
         "links": [["English", "dl/Pinball_en.zip"], ["Dutch", "dl/Pinball_nl.zip"]],
-        "tags": ["Windows"]
+        "tags": ["Windows", "Game"]
     },
     {                
         "title": "I AM A SPACECRAFT",
         "description": "So I browsed my projects directory, and I suddenly saw this! It's my very first (XNA) game! I remember it getting declined on indieDB... I also figured out the comets are stolen from <a href=\"http://defcom1.net/xnalessons/xnalevel1lesson05.php\">here</a>, wait... this whole game is from here! Well not completely(*relieving sigh*), because mine has enemys, and powerups, screenshots, and much, much more!<br>Unfortunatly I lost the source code for that. :( It's actually a playable game(!!!), so I decided to give it a honourfull place like here. My highscore is somewhere arround 3000. Have fun with it!",
         "image": "img/immaspacecraaft.PNG",
         "links": [["Binary", "dl/I_AM_A_SPACECRAFT.zip"]],
+        "tags": ["Windows", "C#", "XNA", "Game"]
     },
     {
         "title": "chiken simulater",
         "image": "img/csgochiken.png",
         "description": "You can now be a chiken! Search your favorite streamer, enter his ID and turn auto chiken on! Made in an hour or so.",
-        "links": [["Binary", "dl/chiken_simulater.zip"], ["Source", "dl/chiken_simulater_src.zip"]]
+        "links": [["Binary", "dl/chiken_simulater.zip"], ["Source", "dl/chiken_simulater_src.zip"]],
+        "tags": ["Windows", "C#", "Tool"]
     },
     {
         "title": "Click Game",
         "image": "img/click.PNG", // Bad name. Bad name.
         "description": "A stupid game I made in C#. It's stupid. It yells at you. It's frustrating, and intense. But it has a degree of fun and polish. Your objective is to click the buttons in order in a certain time, which get's harder over the rounds you've played.",
-        "links": [["Binary", "dl/Click_Game.zip"], ["Source", "dl/Click_Game_SRC.zip"]]
+        "links": [["Binary", "dl/Click_Game.zip"], ["Source", "dl/Click_Game_SRC.zip"]],
+        "tags": ["Windows", "C#"]
     },
     {
         "title": "Low-Memory Candy",
         "image": "img/fry.PNG",
         "description": "You are a man, whose memory is weird. It needs candies! Otherwise it will forget stuff! Can you keep his memory intact?<br>Made for the <a href=\"http://itch.io/jam/candyjam\">Candyjam</a>!",
-        "links": [["Binary", "dl/LMC_bin.zip"], ["Source", "dl/LMC_src.zip"], ["Submission page", "http://joppiesaus.itch.io/low-memory-candy"]]
+        "links": [["Binary", "dl/LMC_bin.zip"], ["Source", "dl/LMC_src.zip"], ["Submission page", "http://joppiesaus.itch.io/low-memory-candy"]],
+        "tags": ["Windows", "C#", "XNA", "Game"]
     },
     {
         "title": "\"Zombie Game\"",
         "image": "img/zombiegaem.PNG",
         "description": "A simple little zombie game I made using <a href=\"\">these</a> tutorials to learn more about C++ game development! It was really fun to make! And the game <em>is</em> really fun too!",
-        "links": [["Page", "dl/zombiegame"]]
+        "links": [["Page", "dl/zombiegame"]],
+        "tags": ["Windows", "Linux", "C++", "Game"]
     },
     {
         "title": "FAG.com",
@@ -246,35 +254,40 @@ var tileData =
         "links": [["universe.zip", "dl/universe.zip"], ["1 GiB file gen cpp", "dl/Useless1GiBDataGenerator.cpp"]]
     },
     {
-        "title": "C++ Windows 7 Spider Solitaire trainer-hacker 2015 XTREME MLG EDITION",
+        "title": "Windows 7 Spider Solitaire trainer-hacker 2015 XTREME MLG EDITION",
         "image": "img/mlghckr.PNG",
         "description": "The trainer you use when you're bored. I've learned A LOT from it. I spend days working with code and even <a href=\"http://stackoverflow.com/q/26782399/2622807\">asking and answering my own stackoverflow question</a>... It's the neatest thing I've ever programmed.",
-        "links": [["x64", "dl/CPPW7SSTH2015XTREMEMLGEDITIONx64.zip"], ["x86", "dl/CPPW7SSTH2015XTREMEMLGEDITIONx86.zip"], ["Source", "dl/CPPW7SSTH2015XTREMEMLGEDITION.cpp"]]
+        "links": [["x64", "dl/CPPW7SSTH2015XTREMEMLGEDITIONx64.zip"], ["x86", "dl/CPPW7SSTH2015XTREMEMLGEDITIONx86.zip"], ["Source", "dl/CPPW7SSTH2015XTREMEMLGEDITION.cpp"]],
+        "tags": ["Windows", "C++", "Tool"]
     },
     {
         "title": "RedBull Santa",
         "image": "img/santa.PNG",
         "description": "RedBull Santa! A C# XNA game, which is very trippy and sound-dynamic! You must prevent santa from falling-of the \"roof\", while drinking as many as possible Red Bull!<br><span class=\"warning\">Contains flashing images.</span>",
-        "links": [["Binary", "dl/RedBull_Santa.zip"], ["Source", "dl/RBS_src.zip"]]
+        "links": [["Binary", "dl/RedBull_Santa.zip"], ["Source", "dl/RBS_src.zip"]],
+        "tags": ["Windows", "C#", "XNA", "Game"]
     },
     {
         "title": "\"Stars.EXE\"",
         "image": "img/stars.PNG",
         "description": "It was a nice \"Test project\", where I did all sorts of (useless) stuff. It was originally created to create my old website's background, but I managed to make a *nice* game from it. Comes with a *nice* *config format*, a bad name and reasonable code.",
-        "links": [["Binary", "dl/Stars.zip"], ["Source", "dl/Stars_4_src.zip"]]
+        "links": [["Binary", "dl/Stars.zip"], ["Source", "dl/Stars_4_src.zip"]],
+        "tags": ["Windows", "C#", "XNA", "Game"]
     },
     {
         "title": "Console Four in a Row",
         "image": "img/row.PNG",
         "description": "Something revolutionary... You can play four in a row on your PC! It includes the source code & executable. You can define how many columns and rows you want. You can even pick 1000!",
-        "links": [["Download", "dl/4InARow_Src.zip"]]
+        "links": [["Download", "dl/4InARow_Src.zip"]],
+        "tags": ["Windows", "Console", "C#", "Game"]
     },
     {
         "mode": "box",
         "title": "SuperForeverAloneInThaDungeon",
         "image": "img/sfaitdinv.PNG",
         "description": "SFAITD is a Rogue-Like made to learn more about object-oriented programming. It was another C# Console game, but this time with text as the level. I didn't now such a thing existed until I searched arround the internet. I worked on it for a long time and never finished it, but It's something!",
-        "links": [["Page", "http://function1.nl/p/sfaitd/"]]
+        "links": [["Page", "http://function1.nl/p/sfaitd/"]],
+        "tags": ["Windows", "Console", "C#", "Game"]
     },
 
 
@@ -287,19 +300,22 @@ var tileData =
                 "title": "C++ Apple Loser",
                 "image": "img/bravepcuser.PNG",
                 "description": "<span class=\"warning\">This program creates milions of apples but forgets where they are located. Notice your RAM.</span><br>I LOVE pointers! This is made to learn more about pointers. What this program does:<ol><li>Create a new apple and assign it to a pointer<li>Create a new apple and assign it to the same pointer<li>Goto 1</ol>This program will fire up your RAM and will throw a <code>bad_alloc</code>",
-                "links": [["Binary(Windows)", "dl/apple_loser.zip"], ["Source", "dl/apple_loser_cpp.zip"]]
+                "links": [["Binary(Windows)", "dl/apple_loser.zip"], ["Source", "dl/apple_loser_cpp.zip"]],
+                "tags": ["Windows", "Linux", "C++"]
             },
             {
                 "title": "never_thrust_batch_files.bat",
                 "description": "So I thought: How can I let someone rage while not harming the whole computer? It's easy! So I came up with this: Your disk drive will open, you are unable to type correctly, you get spammed and the computer yells to you, and much more... I present to you: never_thrust_batch_files.bat!<br>Please use this for \"fun\" purposes, not to harm people. It's easy to fix, just open run and type in \"msconfig\", then open the tab \"startup\" and remove never_thrust_batch_files.bat from the list. I still haven't tested it, thought.",
                 "image": "img/ntbf.PNG",
-                "links": [["Download", "dl/never_thrust_batch_files.bat"]]
+                "links": [["Download", "dl/never_thrust_batch_files.bat"]],
+                "tags": ["Windows", "Batch"]
             },
             {
                 "title": "installer.bat",
                 "description": "Bing bar? Conduit toolbar!? Norton Antivirus!?! That trash wouldn't be able to beat THIS! Designed just for you, to generate trash. If you have an old computer, you want to bomb, just enter -1 trash! <em>Die in style</em>.",
                 "image": "img/itrash.PNG",
-                "links": [["Download!", "dl/installer.bat"]]
+                "links": [["Download!", "dl/installer.bat"]],
+                "tags": ["Windows", "Batch"]
             }
         ]
     },
@@ -308,21 +324,18 @@ var tileData =
     {
         "mode": "box",
         "title": "I like this site",
-        "onclick": "var a=['github.com','glslsandbox.com','youtu.be','khanacademy.org','ludumdare.com','cachemonet.com'];window.open('http://'+a[Math.floor(Math.random()*a.length)])" 
+        "onclick": "var a=['github.com','glslsandbox.com','youtu.be','khanacademy.org','ludumdare.com','cachemonet.com'];window.open('http://'+a[Math.floor(Math.random()*a.length)])",
+        "tags": ["Web"]
     },
 
     {
         "mode": "box",
         "title": "Donations",
         "content": "If you <em>really</em> like my work, you can donate me your crappy CSGO skins(I love crappy CSGO skins), give me TF2 items, give me your stupid games, or other trash or not-so-trash on <a href=\"https://steamcommunity.com/tradeoffer/new/?partner=150881846&token=LdOYlDqJ\">steam</a>!"
-    },
-    {
-        "mode": "box",
-        "title": "Why is everything Windows?",
-        "content": "I grew up with Windows. I got a late discovery of Linux, and never thought about other platforms. It was all to learn, really. That's why."
-    },
+    }
 ];
 
+var tags = [];
 var smallTileHolders = [];
 var smallTilesFragment;
 var grid;
@@ -488,8 +501,10 @@ window.onload = function()
     );
 
     coupleTiles();
-
+    
     ge("joppiesausesAge").textContent = joppiesausesAge();
+    
+    processTags();
 };
 
 // Creates the tile and appends it to parent if defined
@@ -509,6 +524,36 @@ function createTile(classes, parent)
     }
 
     return ct;
+}
+
+// Executes function f for each tile, passing in the tile
+function forEachTile(f)
+{
+    tileData.forEach(function(e)
+        {
+            f(e);
+            if (e.children)
+            {
+                e.children.forEach(f);
+            }
+        }
+    );
+}
+
+function processTags()
+{
+    // Process tags
+    forEachTile(function(e)
+        {
+            if (!e.tags) return;
+            
+            e.tags.forEach(function(tag)
+                {
+                    
+                }
+            );
+        }
+    );
 }
 
 function coupleTiles()
@@ -566,13 +611,26 @@ function search(title)
         {
             return function(e)
             {
-                return (e.title.indexOf(f) === -1);
+                return (e.title.indexOf(f) !== -1);
             }
         })(title)
     );
 }
 
-// Filters all tiles by function ff(returns true if it should remove the tile)
+function searchByTag(tag)
+{
+    filter(
+        (function(f)
+        {
+            return function(e)
+            {
+                return (e.tags && e.tags.some(function(tag){return tag === f}/* no arrow functions :( */));
+            }
+        })(tag)
+    );
+}
+
+// Filters all tiles by function ff(returns false if it should remove the tile)
 function filter(ff)
 {
     decoupleTiles();
@@ -581,16 +639,17 @@ function filter(ff)
         {
             var el = e.domElement;
             
-            if (ff(e))
+            if (!ff(e))
             {
+                /*TODO: Fix filtering with children*/
                 if (e.children)
                 {
                     e.children.forEach(function(f)
                         {
-                            if (ff(f))
+                            if (!ff(f))
                             {
                                 el.style.display = "none";
-                            }
+                            }                            
                         }
                     );
                 }
@@ -624,15 +683,22 @@ function openProjectPopup(data)
     var pEl = ge("projectPopup");
 
     pEl.children[0].textContent = data.title;
-    pEl.children[2].innerHTML = data.description;
+    pEl.children[3].innerHTML = data.description;
 
     // Erase old link data if there's any
-    pEl.children[1].innerHTML = "";
+    //pEl.children[1].innerHTML = "";
 
     if (data.links)
     {
         data.links.forEach(function(e){
             pEl.children[1].innerHTML += "<li><a href=\"" + e[1] + "\">" + e[0] + "</a>";
+        });
+    }
+    
+    if (data.tags)
+    {
+        data.tags.forEach(function(e){
+            pEl.children[2].innerHTML += "<li onclick=\"closeProjectPopup();searchByTag('" + e + "')\">" + e;
         });
     }
 
