@@ -15,7 +15,6 @@ TODO:
 * cleanup code(moving stuff to scripts? -> no, require the bare minimum to load this page, then the fancy stuff.)
 * Tags!
     [] searching, filtering...
-* Fix searching
 * ID's in URL bar won't work if it's a tile(tile with id derp, types in #derp, nothing happens)
 * Fix responsiveness
 * Other content!!1
@@ -109,8 +108,8 @@ TODO:
     <div id="projectPopup">
         <h2 class="projectTitle"></h2>
         <ul class="links"></ul>
-        <ul class="tags"></ul>
         <p class="projectDescription"></p>
+        <ul class="tags"></ul>
 
         <div class="closeButton" onclick="closeProjectPopup()">Close</div>
     </div>
@@ -178,7 +177,7 @@ var tileData =
             }
         ]
     },
-
+ 
     {
         "mode": "box",
         "title": "Hopeless console RPG's",
@@ -452,6 +451,9 @@ window.onload = function()
         {
             parent.id = e.id;
         }
+        
+        // Give the data back a reference to the DOM Element
+        e.domElement = parent;
     };
 
     // TODO: find a way to shuffle them properly
@@ -494,9 +496,6 @@ window.onload = function()
 
             // Procedure its properties
             procedureTile(e, tile);
-
-            // Give the data back a pointer to it
-            e.domElement = tile.parentNode;
         }
     );
 
@@ -641,17 +640,28 @@ function filter(ff)
             
             if (!ff(e))
             {
-                /*TODO: Fix filtering with children*/
                 if (e.children)
                 {
+                    var canRemove = true;
+                    
                     e.children.forEach(function(f)
                         {
-                            if (!ff(f))
+                            if (ff(f))
                             {
-                                el.style.display = "none";
-                            }                            
+                                canRemove = false;
+                            }
+                            else
+                            {
+                                console.log(f);
+                                f.domElement.style.display = "none";
+                            }   
                         }
                     );
+                    
+                    if (canRemove === true)
+                    {
+                        el.style.display = "none";
+                    }
                 }
                 else
                 {
@@ -681,13 +691,15 @@ function restore()
 function openProjectPopup(data)
 {
     var pEl = ge("projectPopup");
-
+    
     pEl.children[0].textContent = data.title;
-    pEl.children[3].innerHTML = data.description;
-
-    // Erase old link data if there's any
-    //pEl.children[1].innerHTML = "";
-
+    pEl.children[2].innerHTML = data.description;
+    
+    // Erase old data if there's any
+    pEl.children[1].innerHTML = "";
+    pEl.children[3].innerHTML = "";
+    
+    
     if (data.links)
     {
         data.links.forEach(function(e){
@@ -698,7 +710,7 @@ function openProjectPopup(data)
     if (data.tags)
     {
         data.tags.forEach(function(e){
-            pEl.children[2].innerHTML += "<li onclick=\"closeProjectPopup();searchByTag('" + e + "')\">" + e;
+            pEl.children[3].innerHTML += "<li onclick=\"closeProjectPopup();searchByTag('" + e + "')\">" + e;
         });
     }
 
