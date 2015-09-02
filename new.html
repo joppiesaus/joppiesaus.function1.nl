@@ -561,19 +561,33 @@ function decoupleTiles()
 
 function search(title)
 {
+    filter(
+        (function(f)
+        {
+            return function(e)
+            {
+                return (e.title.indexOf(f) === -1);
+            }
+        })(title)
+    );
+}
+
+// Filters all tiles by function ff(returns true if it should remove the tile)
+function filter(ff)
+{
     decoupleTiles();
 
     tileData.forEach(function(e)
         {
             var el = e.domElement;
             
-            if (e.title.indexOf(title) === -1)
+            if (ff(e))
             {
                 if (e.children)
                 {
                     e.children.forEach(function(f)
                         {
-                            if (f.title.indexOf(title) === -1)
+                            if (ff(f))
                             {
                                 el.style.display = "none";
                             }
