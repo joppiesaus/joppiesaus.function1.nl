@@ -155,6 +155,12 @@ noscript
     position: relative;
 }
 
+#logoarea a, #logoarea a:visited, #logoarea a:active, #logoarea a:link
+{
+    color: inherit;
+    text-decoration: inherit;
+}
+
 #sillyquote
 {
     font-style: italic;
