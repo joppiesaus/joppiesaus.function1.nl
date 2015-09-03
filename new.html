@@ -16,6 +16,8 @@ TODO:
 * Tags!
     [] searching, filtering...
     [] style them
+* Make the about button actually do something?
+* Think about the text in tiles.
 * ordering!
 * ID's in URL bar won't work if it's a tile(tile with id derp, types in #derp, nothing happens)
 * Fix responsiveness
@@ -334,6 +336,10 @@ var tileData =
         ]
     },
 
+    {
+        "title": "NEON IT ALLL",
+        "onclick": "var style=document.createElement('style');style.innerHTML='*{text-shadow:0 0 3px #f00, 0 0 5px #00f !important}h1,h2{text-shadow:0 0 8px #f00, 0 0 15px #00f !important}';document.getElementsByTagName('head')[0].appendChild(style)",
+    },
 
     {
         "mode": "box",

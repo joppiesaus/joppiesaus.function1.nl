@@ -251,7 +251,7 @@ project popup
     height: 100%;
     overflow: hidden;
 
-    background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.5));
+    background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.55));
 }
 
 #projectPopup p
@@ -290,6 +290,8 @@ project popup
     padding: 1rem;
     padding-right: 5rem;
     margin: 0 0 0.5rem 0;
+
+    text-shadow: 2px 2px 4px #000;
 }
 
 #projectPopup .links
@@ -303,7 +305,9 @@ project popup
 
 #projectPopup .links li
 {
-    padding-left: 0;
+    padding: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
 }
 
 #projectPopup .tags
@@ -318,8 +322,18 @@ project popup
     margin: 5px;
     padding: 3px;
     display: inline-block;
+
+    border: 1px solid #aaa;
+    border-radius: 1px;
+
+    cursor: pointer;
     
     text-align: center;
+}
+
+.tag:hover
+{
+    background-color: #0F0;
 }
 
 /****************
