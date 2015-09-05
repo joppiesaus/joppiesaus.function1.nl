@@ -592,7 +592,6 @@ function processTags()
             );
         }
     );
-
     var appendEl = ge("tags");
 
     // Create visual tags
@@ -604,7 +603,21 @@ function processTags()
             {
                 return function()
                 {
-                    searchByTag(a);
+                    var el = ge("searchBox");
+                    var text = el.value;
+                    var expression = "tags:has(" + a + ")";
+
+                    if (text.indexOf(expression) === -1)
+                    {
+                        if (text[text.length - 1] !== " " && text.length !== 0)
+                        {
+                            el.value += " ";
+                        }
+
+                        el.value += expression;
+                    };
+
+                    applySearchboxFilter();
                 }
             })(tag);
             e.textContent = tag;
@@ -719,6 +732,9 @@ For example, !has:foo will select all elements without the variable foo.
 
 Multiple functions are also possible. Just add a space.
 
+Alternatively, you can do variable:value. It selects all variables where variable equals value.
+It's the same as has:variable(value)
+
 */
 
     var hasFunc = function() /* e, variable */
@@ -764,11 +780,14 @@ Multiple functions are also possible. Just add a space.
         })(args);
     };
 
-    // Split the input and make 
+    // Split the input to commands
     // semi-dumb
+    // I should learn regex
+    // TODO: Make regex and add quotes
     var newInput = [];
     var chars = "";
     var inClosure = false, prevWasEscapeClosureChar = false;
+
     for (var i = 0; i < input.length; i++)
     {
         if (inClosure)
@@ -803,6 +822,7 @@ Multiple functions are also possible. Just add a space.
         chars += input[i];
     }
 
+    // Add the remaining chars
     if (chars !== "")
     {
         newInput.push(chars);
@@ -816,10 +836,16 @@ Multiple functions are also possible. Just add a space.
     {
         var things = put.split(":");
 
-        if (things.length < 2) return;
+        // If just a word, replace it by searching for the title
+        if (things.length < 2)
+        {
+            things = [ "contains", "title(" + things[0] + ")" ];
+        }
+
 
         var func, variable, comparator, not;
 
+        // If there's a ! in front of it, invert the function
         if (things[0][0] === "!")
         {
             not = true;
@@ -857,7 +883,7 @@ Multiple functions are also possible. Just add a space.
             }
         }
 
-        if (variable)
+        if (variable) // if the first index was a variable and not a function
         {
             if (argInput.length > 1)
             {
@@ -873,9 +899,11 @@ Multiple functions are also possible. Just add a space.
 
                 comparator = argInput[1];
             }
-            else
+            else // if it doesn't have a parameter, it's of format variable:value
             {
-                func = hasFunc;
+                func = isFunc;
+                variable = things[0];
+                comparator = things[1];
             }
         }
         else
@@ -921,6 +949,11 @@ Multiple functions are also possible. Just add a space.
     })(funcs);
 }
 
+function applySearchboxFilter()
+{
+    restore();
+    filter(makeFilterFunction(ge("searchBox").value));
+}
 
 // Filters all tiles by function ff(returns false if it should remove the tile)
 function filter(ff)
