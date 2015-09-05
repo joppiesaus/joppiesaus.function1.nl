@@ -92,8 +92,8 @@ TODO:
         <!-- 2ugly4me -->
         <div class="searchDialog">
             <span>
-                <span class="inputContainer"><input type="text" id="searchBox" placeholder="Search..."></span>
-                <input type="button" onclick="filter(makeFilterFunction(ge('searchBox').value))" value="search">
+                <input type="text" id="searchBox" placeholder="Search...">
+                <input type="button" onclick="restore();filter(makeFilterFunction(ge('searchBox').value))" value="search">
                 <!--
                 <input type="button" onclick="search(ge('searchBox').value)" value="search by title">
                 <input type="button" onclick="searchByTag(ge('searchBox').value)" value="search by tag">
@@ -744,10 +744,6 @@ Multiple functions are also possible. Just add a space.
 
     var isFunc = function() /* e, variable, equals */
     {
-        /*if (!this[0][this[1]])
-        {
-            return false;
-        }*/
         return (this[0][this[1]] === this[2]);
     };
 
@@ -820,76 +816,89 @@ Multiple functions are also possible. Just add a space.
     {
         var things = put.split(":");
 
-        for (var i = 0; i < things.length; i++)
+        if (things.length < 2) return;
+
+        var func, variable, comparator, not;
+
+        if (things[0][0] === "!")
         {
-            var func, variable, comparator, not;
+            not = true;
+            things[0] = things[0].substring(1);
+        }
 
-            if (things[i][0] === "!")
+        switch (things[0])
+        {
+            case "has":
+                func = hasFunc;
+                break;
+
+            case "contains":
+                func = containsFunc;
+                break;
+
+            case "javascript":
+                // TODO: Add
+                break;
+
+            default:
+                variable = things[0]; // It's not a function, it's a variable
+                break;
+        }
+
+        var argInput = things[1].split("(");
+        var args = [];
+
+        if (argInput.length > 1)
+        {
+            // Remove ) if needed
+            if (argInput[1][argInput[1].length - 1] === ")")
             {
-                not = true;
-                things[i] = things[i].substring(1);
+                argInput[1] = argInput[1].slice(0, -1);
             }
+        }
 
-            switch (things[i])
-            {
-                case "has":
-                    func = hasFunc;
-                    break;
-
-                case "contains":
-                    func = containsFunc;
-                    break;
-
-                default:
-                    variable = things[i]; // It's not a function, it's a variable
-                    break;
-            }
-
-            var argInput = things[++i].split("(");
-            var args = [];
-
+        if (variable)
+        {
             if (argInput.length > 1)
-            {
-                // Remove ) if needed
-                if (argInput[1][argInput[1].length - 1] === ")")
-                {
-                    argInput[1] = argInput[1].slice(0, -1);
-                }
-            }
-
-            if (variable)
             {
                 switch (argInput[0])
                 {
                     case "has":
                         func = hasArrFunc;
                         break;
+
+                    default:
+                        return;
                 }
 
                 comparator = argInput[1];
             }
             else
             {
-                variable = argInput[0];
-
-                if (argInput.length > 1)
-                {
-                    // if  has is supplied with an argument, it becomes is
-                    if (func === hasFunc)
-                    {
-                        func = isFunc;
-                    }
-
-                    comparator = argInput[1];
-                }
+                func = hasFunc;
             }
-
-            args = [ func, variable, comparator/*doesn't matter if it's undefined, then it isn't used anyway*/ ];
-
-            var finalFunc = compose(args);
-            finalFunc.not = not;
-            funcs.push(finalFunc);
         }
+        else
+        {
+            variable = argInput[0];
+
+            if (argInput.length > 1)
+            {
+                // if  has is supplied with an argument, it becomes is
+                if (func === hasFunc)
+                {
+                    func = isFunc;
+                }
+
+                comparator = argInput[1];
+            }
+        }
+
+        args = [ func, variable, comparator/*doesn't matter if it's undefined, then it isn't used anyway*/ ];
+
+        var finalFunc = compose(args);
+        finalFunc.not = not;
+        funcs.push(finalFunc);
     });
 
     return (function(arr)
