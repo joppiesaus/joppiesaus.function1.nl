@@ -90,12 +90,19 @@ TODO:
         <noscript>I told you nothing would be here without JavaScript!</noscript>
         
         <!-- 2ugly4me -->
-        <span class="searchDialog">
-            <input type="text" id="searchBox" placeholder="Search...">
-            <input type="button" onclick="search(ge('searchBox').value)" value="search by title">
-            <input type="button" onclick="searchByTag(ge('searchBox').value)" value="search by tag">
+        <div class="searchDialog">
+            <span>
+                <span class="inputContainer"><input type="text" id="searchBox" placeholder="Search..."></span>
+                <input type="button" onclick="filter(makeFilterFunction(ge('searchBox').value))" value="search">
+                <!--
+                <input type="button" onclick="search(ge('searchBox').value)" value="search by title">
+                <input type="button" onclick="searchByTag(ge('searchBox').value)" value="search by tag">
+                -->
+            </span>
             <input type="button" onclick="restore()" value="restore">
-        </span>
+
+            <span id="tags"></span>
+        </div>
         <!--<div class="box">
             <a href="img/athing.png">
                 <div class="boxInner">
@@ -562,16 +569,47 @@ function forEachTile(f)
 
 function processTags()
 {
-    // Process tags
+    // TODO: Performance? Are there better ways to do this?
+    // Loop trough all tiles
     forEachTile(function(e)
         {
             if (!e.tags) return;
             
-            e.tags.forEach(function(tag)
+            // Loop through their tags
+            e.tags.forEach(function(tileTag)
                 {
-                    
+                    // And check if the tag has not be found yet
+                    if (tags.every(function(globalTag)
+                        {
+                            return (tileTag !== globalTag); 
+                        }
+                    ))
+                    {
+                        // if so, add them to the tags
+                        tags.push(tileTag);
+                    }
                 }
             );
+        }
+    );
+
+    var appendEl = ge("tags");
+
+    // Create visual tags
+    tags.forEach(function(tag)
+        {
+            var e = document.createElement("span");
+            e.className = "tag";
+            e.onclick = (function(a)
+            {
+                return function()
+                {
+                    searchByTag(a);
+                }
+            })(tag);
+            e.textContent = tag;
+
+            appendEl.appendChild(e);
         }
     );
 }
@@ -650,6 +688,231 @@ function searchByTag(tag)
     );
 }
 
+// Please send help
+// I'm drowning in javascript closures
+// I will so not get this code next week
+// I still feel like a genious
+// Even thought this code may be terribad
+function makeFilterFunction(input)
+{
+/***************************************
+***  Input generation documentation  ***
+****************************************
+
+You have two ways of filtering:
+
+array:function(argument)
+function:variable(argument)
+
+For example:
+
+has:foo selects all tiles with the variable foo
+has:foo(bar) selects all tiles with the variable bar equal to "bar"
+
+Valid functions for variables:
+contains: Checks if the variable contains arg
+has: Checks if the tile has variable variable. If argument supplied, it will check if the variable is equal to argument
+
+
+You can also supply a ! in front of the statement to add invert the result.
+For example, !has:foo will select all elements without the variable foo.
+
+Multiple functions are also possible. Just add a space.
+
+*/
+
+    var hasFunc = function() /* e, variable */
+    {
+        return (this[0][this[1]]);
+    };
+
+    var hasArrFunc = function()
+    {
+        if (!this[0][this[1]])
+        {
+            return false;
+        }
+        var c = this[2];
+        return (
+            this[0][this[1]].some(function(e)
+                {
+                    return (e === c);
+                }
+            )
+        );
+    };
+
+    var isFunc = function() /* e, variable, equals */
+    {
+        /*if (!this[0][this[1]])
+        {
+            return false;
+        }*/
+        return (this[0][this[1]] === this[2]);
+    };
+
+    var containsFunc = function() /* e, variable, contains */
+    {
+        return (this[0][this[1]].indexOf(this[2]) !== -1);
+    };
+
+
+    var compose = function(args) /* function f, f-specific arguments */
+    {
+        return (function(arg)
+        {
+            return function()
+            {
+                return arg[0].apply([arguments[0]].concat(arg.slice(1)));
+            };
+        })(args);
+    };
+
+    // Split the input and make 
+    // semi-dumb
+    var newInput = [];
+    var chars = "";
+    var inClosure = false, prevWasEscapeClosureChar = false;
+    for (var i = 0; i < input.length; i++)
+    {
+        if (inClosure)
+        {
+            if (prevWasEscapeClosureChar && input[i] !== ")")
+            {
+                inClosure = false;
+                prevWasEscapeClosureChar = false;
+                i--;
+                continue;
+            }
+            else if (input[i] === ")")
+            {
+                prevWasEscapeClosureChar = true;
+            }
+        }
+        else
+        {
+            switch (input[i])
+            {
+                case " ":
+                    newInput.push(chars);
+                    chars = "";
+                    continue;
+
+                case "(":
+                    inClosure = true;
+                    break;
+            }
+        }
+
+        chars += input[i];
+    }
+
+    if (chars !== "")
+    {
+        newInput.push(chars);
+        chars = "";
+    }
+
+    var funcs = [];
+
+    // Go trough each filter definition
+    newInput.forEach(function(put)
+    {
+        var things = put.split(":");
+
+        for (var i = 0; i < things.length; i++)
+        {
+            var func, variable, comparator, not;
+
+            if (things[i][0] === "!")
+            {
+                not = true;
+                things[i] = things[i].substring(1);
+            }
+
+            switch (things[i])
+            {
+                case "has":
+                    func = hasFunc;
+                    break;
+
+                case "contains":
+                    func = containsFunc;
+                    break;
+
+                default:
+                    variable = things[i]; // It's not a function, it's a variable
+                    break;
+            }
+
+            var argInput = things[++i].split("(");
+            var args = [];
+
+            if (argInput.length > 1)
+            {
+                // Remove ) if needed
+                if (argInput[1][argInput[1].length - 1] === ")")
+                {
+                    argInput[1] = argInput[1].slice(0, -1);
+                }
+            }
+
+            if (variable)
+            {
+                switch (argInput[0])
+                {
+                    case "has":
+                        func = hasArrFunc;
+                        break;
+                }
+
+                comparator = argInput[1];
+            }
+            else
+            {
+                variable = argInput[0];
+
+                if (argInput.length > 1)
+                {
+                    // if  has is supplied with an argument, it becomes is
+                    if (func === hasFunc)
+                    {
+                        func = isFunc;
+                    }
+
+                    comparator = argInput[1];
+                }
+            }
+
+            args = [ func, variable, comparator/*doesn't matter if it's undefined, then it isn't used anyway*/ ];
+
+            var finalFunc = compose(args);
+            finalFunc.not = not;
+            funcs.push(finalFunc);
+        }
+    });
+
+    return (function(arr)
+    {
+        return function(e)
+        {
+            return (arr.every(function(f)
+                {
+                    if (f.not)
+                    {
+                        return !f(e);
+                    }
+                    else
+                    {
+                        return f(e); 
+                    }
+                }
+            ));
+        };
+    })(funcs);
+}
+
+
 // Filters all tiles by function ff(returns false if it should remove the tile)
 function filter(ff)
 {
@@ -673,7 +936,6 @@ function filter(ff)
                             }
                             else
                             {
-                                console.log(f);
                                 f.domElement.style.display = "none";
                             }   
                         }
