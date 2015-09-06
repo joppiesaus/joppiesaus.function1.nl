@@ -539,5 +539,5 @@ function start(){ranPass();sTime();ranQuote();getAge();initBackground()}
 function ranQuote(){g("stupidquote").innerHTML="\""+qts[rnd(qts.length)]+"\""}
 
 // WebGL ThreeJS backgrounds available in: /js/background<number>.js. Descriptions in /js/BACKGROUNDS.txt
-function initBackground(){if(window.WebGLRenderingContext){g("drawCanvas").style.display="block";freq("/js/background"+rnd(4)+".min")}else{document.body.onkeypress=changeBackground;changeBackground()}}
+function initBackground(){if(window.WebGLRenderingContext){g("drawCanvas").style.display="block";freq("js/background"+rnd(4)+".min")}else{document.body.onkeypress=changeBackground;changeBackground()}}
 </script></body></html>
