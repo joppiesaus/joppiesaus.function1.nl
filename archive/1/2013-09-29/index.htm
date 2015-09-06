@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>job - Function1.nl</title>
+</head>
+
+<body style="font-family:Verdana; background-color:Black; color:White">
+<center>
+<p>Hi! I am Job van der Zweep(AKA joppiesaus), and I made some software 'n stuff! Check <a href="http://function1.nl">function1.nl</a> out for more info about me!</p>
+
+<table border="1" style="background-color:#04092D">
+    <tr style="background-color:Red"><th colspan="2">Games, Software and other stuff I made:</th></tr>
+
+    <!-- item 1 -->
+    <tr>
+        <td><center>C# XNA Weather engine</center>
+        <table>        
+            <tr>
+                <td><img src="/img/weather.PNG"/></td>
+                <td>I made this a while ago, just for fun. A fully customizable weather engine.<br />
+                It includes a sample, the source, and a executable. (and more)<br />
+                How awsome is that? Have fun with it!</td>
+            </tr>
+        </table>
+        </td>
+        <td><a href="/dl/Weather_Engine.zip">Download</a></td>
+    </tr>
+
+    <!-- item 2 -->
+    <tr>
+        <td><center>C# Console Four in a row(vier op 'n rij!)</center>
+        <table>
+            <tr>
+                <td><img src="/img/row.PNG"/></td>
+                <td>Something revolutionary... You can play four in a row on your PC!<br />
+                It includes the source code & executable. You can define how many<br />
+                columns and rows you want. You can even pick 1000!
+                </td>
+            </tr>
+        </table>
+        </td>
+        <td><a href="/dl/4InARow_Src.zip">Download</a></td>
+    </tr>
+
+    <!-- item 3 -->
+    <tr>
+        <td><center>Motorcycle</center>
+        <table>
+            <tr>
+                <td><img src="/img/motorcycle.PNG" /></td>
+                <td>Motorcycle is a C# console (kindof)RPG where you can do what you want.<br />
+                You can race, upgrade your motor, and that's it I believe. It was my first<br />
+                console game, and it is really boring actually.
+                </td>
+            </tr>
+        </table>
+        </td>
+        <td><a href="/dl/cycle_SRC.zip">Download</a></td>
+    </tr>
+
+    <!-- item 4 -->
+    <tr>
+        <td><center>SuperHero</center>
+        <table>
+            <tr>
+                <td><img src="/img/powerz.PNG" /></td>
+                <td>SuperHero is my second C# console RPG which is a lot better than Motorcycle. <br />
+                With random and weird things, easter eggs, and some other geeky stuff!<br />
+                It was never finished actually. If you are interested, you can develop it by yourself and<br />
+                if you <a href="mailto:job@function1.nl">send me an email</a> I will post it on my website!<br />
+                I'll be very happy if you do that. Anyways, have fun enyoying your powers.
+                </td>
+            </tr>
+        </table>
+        </td>
+        <td><a href="/dl/SuperSOURCE.zip">Download</a></td>
+    </tr>
+
+    <!-- item 5 -->
+    <tr>
+        <td><center>C# Click Game</center>
+        <table>
+            <tr>
+                <td><img src="/img/click.PNG" /></td>
+                <td>Click Game is a simple click game where your goal is to click buttons as <br />
+                fast as possible in the correct order, the order is always the same,<br />
+                but as always the souce is included so you can mess arround with it.<br />
+                I made this quick, when I was bored by the way. <i>Have fun!</i></td>
+            </tr>
+        </table>
+        </td>
+        <td><center><a href="/dl/Click_Game.zip">Binary</a><br />
+        <a href="/dl/Click_Game_SRC.zip">Source</a></center></td>
+    </tr>
+
+    <!-- item 6 -->
+    <tr>
+        <td><center>DerpinPlugin, a Minecraft Bukkit Server Java Plugin</center>
+        <table>
+            <tr>
+                <td><img src="/img/derpinplugin.PNG" /></td>
+                <td><p>Jup! My first Java code! Combined with one of my favorite games, Minecraft!<br />
+                Also, it is not bug free. It also doesn't contain <em>any</em> source code. But,<br />
+                Try it if you want to derp! :D</p></td>
+            </tr>
+            </table>
+        </td>
+        <td><center><a href="/dl/DerpinPlugin.jar">Download</a></center></td>
+    </tr>
+    
+    <!-- item 7 -->
+    <tr>
+        <td><center>PoleCompass, a Minecraft Bukkit Server Java Plugin</center>
+        <table>
+            <tr>
+                <td><img src="/img/PoleCompass.png" width="128" height="109" /></td>
+                <td><p>My first released bukkit plugin! PoleCompass is a very, very simple plugin<br />
+                which allows you to set your compass to any location!
+                </p></td>
+            </tr>
+        </table>
+        </td>
+        <td><center><a href="/dl/PolePass.zip">Source</a><br /><a href="http://dev.bukkit.org/bukkit-plugins/joppiesaus-pass/">Website</a></center></td>
+    </tr>
+</table>
+
+</center>
+<p style="color:#ADADAD; text-align:center" id="date"><a href="http://function1.nl/sitemap.htm">Sitemap</a> - <a href="http://function1.nl/Over.htm">More Info</a></p>
+</body>
+
+<script>
+    var today = new Date();
+    var month = today.getMonth() + 1;
+    var min;
+    if (today.getMinutes().toString().substring(1) == "") {
+        min = "0" + today.getMinutes().toString();
+    }
+    else {
+        min = today.getMinutes().toString();
+    }
+    document.getElementById("date").innerHTML = "Today it is: " + today.getDate().toString() + "-" + month.toString() + "-" + today.getUTCFullYear().toString() + ", and the time is: " + today.getHours().toString() + ":" + min
+     + " - " + document.getElementById("date").innerHTML;
+</script>
+
+</html>
