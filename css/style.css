@@ -134,7 +134,7 @@ noscript
 #links
 {
     z-index: 3;
-    position: fixed;
+    position: absolute;
     margin: 10px;
 }
 #links img
@@ -261,8 +261,9 @@ project popup
     
     position: fixed;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: 10%;
+    right: 10%;
+    transform: translate(0, -50%);
     
     max-width: 100%;
 }

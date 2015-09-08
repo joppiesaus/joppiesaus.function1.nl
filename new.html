@@ -5,6 +5,8 @@ Oh boy... JavaScript is taking over my site! And soon... the world! PANIC THE US
 TODO:
 * find a way to randomize ALL tiles and not just the dom scramble way
 * And now... STYLE!
+* about large nice style -> click -> about text site -> becomes big,
+* tag searching button coloring pressing
 * Multiple tile sizes
 * Text tiles big title, and then you click on them, they become big! yey
 * Themes for tiles? 3 different colors or something?
@@ -19,10 +21,7 @@ TODO:
     [] searching, filtering...
     [] style them
 * Not body.onload!
-* Make the about button actually do something?
-* Think about the text in tiles.
 * ordering!
-* ID's in URL bar won't work if it's a tile(tile with id derp, types in #derp, nothing happens)
 * Fix responsiveness
 * Other content!!1
 -->
@@ -116,7 +115,7 @@ TODO:
                 <input type="button" onclick="searchByTag(ge('searchBox').value)" value="search by tag">
                 -->
             </span>
-            <input type="button" onclick="restore()" value="restore">
+            <input type="button" onclick="ge('searchBox').value='';restore()" value="clear">
 
             <span id="tags"></span>
         </div>
@@ -184,6 +183,7 @@ var tileData =
     {
         "mode": "boxBig",
         "title": "About",
+        "id": "about",
         "content": "<p>I'm Job van der Zweep, AKA joppiesaus. I'm <span id=\"joppiesausesAge\">?</span> year old. I like to program. On this page you can find stuff I programmed, along with other stuff I did.</p><p>On the top-left you can find various links of websites I like to go to. I have various stuff lying arround there, too.</p><p>Other than programming I like to play video games, paint, longboard, watching videos, eat food, mess arround with electronics, be outside, doing nothing, and other stuff. But it's a list that won't ever be up-to-date thought, it constantly changes.</p><p>If you want a chat, you can email me! <a href=\"mailto:job@function1.nl\"><code>job@function1.nl</code></a></p><p>I hope you have a lot of fun watching this page. Have a nice day!</p>"
     },
     {
@@ -547,6 +547,19 @@ window.onload = function()
     coupleTiles();
     
     ge("joppiesausesAge").textContent = joppiesausesAge();
+    
+    ge("searchBox").onkeypress = function(e)
+    {
+        if (!e) e = window.event;
+        var keyCode = e.keyCode || e.which;
+    
+        if (keyCode === 13)
+        {
+            restore();
+            filter(makeFilterFunction(this.value));
+            return false;
+        }
+    };
     
     processTags();
 };
