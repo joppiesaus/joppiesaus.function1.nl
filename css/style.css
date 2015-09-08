@@ -197,12 +197,18 @@ noscript
     margin-left: 5px;
 }
 
+#projects
+{
+    overflow: visible;
+}
 
 /* TODO: Make responsive, and style those tags */
 .searchDialog
 {
     padding-right: 5px;
     padding-left: 5px;
+    position: relative;
+    overflow: visible;
 }
 #searchBox
 {
@@ -212,6 +218,19 @@ noscript
     color: white;
     border: 1px solid #e0e;
     font-weight: bold;
+}
+#searchBox + .tooltip
+{
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    background-color: #ccc;
+    color: #000;
+    padding: 5px;
+}
+#searchBox:hover + .tooltip
+{
+    display: block;
 }
 .searchDialog input[type="button"]
 {

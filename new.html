@@ -5,6 +5,8 @@ Oh boy... JavaScript is taking over my site! And soon... the world! PANIC THE US
 TODO:
 * find a way to randomize ALL tiles and not just the dom scramble way
 * And now... STYLE!
+* Multiple tile sizes
+* Text tiles big title, and then you click on them, they become big! yey
 * Themes for tiles? 3 different colors or something?
 * Start parsing content from the old site
 * Fix titleBox
@@ -16,6 +18,7 @@ TODO:
 * Tags!
     [] searching, filtering...
     [] style them
+* Not body.onload!
 * Make the about button actually do something?
 * Think about the text in tiles.
 * ordering!
@@ -28,7 +31,10 @@ TODO:
     <title>joppiesaus!</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <meta name="description" content="The webpage of Job van der Zweep AKA joppiesaus, it contains a load of information and funny software!">
+    <meta name="keywords" content="joppiesaus, software, games, stuff, rainbows, derp, code">
+
+
     <link rel="shortcut icon" type="image/png" href="img/ico/joppiesaus.png">
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -93,6 +99,17 @@ TODO:
         <div class="searchDialog">
             <span>
                 <input type="text" id="searchBox" placeholder="Search...">
+                <div class="tooltip">
+                    <!-- TODO: ` replacing with <code>? -->
+                    <!-- this doc sucks -->
+                    <h1>Searching tips</h1>
+                    <ul>
+                        <li>Having a property: <code>has:variable</code> Example: <code>has:url</code>
+                        <li>Equals: <code>has:variable(equals)</code> or <code>variable:equals</code> Example: <code>title:foo</code>
+                        <li>Contains: <code>contains:variable(equals)</code> or just no code. Example: <code>contains:title(Sheep)</code> or with arrays: <code>variable:has(property)</code>. Example: <code>tags:has(Web)</code>
+                        <li>Invert stuff with !. Example: <code>!tags:has(Game)</code> will select everything that's not a game.
+                    </ul>
+                </div>
                 <input type="button" onclick="restore();filter(makeFilterFunction(ge('searchBox').value))" value="search">
                 <!--
                 <input type="button" onclick="search(ge('searchBox').value)" value="search by title">
@@ -567,6 +584,31 @@ function forEachTile(f)
     );
 }
 
+function onTagClick(a)
+{
+    return function()
+    {
+        // If that thing is still open, close it
+        closeProjectPopup();
+
+        var el = ge("searchBox");
+        var text = el.value;
+        var expression = "tags:has(" + a + ")";
+
+        if (text.indexOf(expression) === -1)
+        {
+            if (text[text.length - 1] !== " " && text.length !== 0)
+            {
+                el.value += " ";
+            }
+
+            el.value += expression;
+        };
+
+        applySearchboxFilter();
+    }
+}
+
 function processTags()
 {
     // TODO: Performance? Are there better ways to do this?
@@ -599,27 +641,7 @@ function processTags()
         {
             var e = document.createElement("span");
             e.className = "tag";
-            e.onclick = (function(a)
-            {
-                return function()
-                {
-                    var el = ge("searchBox");
-                    var text = el.value;
-                    var expression = "tags:has(" + a + ")";
-
-                    if (text.indexOf(expression) === -1)
-                    {
-                        if (text[text.length - 1] !== " " && text.length !== 0)
-                        {
-                            el.value += " ";
-                        }
-
-                        el.value += expression;
-                    };
-
-                    applySearchboxFilter();
-                }
-            })(tag);
+            e.onclick = onTagClick(tag);
             e.textContent = tag;
 
             appendEl.appendChild(e);
@@ -1035,7 +1057,13 @@ function openProjectPopup(data)
     if (data.tags)
     {
         data.tags.forEach(function(e){
-            pEl.children[3].innerHTML += "<li class=\"tag\" onclick=\"closeProjectPopup();searchByTag('" + e + "')\">" + e;
+            var li = document.createElement("li");
+            li.className = "tag";
+            li.onclick = onTagClick(e);
+            li.textContent = e;
+
+            pEl.children[3].appendChild(li);
+            //pEl.children[3].innerHTML += "<li class=\"tag\" onclick=\"closeProjectPopup();searchByTag('" + e + "')\">" + e;
         });
     }
 
