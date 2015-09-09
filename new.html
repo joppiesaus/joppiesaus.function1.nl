@@ -109,7 +109,7 @@ TODO:
                         <li>Invert stuff with !. Example: <code>!tags:has(Game)</code> will select everything that's not a game.
                     </ul>
                 </div>
-                <input type="button" onclick="restore();filter(makeFilterFunction(ge('searchBox').value))" value="search">
+                <input type="button" onclick="applySearchboxFilter()" value="search">
                 <!--
                 <input type="button" onclick="search(ge('searchBox').value)" value="search by title">
                 <input type="button" onclick="searchByTag(ge('searchBox').value)" value="search by tag">
@@ -548,17 +548,24 @@ window.onload = function()
     
     ge("joppiesausesAge").textContent = joppiesausesAge();
     
-    ge("searchBox").onkeypress = function(e)
+
+    var sb = ge("searchBox");
+    sb.onkeypress = function(e)
     {
         if (!e) e = window.event;
         var keyCode = e.keyCode || e.which;
-    
+
         if (keyCode === 13)
         {
             restore();
             filter(makeFilterFunction(this.value));
             return false;
         }
+    };
+
+    sb.onkeyup = function(e)
+    {
+        evaluateUserTagColors(this.value);
     };
     
     processTags();
@@ -654,6 +661,7 @@ function processTags()
         {
             var e = document.createElement("span");
             e.className = "tag";
+            e.id = "tag-" + tag;
             e.onclick = onTagClick(tag);
             e.textContent = tag;
 
@@ -733,6 +741,30 @@ function searchByTag(tag)
                 return (e.tags && e.tags.some(function(tag){return tag === f}/* no arrow functions :( */));
             }
         })(tag)
+    );
+}
+
+function evaluateUserTagColors(text)
+{
+    text = text || ge("searchBox").value;
+
+    tags.forEach(function(tag)
+        {
+            var e = ge("tag-" + tag);
+
+            if (text.indexOf("!tags:has(" + tag + ")") !== -1)
+            {
+                e.style.backgroundColor = "#f00";
+            }
+            else if (text.indexOf("tags:has(" + tag + ")") !== -1)
+            {
+                e.style.backgroundColor = "#00f";
+            }
+            else
+            {
+                e.style.backgroundColor = "inherit";
+            }
+        }
     );
 }
 
@@ -987,6 +1019,7 @@ It's the same as has:variable(value)
 function applySearchboxFilter()
 {
     restore();
+    evaluateUserTagColors();
     filter(makeFilterFunction(ge("searchBox").value));
 }
 
