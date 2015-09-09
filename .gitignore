@@ -1,4 +1,6 @@
 bak/
 div/
 dl/
+node_modules/
+build/
 index.php
