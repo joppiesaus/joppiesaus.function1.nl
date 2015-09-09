@@ -147,3 +147,5 @@ function titleInterval()
 
     document.title = title + "!";
 }
+
+(function(){setupLogo()})();

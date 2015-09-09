@@ -233,14 +233,12 @@ var smallTileHolders = [];
 var smallTilesFragment;
 var grid;
 
-window.onload = function()
+document.addEventListener("DOMContentLoaded", function()
 {
     if (window.WebGLRenderingContext)
     {
         freq("js/background3");
     }
-
-    setupLogo();
 
     // Y U NO .forEach???1! I CRY
     var projectPopups = document.querySelectorAll(".projectPopup");
@@ -418,7 +416,7 @@ window.onload = function()
     };
     
     processTags();
-};
+});
 
 // Creates the tile and appends it to parent if defined
 function createTile(classes, parent)
