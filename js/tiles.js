@@ -462,15 +462,31 @@ function onTagClick(a)
         var text = el.value;
         var expression = "tags:has(" + a + ")";
 
-        if (text.indexOf(expression) === -1)
+        var i = text.indexOf(expression);
+
+        if (i === -1)
         {
-            if (text[text.length - 1] !== " " && text.length !== 0)
+            for (var b = 0; text[text.length - 1 - b] === " "; b++) {}
+            if (b > 1)
+            {
+                el.value = text.slice(0, -(b - 1));
+            }
+            else if (!b)
             {
                 el.value += " ";
             }
 
             el.value += expression;
-        };
+        }
+        else if (text[i - 1] !== "!")
+        {
+            for (var b = 0; text[i - 1 - b] === " "; b++){}
+            if (b)
+            {
+                text = text.substring(0, i - b) + text.substring(i, text.length);
+            }
+            el.value = text.replace(expression, "");
+        }
 
         applySearchboxFilter();
     }
