@@ -8,8 +8,15 @@ Have fun here!
 
 ## About the new site
 
+### Building
+`grunt`
+
+If you grunt is not found, install it(could be any package manager) `npm install -g grunt`
+
+If modules are not found, install them `npm install --production`
+
 ### Demands
-* Must be easy to use
+* Must be easy to use 
 * Must be fun
 * Must be accessible(colorblinds, dyslectics)
 * Must be a little future-compatible(for example, not storing the data in the HTML, but in something else)
