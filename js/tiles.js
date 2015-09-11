@@ -466,14 +466,17 @@ function onTagClick(a)
 
         if (i === -1)
         {
-            for (var b = 0; text[text.length - 1 - b] === " "; b++) {}
-            if (b > 1)
+            if (text.length > 0)
             {
-                el.value = text.slice(0, -(b - 1));
-            }
-            else if (!b)
-            {
-                el.value += " ";
+                for (var b = 0; text[text.length - 1 - b] === " "; b++) {}
+                if (b > 1)
+                {
+                    el.value = text.slice(0, -(b - 1));
+                }
+                else if (!b)
+                {
+                    el.value += " ";
+                }
             }
 
             el.value += expression;

@@ -67,7 +67,7 @@ var logo =
         this.twinklers.forEach(function(e){
             if (Math.random() < 0.33)
             {
-                var m = (e.retrackted=!e.retrackted) ? "0" : "5px";
+                var m = (e.retrackted = !e.retrackted) ? "0" : "5px";
 
                 if (e.length)
                 {
@@ -111,8 +111,8 @@ function setupLogo()
     logo.height = y;
     
     logo.element.innerHTML = newHTML;
-    
-    // TODO: MOre of this crap, and make prettier
+
+
     for (i = 0; i < 5; i++)
     {
         logo.setTwinkling(logo.pickRandom());
@@ -133,7 +133,7 @@ function logoInterval()
 
 function titleInterval()
 {
-    var title = document.title.slice(0, -1);
+    var title = document.title.slice(0, -1); // Remove the !
 
     for (var i = 0; i < LEET.length; i++)
     {
