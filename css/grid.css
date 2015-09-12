@@ -63,11 +63,17 @@
     top: 0;
     left: 5px;
     font-size: 3.8em;
+    transition: text-shadow 0.09s ease-in;
 }
 .childBox > .boxInner > .title
 {
     font-size: 1.8em;
     word-break: break-all;
+}
+
+.boxInner:hover > .title
+{
+    text-shadow: 0 0 15px #000;
 }
 
 .boxInner .tileImage
