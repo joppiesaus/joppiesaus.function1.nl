@@ -23,6 +23,8 @@ children:       The child tiles of the target tile.
 content:        The HTML content of the tile.
 tags:           The tags used for searching or categorizing your tiles.
 
+targetMode:     If you have a title with content, the targetmode specifies what classes it should extent the tile to when clicked.
+
 domElement:     After the initial generation, every tile gets a pointer to the DOM element to the tile on the page.
 */
 
@@ -30,7 +32,8 @@ domElement:     After the initial generation, every tile gets a pointer to the D
 var tileData = 
 [
     {
-        "mode": "boxBig",
+        "mode": "box",
+        "image": "img/athing.png",
         "title": "About",
         "id": "about",
         "content": "<p>I'm Job van der Zweep, AKA joppiesaus. I'm <span id=\"joppiesausesAge\">?</span> year old. I like to program. On this page you can find stuff I programmed, along with other stuff I did.</p><p>On the top-left you can find various links of websites I like to go to. I have various stuff lying arround there, too.</p><p>Other than programming I like to play video games, paint, longboard, watching videos, eat food, mess arround with electronics, be outside, doing nothing, and other stuff. But it's a list that won't ever be up-to-date thought, it constantly changes.</p><p>If you want a chat, you can email me! <a href=\"mailto:job@function1.nl\"><code>job@function1.nl</code></a></p><p>I hope you have a lot of fun watching this page. Have a nice day!</p>"
@@ -286,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function()
         {
             tile.onclick = eval("(function(){" + e.onclick + "})");
         }
-        else if (e.children || e.content)
+        else if (e.children/* || e.content*/)
         {
             tile.style.cursor = "";
         }
@@ -302,18 +305,59 @@ document.addEventListener("DOMContentLoaded", function()
                 })(e);
         }
 
-        // Image
-        if (e.image)
+
+        if (e.content)
         {
-            var img = document.createElement("img");
-            img.className = "tileImage";
-            img.src = e.image;
-            tile.appendChild(img);
-            tile.style.padding = "0";
+            tile.innerHTML += '<div style="display:none">' + e.content + '</div>';
+            tile.innerHTML += '<span class="title">' + e.title + '</span>';
+            tile.className += " disablePadding";
+
+            //tile.style.display = "inline-block"; // to preserve padding
+
+            if (e.image)
+            {
+                var img = document.createElement("img");
+                img.src = e.image;
+                img.className = "tileImage";
+                tile.appendChild(img);
+            }
+
+            // TODO: Fix for small tiles
+            tile.targetMode = (e.targetMode ? e.targetMode : (e.mode ? "boxBig" : "box"));
+            tile.prevMode = e.mode;
+
+            // I hate this code
+            tile.onclick = function()
+            {
+                // blech
+                if (this.children[0].style.display === "none")
+                {
+                    this.children[0].style.display = "block";
+                    for (var i = 1; i < this.children.length; i++)
+                    {
+                        this.children[i].style.display = "none";
+                    }
+                }
+                else
+                {
+                    this.children[0].style.display = "none";
+                    for (var i = 1; i < this.children.length; i++)
+                    {
+                        this.children[i].style.display = "block";
+                    }
+                }
+
+                toggleClass(this, "disablePadding");
+
+                this.prevMode = this.parentNode.className;
+                this.parentNode.className = tile.targetMode;
+                this.targetMode = this.prevMode;
+            };
         }
-        else if (e.content)
+        else if (e.image)
         {
-            tile.innerHTML += e.content;
+            tile.style.background = "url(" + e.image + ")";
+            tile.style.backgroundSize = "cover";
         }
         else if (e.children)
         {
@@ -330,7 +374,7 @@ document.addEventListener("DOMContentLoaded", function()
 
 
         // Title box
-        if (e.title && (e.image || e.children || e.content))
+        if (e.title && (e.image || e.children/* || e.content*/))
         {
             var tEl = document.createElement("div");
             tEl.className = "titleBox";
@@ -394,7 +438,6 @@ document.addEventListener("DOMContentLoaded", function()
     coupleTiles();
     
     ge("joppiesausesAge").textContent = joppiesausesAge();
-    
 
     var sb = ge("searchBox");
     sb.onkeypress = function(e)

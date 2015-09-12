@@ -19,6 +19,12 @@ function hasClass(e, c)
     return (e.className.indexOf(c) !== -1);
 }
 
+// Toggles class c on element e
+function toggleClass(e,  c)
+{
+    e.className = hasClass(e, c) ? e.className.replace(c, "") : e.className += " " + c;
+}
+
 // Shuffles an array
 Array.prototype.shuffle = function()
 {

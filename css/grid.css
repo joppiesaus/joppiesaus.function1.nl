@@ -41,6 +41,11 @@
     background-color: #0f0;
 }*/
 
+.disablePadding
+{
+    padding: 0 !important;
+}
+
 .boxInner
 {
     position: absolute;
@@ -54,7 +59,15 @@
 
 .boxInner > .title
 {
-    font-weight: bold;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 3.8em;
+}
+.childBox > .boxInner > .title
+{
+    font-size: 1.8em;
+    word-break: break-all;
 }
 
 .boxInner .tileImage
