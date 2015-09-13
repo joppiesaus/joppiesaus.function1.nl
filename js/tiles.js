@@ -152,6 +152,27 @@ var tileData =
         "tags": ["Windows", "C#", "XNA", "Game"]
     },
     {
+        "title": "Offensive Defense",
+        "image": "img/od.PNG",
+        "description": "Offensive defense is a strategy defense game made for the Ludum Dare October Challenge 2014, where the target is to finish a game in October and earn 1 $!<br><br>It horribly failed.<br><br>But it's a fun game! Or fun... It will provoke human reactions!",
+        "links": [["Page", "http://function1.nl/p/od/"], ["Binary(WIN XNA)", "http://function1.nl/p/od/dl/Offensive%20Defense%20WIN%20XNA.zip"], ["Source", "http://function1.nl/p/od/dl/OffenseDefense_src.zip"], ["Mediocre trailer", "https://youtu.be/7Jhp71hCBK4"]],
+        "tags": ["Windows", "C#", "XNA", "Game", "Ludum Dare"]
+    },
+    {
+        "title": "SuperDrive OVERCLOCK",
+        "image": "img/ld/m49.PNG",
+        "description": "You are a DVD/CD-ROM Driver laser. Your task is to read all the data from the disk as long as possible. You can miss 3 times. If you miss more than that, the computer will crash. But the driver is hacked & overclocked by the user.<br>How long can you read data from the disc?",
+        "links": [["Submission Page", "http://www.ludumdare.com/compo/minild-49/?action=preview&uid=29014"], ["Binary", "http://function1.nl/ld/mini/LD49/Mini-LD49.zip"], ["Source", "http://function1.nl/ld/mini/LD49/Mini-LD49_src.zip"]],
+        "tags": ["Windows", "C#", "XNA", "Game", "Ludum Dare"]
+    },
+    {
+        "title": "Bob the different bird",
+        "image": "img/ld/32.PNG",
+        "description": "Bob was always a different bird. But today, he decides to do something completely different.",
+        "links": [["Submission Page", "http://www.ludumdare.com/compo/ludum-dare-32/?action=preview&uid=29014"], ["Binary", "http://function1.nl/ld/mini/LD32/LD32_Bob.zip"], ["Source", "http://function1.nl/ld/mini/LD32/LD32_Bob_src.zip"], ["Timelapse", "https://youtu.be/KFcB7GkhuNE"]],
+        "tags": ["Windows", "C#", "XNA", "Game", "Ludum Dare"]
+    },
+    {
         "title": "\"Stars.EXE\"",
         "image": "img/stars.PNG",
         "description": "It was a nice \"Test project\", where I did all sorts of (useless) stuff. It was originally created to create my old website's background, but I managed to make a *nice* game from it. Comes with a *nice* *config format*, a bad name and reasonable code.",
