@@ -236,6 +236,10 @@ var tileData =
         "title": "NEON IT ALLL",
         "onclick": "var style=document.createElement('style');style.innerHTML='*{text-shadow:0 0 3px #f00, 0 0 5px #00f !important}h1,h2{text-shadow:0 0 8px #f00, 0 0 15px #00f !important}';document.getElementsByTagName('head')[0].appendChild(style)",
     },
+    {
+        "title": "I want more stuff!",
+        "onclick": "if(typeof additionalData==='undefined')freq('js/additionalTiles')"
+    },
 
     {
         "mode": "box",
@@ -256,161 +260,191 @@ var smallTileHolders = [];
 var smallTilesFragment;
 var grid;
 
+function procedureTile(e, tile)
+{
+    var parent = tile.parentNode;
+    tile.style.cursor = "pointer";
+    
+    if (e.url)
+    {
+        var a = document.createElement("a");
+        a.href = e.url;
+        parent.removeChild(tile);
+        a.appendChild(tile);
+        parent.appendChild(a);
+    }
+    else if (e.onclick)
+    {
+        tile.onclick = eval("(function(){" + e.onclick + "})");
+    }
+    else if (e.children/* || e.content*/)
+    {
+        tile.style.cursor = "";
+    }
+    else if (!e.content)
+    {
+        tile.className += " projectPopup";
+        tile.onclick = (function(a)
+            {
+                return function()
+                {
+                    openProjectPopup(a);
+                }
+            })(e);
+    }
+
+
+    if (e.content)
+    {
+        tile.innerHTML += '<div style="display:none">' + e.content + '</div>';
+        tile.innerHTML += '<span class="title">' + e.title + '</span>';
+        tile.className += " disablePadding";
+
+        //tile.style.display = "inline-block"; // to preserve padding
+
+        if (e.image)
+        {
+            var img = document.createElement("img");
+            img.src = e.image;
+            img.className = "tileImage";
+            tile.appendChild(img);
+        }
+
+        // TODO: Fix for small tiles
+        tile.targetMode = (e.targetMode ? e.targetMode : (e.mode ? "boxBig" : "box"));
+        tile.prevMode = e.mode;
+
+        // I hate this code
+        tile.onclick = function()
+        {
+            // blech
+            if (this.children[0].style.display === "none")
+            {
+                this.children[0].style.display = "block";
+                for (var i = 1; i < this.children.length; i++)
+                {
+                    this.children[i].style.display = "none";
+                }
+            }
+            else
+            {
+                this.children[0].style.display = "none";
+                for (var i = 1; i < this.children.length; i++)
+                {
+                    this.children[i].style.display = "block";
+                }
+            }
+
+            toggleClass(this, "disablePadding");
+
+            this.prevMode = this.parentNode.className;
+            this.parentNode.className = tile.targetMode;
+            this.targetMode = this.prevMode;
+        };
+    }
+    else if (e.image)
+    {
+        tile.style.background = "url(" + e.image + ")";
+        tile.style.backgroundSize = "cover";
+    }
+    else if (e.children)
+    {
+        tile.className += " groupTile";
+    }
+    else // When no image provided, fall back to a title
+    {
+        /* TODO: Style */
+        tile.innerHTML += '<span class="title">' + e.title + '</span>';
+    }
+
+    // Assign random "theme"(CSS class color)
+    tile.className += " gridTheme" + Math.floor(Math.random() * 3);
+
+
+    // Title box
+    if (e.title && ((e.image && !e.content) || e.children))
+    {
+        var tEl = document.createElement("div");
+        tEl.className = "titleBox";
+        tEl.innerHTML = e.title;
+        tile.appendChild(tEl);
+    }
+
+    // ID
+    if (e.id)
+    {
+        parent.id = e.id;
+    }
+
+    // Give the data back a reference to the DOM Element
+    e.domElement = parent;
+
+    // Tags
+    // TODO: Performance and location?
+    if (e.tags)
+    {
+        // Loop through their tags
+        e.tags.forEach(function(tileTag)
+            {
+                // And check if the tag has not be found yet
+                if (tags.every(function(globalTag)
+                    {
+                        return (tileTag !== globalTag); 
+                    }
+                ))
+                {
+                    // if so, add them to the tags
+                    tags.push(tileTag);
+
+                    var f = document.createElement("span");
+                    f.className = "tag";
+                    f.id = "tag-" + tileTag;
+                    f.onclick = onTagClick(tileTag);
+                    f.textContent = tileTag;
+
+                    ge("tags").appendChild(f);
+                }
+            }
+        );
+    }
+}
+
+function addTile(e)
+{
+    var tile;
+
+    if (!e.mode)
+    {
+        tile = createTile("childBox");
+    }
+    else
+    {
+        tile = createTile(e.mode, grid);
+
+        if (e.children)
+        {
+            e.children.forEach(function(f)
+                {
+                    procedureTile(f, createTile("childBox", tile));
+                }
+            );
+        }
+    }
+
+    // Procedure its properties
+    procedureTile(e, tile);
+}
+
 document.addEventListener("DOMContentLoaded", function()
 {
+    // Init background
     if (window.WebGLRenderingContext)
     {
         freq("js/background3");
     }
 
-    // Y U NO .forEach???1! I CRY
-    var projectPopups = document.querySelectorAll(".projectPopup");
-
-    // Query all elements that have a popup defined, and give them their click listener with the data so that they function
-    for (var i = 0; i < projectPopups.length; i++)
-    {
-        var e = projectPopups[i];
-
-        // Is javascript ever going to have nice closures?
-        e.onclick = (function(a)
-            {
-                return function()
-                {
-                    openProjectPopup(a);
-                };
-            })(JSON.parse(e.dataset.projectPopup));
-
-        // And why not make a CSS class?
-        // Because javascript may be disabled.
-        e.style.cursor = "pointer"; 
-    }
-
-
     // Create small project tiles out of the data
     grid = ge("projects");
-    var currentTile = null; // The current tile to add the small tiles in(Actually the boxInner of the current tile)
-    var subTileCount = 3; // How many small tiles there are in the currenTile, in order to add a new one later
-
-    // Processes the tile to make it functional by it's properties
-    var procedureTile = function(e, tile)
-    {
-        var parent = tile.parentNode;
-        tile.style.cursor = "pointer";
-        
-        if (e.url)
-        {
-            var a = document.createElement("a");
-            a.href = e.url;
-            parent.removeChild(tile);
-            a.appendChild(tile);
-            parent.appendChild(a);
-        }
-        else if (e.onclick)
-        {
-            tile.onclick = eval("(function(){" + e.onclick + "})");
-        }
-        else if (e.children/* || e.content*/)
-        {
-            tile.style.cursor = "";
-        }
-        else
-        {
-            tile.className += " projectPopup";
-            tile.onclick = (function(a)
-                {
-                    return function()
-                    {
-                        openProjectPopup(a);
-                    }
-                })(e);
-        }
-
-
-        if (e.content)
-        {
-            tile.innerHTML += '<div style="display:none">' + e.content + '</div>';
-            tile.innerHTML += '<span class="title">' + e.title + '</span>';
-            tile.className += " disablePadding";
-
-            //tile.style.display = "inline-block"; // to preserve padding
-
-            if (e.image)
-            {
-                var img = document.createElement("img");
-                img.src = e.image;
-                img.className = "tileImage";
-                tile.appendChild(img);
-            }
-
-            // TODO: Fix for small tiles
-            tile.targetMode = (e.targetMode ? e.targetMode : (e.mode ? "boxBig" : "box"));
-            tile.prevMode = e.mode;
-
-            // I hate this code
-            tile.onclick = function()
-            {
-                // blech
-                if (this.children[0].style.display === "none")
-                {
-                    this.children[0].style.display = "block";
-                    for (var i = 1; i < this.children.length; i++)
-                    {
-                        this.children[i].style.display = "none";
-                    }
-                }
-                else
-                {
-                    this.children[0].style.display = "none";
-                    for (var i = 1; i < this.children.length; i++)
-                    {
-                        this.children[i].style.display = "block";
-                    }
-                }
-
-                toggleClass(this, "disablePadding");
-
-                this.prevMode = this.parentNode.className;
-                this.parentNode.className = tile.targetMode;
-                this.targetMode = this.prevMode;
-            };
-        }
-        else if (e.image)
-        {
-            tile.style.background = "url(" + e.image + ")";
-            tile.style.backgroundSize = "cover";
-        }
-        else if (e.children)
-        {
-            tile.className += " groupTile";
-        }
-        else // When no image provided, fall back to a title
-        {
-            /* TODO: Style */
-            tile.innerHTML += '<span class="title">' + e.title + '</span>';
-        }
-
-        // Assign random "theme"(CSS class color)
-        tile.className += " gridTheme" + Math.floor(Math.random() * 3);
-
-
-        // Title box
-        if (e.title && ((e.image && !e.content) || e.children))
-        {
-            var tEl = document.createElement("div");
-            tEl.className = "titleBox";
-            tEl.innerHTML = e.title;
-            tile.appendChild(tEl);
-        }
-
-        // ID
-        if (e.id)
-        {
-            parent.id = e.id;
-        }
-        
-        // Give the data back a reference to the DOM Element
-        e.domElement = parent;
-    };
 
     // TODO: find a way to shuffle them properly
     // Shuffle the tiles!
@@ -428,32 +462,7 @@ document.addEventListener("DOMContentLoaded", function()
     /* It's valid jason, so if you want to load it differently, just pass it in JSON.parse.
     JSON.parse(tileData)
     */
-    tileData.forEach(function(e)
-        {
-            var tile;
-
-            if (!e.mode)
-            {
-                tile = createTile("childBox");
-            }
-            else
-            {
-                tile = createTile(e.mode, grid);
-
-                if (e.children)
-                {
-                    e.children.forEach(function(f)
-                        {
-                            procedureTile(f, createTile("childBox", tile));
-                        }
-                    );
-                }
-            }
-
-            // Procedure its properties
-            procedureTile(e, tile);
-        }
-    );
+    tileData.forEach(addTile);
 
     coupleTiles();
     
@@ -477,8 +486,6 @@ document.addEventListener("DOMContentLoaded", function()
     {
         evaluateUserTagColors(this.value);
     };
-    
-    processTags();
 });
 
 // Creates the tile and appends it to parent if defined
@@ -556,47 +563,6 @@ function onTagClick(a)
 
         applySearchboxFilter();
     }
-}
-
-function processTags()
-{
-    // TODO: Performance? Are there better ways to do this?
-    // Loop trough all tiles
-    forEachTile(function(e)
-        {
-            if (!e.tags) return;
-            
-            // Loop through their tags
-            e.tags.forEach(function(tileTag)
-                {
-                    // And check if the tag has not be found yet
-                    if (tags.every(function(globalTag)
-                        {
-                            return (tileTag !== globalTag); 
-                        }
-                    ))
-                    {
-                        // if so, add them to the tags
-                        tags.push(tileTag);
-                    }
-                }
-            );
-        }
-    );
-    var appendEl = ge("tags");
-
-    // Create visual tags
-    tags.forEach(function(tag)
-        {
-            var e = document.createElement("span");
-            e.className = "tag";
-            e.id = "tag-" + tag;
-            e.onclick = onTagClick(tag);
-            e.textContent = tag;
-
-            appendEl.appendChild(e);
-        }
-    );
 }
 
 function coupleTiles()

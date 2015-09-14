@@ -7,6 +7,11 @@ function ge(id)
 // Requires a script
 function freq(f,c)
 {
+    // Check if script hasn't already been included
+    /*if (document.querySelectorAll('script[src="' + (f += ".js") + '"]').length)
+    {
+        return;
+    }*/
     var s = document.createElement("script");
     s.src = f + ".js";
     s.onreadystagechanged = s.onload = c;
