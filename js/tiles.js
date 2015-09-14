@@ -298,17 +298,9 @@ function procedureTile(e, tile)
     {
         tile.innerHTML += '<div style="display:none">' + e.content + '</div>';
         tile.innerHTML += '<span class="title">' + e.title + '</span>';
-        tile.className += " disablePadding";
-
+        tile.className += " disablePadding"; // if it has an image, it will appear double. But who cares.
+        
         //tile.style.display = "inline-block"; // to preserve padding
-
-        if (e.image)
-        {
-            var img = document.createElement("img");
-            img.src = e.image;
-            img.className = "tileImage";
-            tile.appendChild(img);
-        }
 
         // TODO: Fix for small tiles
         tile.targetMode = (e.targetMode ? e.targetMode : (e.mode ? "boxBig" : "box"));
@@ -342,23 +334,30 @@ function procedureTile(e, tile)
             this.targetMode = this.prevMode;
         };
     }
-    else if (e.image)
+    
+    if (e.image)
     {
-        tile.style.background = "url(" + e.image + ")";
-        tile.style.backgroundSize = "cover";
+        var img = document.createElement("img");
+        img.src = e.image;
+        img.className = "tileImage";
+        tile.appendChild(img);
+        tile.className += " disablePadding";
     }
     else if (e.children)
     {
         tile.className += " groupTile";
     }
-    else // When no image provided, fall back to a title
+    else if (!e.content) // When no image provided, fall back to a title
     {
         /* TODO: Style */
         tile.innerHTML += '<span class="title">' + e.title + '</span>';
     }
 
     // Assign random "theme"(CSS class color)
-    tile.className += " gridTheme" + Math.floor(Math.random() * 3);
+    if (!e.children)
+    {
+        tile.className += " gridTheme" + Math.floor(Math.random() * 3);
+    }
 
 
     // Title box
