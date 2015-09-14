@@ -339,6 +339,7 @@ function procedureTile(e, tile)
     {
         var img = document.createElement("img");
         img.src = e.image;
+        if (e.title) img.alt = e.title;
         img.className = "tileImage";
         tile.appendChild(img);
         tile.className += " disablePadding";
