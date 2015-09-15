@@ -298,6 +298,7 @@ function procedureTile(e, tile)
     {
         tile.innerHTML += '<div style="display:none">' + e.content + '</div>';
         tile.innerHTML += '<span class="title">' + e.title + '</span>';
+        if (!e.image) tile.className += " disablePadding";
         
         //tile.style.display = "inline-block"; // to preserve padding
 
