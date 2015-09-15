@@ -7,15 +7,19 @@ function ge(id)
 // Requires a script
 function freq(f,c)
 {
-    // Check if script hasn't already been included
-    /*if (document.querySelectorAll('script[src="' + (f += ".js") + '"]').length)
-    {
-        return;
-    }*/
     var s = document.createElement("script");
     s.src = f + ".js";
     s.onreadystagechanged = s.onload = c;
     document.body.appendChild(s);
+}
+
+// Requires a script if it hasn't already been included yet
+function cfreq(f,c)
+{
+    if (!document.querySelectorAll('script[src="' + f + '.js"]').length)
+    {
+        freq(f, c);
+    }
 }
 
 // Returns true if the element e has class c

@@ -238,7 +238,7 @@ var tileData =
     },
     {
         "title": "I want more stuff!",
-        "onclick": "if(typeof additionalData==='undefined')freq('js/additionalTiles')"
+        "onclick": "if(typeof additionalData==='undefined')cfreq('js/additionalTiles')"
     },
 
     {
