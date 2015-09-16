@@ -465,6 +465,13 @@ media breakpoints
     }
 }
 
+@media only screen and (max-width: 430px) {
+    #nav div
+    {
+        margin-top: 25px;
+    }
+}
+
 /****************
 keyframes
 ****************/
