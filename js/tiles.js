@@ -592,6 +592,26 @@ function coupleTiles()
         }
     );
 
+    var items = grid.children, sortList = [];
+    var last = items[items.length - 1];
+    grid.removeChild(last);
+
+    for (var i = items.length - 2; i >= 2; i--)
+    {
+        sortList.push(items[i]);
+        grid.removeChild(items[i]);
+    }
+
+    sortList.shuffle();
+
+    sortList.forEach(function(e)
+        {
+            grid.appendChild(e);
+        }
+    );
+
+    grid.appendChild(last);
+
     smallTilesFragment = null;
 }
 
