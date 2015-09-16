@@ -212,6 +212,7 @@ noscript
 #searchBox
 {
     width: 500px;
+    max-width: 95%;
     padding: 8px;
     background-color: #f0f;
     color: white;
