@@ -248,6 +248,10 @@ var tileData =
         "onclick": "var a=['github.com','glslsandbox.com','youtu.be','khanacademy.org','ludumdare.com','cachemonet.com'];window.open('http://'+a[Math.floor(Math.random()*a.length)])",
         "tags": ["Web"]
     },
+    {
+        "title": "Blog",
+        "url": "http://joppiesaus.github.io",
+    },
 
     {
         "mode": "box",
