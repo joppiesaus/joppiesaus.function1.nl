@@ -445,7 +445,7 @@ document.addEventListener("DOMContentLoaded", function()
     // Init background
     if (window.WebGLRenderingContext)
     {
-        freq("js/background3");
+        freq("js/background" + (Math.random() >= 0.5 ? "1" : "3"));
     }
 
     // Create small project tiles out of the data

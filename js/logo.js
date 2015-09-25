@@ -10,6 +10,28 @@ var LEET =
     ['u', '|_|']
 ];
 
+var SILLY_QUOTES =
+[
+    "That wasn't the best idea, was it?",
+    "Pretend that didn't happen.",
+    "A milion closets!",
+    "The fish will seek for its eggs.",
+    "A scary apple a day keeps fish hydrated.",
+    "Closets. Closets everywhere.",
+    "Ninja Pyjama Manager",
+    "Seecret!",
+    "Unexpected T_PAAMAYIM_NEKUDOTAYIM",
+    "Well-Worn",
+    "How could you do this to me?",
+    "WELCOME TO MY HOMEPAGE!!11!!1!!",
+    "Zero is the length of the collection of all elements that are not themselves",
+    "Are you brave enough?",
+    "Cheese. Just cheese.",
+    "MIT Licensed!",
+    "Old computers",
+    "Hello, brave internet user!",
+];
+
 var logo = 
 {
     width: 0,
@@ -88,6 +110,7 @@ var logo =
 
 function setupLogo()
 {
+    ge("sillyquote").innerHTML = SILLY_QUOTES[logo.rnd(SILLY_QUOTES.length)];
     logo.element = ge("logo");
     var l = logo.element.innerHTML;
     

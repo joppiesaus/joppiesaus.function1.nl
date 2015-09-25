@@ -166,11 +166,7 @@ noscript
 
 #sillyquote
 {
-    font-style: italic;
-}
-#sillyquote::before, #sillyquote::after
-{
-    content: "\"";/*not pretty*/
+    font-family: Times;
 }
 
 #footer
