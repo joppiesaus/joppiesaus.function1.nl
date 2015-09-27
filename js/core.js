@@ -51,6 +51,12 @@ Array.prototype.shuffle = function()
     }
 };
 
+// Picks an random element from an array
+Array.prototype.random = function()
+{
+    return this[Math.floor(Math.random() * this.length)];
+};
+
 // Returnss joppiesaus's age
 function joppiesausesAge()
 {

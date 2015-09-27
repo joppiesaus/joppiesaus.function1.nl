@@ -110,7 +110,7 @@ var logo =
 
 function setupLogo()
 {
-    ge("sillyquote").innerHTML = SILLY_QUOTES[logo.rnd(SILLY_QUOTES.length)];
+    ge("sillyquote").innerHTML = SILLY_QUOTES.random();
     logo.element = ge("logo");
     var l = logo.element.innerHTML;
     
