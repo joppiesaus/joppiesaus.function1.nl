@@ -36,7 +36,7 @@ var tileData =
         "title": "About",
         "image": "img/me/me_2015-09-15.jpg",
         "id": "about",
-        "content": "<p>I'm Job van der Zweep, AKA joppiesaus. I'm <span id=\"joppiesausesAge\">?</span> year old. I like to program. On this page you can find stuff I programmed, along with other stuff I did.</p><p>On the top-left you can find various links of websites I like to go to. I have various stuff lying arround there, too.</p><p>Other than programming I like to play video games, paint, longboard, watching videos, eat food, mess arround with electronics, be outside, doing nothing, and other stuff. But it's a list that won't ever be up-to-date thought, it constantly changes.</p><p>If you want a chat, you can email me! <a href=\"mailto:job@function1.nl\"><code>job@function1.nl</code></a></p><p>I hope you have a lot of fun watching this page. Have a nice day!</p>"
+        "content": "<p>Hi! I'm Job van der Zweep, AKA joppiesaus. I'm <span id=\"joppiesausesAge\">?</span> year old. I like to program. On this page you can find stuff I programmed, along with other stuff I did.</p><p>On the top-left you can find various links of websites I like to go to. I have various stuff lying arround there, too.</p><p>Other than programming I like to play video games, paint, longboard, watch videos, eat food, mess arround with electronics, be outside, doing nothing, explore the internet, explore the world, think about stuff, and more. This list won't be very accurate, though</p><p>If you want a chat, you can email me! <a href=\"mailto:job@function1.nl\"><code>job@function1.nl</code></a></p><p>I hope you have a lot of fun watching this page. Have a nice day!</p>"
     },
     {
         "mode": "box",
