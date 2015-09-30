@@ -31,12 +31,9 @@ div
 section
 {
     width: 100%;
-    /*min-height: 100%;*/
     overflow: hidden;
     position: relative;
     z-index: 2; /* background 'n stuff*/
-
-    /*border-bottom: 1px solid brown;*/
 }
 
 .x-align
