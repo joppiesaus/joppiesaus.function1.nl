@@ -216,7 +216,7 @@ noscript
     border: 1px solid #e0e;
     font-weight: bold;
 }
-#searchBox + .tooltip
+/*#searchBox + .tooltip
 {
     display: none;
     position: absolute;
@@ -228,7 +228,7 @@ noscript
 #searchBox:hover + .tooltip
 {
     display: block;
-}
+}*/
 .searchDialog input[type="button"]
 {
     color: white;

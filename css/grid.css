@@ -105,7 +105,7 @@
     margin-bottom: calc(-3em - 10px);
 }
 
-.boxInner .showoffTitle
+/*.boxInner .showoffTitle
 {
     position: absolute;
     top: 0;
@@ -142,9 +142,9 @@
     background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.5));
     
     transition: margin-bottom 0.2s ease-out;
-}
+}*/
 
-.boxInner:hover > .titleBox, .boxInner:hover > .showoffTitle, .boxInner:hover > .showoffDescription
+.boxInner:hover > .titleBox/*, .boxInner:hover > .showoffTitle, .boxInner:hover > .showoffDescription*/
 {
     margin: 0;
 }

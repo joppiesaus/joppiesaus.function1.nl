@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--
+Oh boy... JavaScript is taking over my site! And soon... the world! PANIC THE USERS PANIC WHAT IF THEY DISABLE PANIC HELP PANIC
+
+TODO:
+* OH MY GOD IT'S SO TRIPPY
+* POLISSSH!
+* Q&A
+* Make rnd a func
+
+* A preview button on my old page?
+
+* And now... STYLE!
+* Wide and tall tiles
+* about large nice style -> click -> about text site -> becomes big,
+* Multiple tile sizes
+* Text tiles big title, and then you click on them, they become big! yey
+* Start parsing content from the old site
+* Fix titleBox
+    ! in a category tile, the bottom subtile isn't displayed properly
+    [] must use relative height
+* Is the title effect to distracting/too confusing/inaccessible?
+* improve popup(links?)
+* Tags!
+    [] style them
+* ordering!
+* Fix responsiveness
+* Fix js directory & archive
+* Other content!!1
+-->
+<html>
+<head>
+    <title>joppiesaus!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The webpage of Job van der Zweep AKA joppiesaus, it contains a load of information and funny software!">
+    <meta name="keywords" content="joppiesaus, software, games, stuff, rainbows, derp, code">
+
+
+    <link rel="shortcut icon" type="image/png" href="img/ico/joppiesaus.png">
+    
+    <!-- build:css inline build/css/style.css -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/grid.css">
+    <!-- /build -->
+</head>
+<body>
+    <div id="drawCanvas"></div>
+    
+    <noscript>JavaScript is disabled! Without it, some functionality of this page is lost. I'm doing nothing sketchy, so it's safe to enable on this page!</noscript>
+    
+    <div id="nav">
+        <a href="#about"><div>About</div></a>
+        <a href="#projects"><div>Projects</div></a>
+        <a href="#projects"><div id="menuonoff">Explore</div></a>
+    </div>
+
+    <section id="landing">
+    
+    <div id="links">
+        <a href="http://stackexchange.com/users/3097979/joppiesaus"><img src="img/ico/stackexchange.png" alt="" title="Stack Exchange"/></a>
+        <a href="http://steamcommunity.com/id/joppiesausisok"><img src="img/ico/steam.png" alt="" title="Steam"/></a>
+        <a href="https://www.youtube.com/c/DJoppiesaus"><img src="img/ico/youtube.png" alt="" title="YouTube"/></a>
+        <a href="http://twitch.tv/joppiesausisok/"><img src="img/ico/twitch.png" alt="" title="Twitch"/></a>
+        <a href="http://ludumdare.com/compo/author/job_/"><img src="img/ico/ld.png" alt="" title="Ludum Dare"/></a>
+        <a href="https://www.khanacademy.org/profile/joppiesaus/"><img src="img/ico/khan.png" alt="" title="Khan Academy"/></a>
+        <a href="https://github.com/joppiesaus/"><img src="img/ico/github.png" alt="" title="GitHub"/></a>
+        <a href="mailto:job@function1.nl"><img src="img/ico/email.png" alt="" title="Email me(job@function1.nl)"/></a>
+    </div>
+    
+    <div class="y-align">
+        <div id="logoarea">
+            <p id="sillyquote">That wasn't the best idea, was it?</p>
+            
+            <a href="#projects">
+                <pre id="logo">░░░░▒▀░░▒███░░▒████░░▒████░░▒▀░▒████░▒████░░▒███░░▒█░░▒█░▒████
+░░░░▒█░▒█░░▒█░▒█░░▒█░▒█░░▒█░▒█░▒█░░░░▒█░░░░▒█░░▒█░▒█░░▒█░▒█░░░
+░░░░▒█░▒█░░▒█░▒████░░▒████░░▒█░▒████░░▒██░░▒█████░▒█░░▒█░░▒██░
+▒█░░▒█░▒█░░▒█░▒█░░░░░▒█░░░░░▒█░▒█░░░░░░░▒█░▒█░░▒█░▒█░░▒█░░░░▒█
+░▒███░░░▒███░░▒█░░░░░▒█░░░░░▒█░▒████░▒████░▒█░░▒█░░▒███░░▒████</pre>
+            </a>
+            
+            <p id="logoslogan">I like to program 'n stuff</p>
+        </div>
+    </div>
+    </section>
+
+
+    </section>
+    <section id="projects" class="grid">
+        <noscript>I told you nothing would be here without JavaScript!</noscript>
+        
+        <!-- 2ugly4me -->
+        <div class="searchDialog">
+            <span>
+                <input type="text" id="searchBox" placeholder="Search...">
+                <!--<div class="tooltip">
+                    <h1>Searching tips</h1>
+                    <ul>
+                        <li>Having a property: <code>has:variable</code> Example: <code>has:url</code>
+                        <li>Equals: <code>has:variable(equals)</code> or <code>variable:equals</code> Example: <code>title:foo</code>
+                        <li>Contains: <code>contains:variable(equals)</code> or just no code. Example: <code>contains:title(Sheep)</code> or with arrays: <code>variable:has(property)</code>. Example: <code>tags:has(Web)</code>
+                        <li>Invert stuff with !. Example: <code>!tags:has(Game)</code> will select everything that's not a game.
+                    </ul>
+                </div>-->
+                <input type="button" onclick="applySearchboxFilter()" value="search">
+            </span>
+            <input type="button" onclick="ge('searchBox').value='';restore()" value="clear">
+
+            <span id="tags"></span>
+        </div>
+        <!--<div class="box">
+            <a href="img/athing.png">
+                <div class="boxInner">
+                    <img src="img/athing.png" alt="a picture created in mtpaint">
+                    <div class="showoffTitle">Doom</div>
+                    <div class="showoffDescription">A 3D First-Person Shooter</div>
+                </div>
+            </a>
+        </div>-->
+    </section>
+    <section id="footer">
+        <span><a href="mailto:job@function1.nl">job@function1.nl</a></span>
+        Programs are licensed under <a href="http://function1.nl/p/unlicense.txt">the unlicense</a> if no license provided, <a href="https://github.com/joppiesaus/joppiesaus.function1.nl">website code</a> under the <!--<a href="http://function1.nl/p/mit-license.txt">--><a href="LICENSE.md">MIT license</a>. Looking for more stuff? Check out <a href="archive/1/">the old website</a>.
+    </section>
+    
+    
+    <div id="projectPopupLayer" onclick="closeProjectPopup()" style="display: none"></div>
+
+    <!-- WARNING: Selecting goes by element index, not by class name! -->
+    <div id="projectPopup">
+        <h2 class="projectTitle"></h2>
+        <ul class="links"></ul>
+        <p class="projectDescription"></p>
+        <ul class="tags"></ul>
+
+        <div class="closeButton" onclick="closeProjectPopup()">Close</div>
+    </div>
+
+    <!-- build:js inline build/js/build.js -->
+    <script src="js/core.js"></script>
+    <script src="js/tiles.js"></script>
+    <script async src="js/logo.js"></script>
+    <!-- /build -->
+</body>
+</html>

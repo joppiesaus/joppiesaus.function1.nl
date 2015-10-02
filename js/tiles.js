@@ -237,10 +237,10 @@ var tileData =
         "title": "NEON IT ALLL",
         "onclick": "var style=document.createElement('style');style.innerHTML='*{text-shadow:0 0 3px #f00, 0 0 5px #00f !important}h1,h2{text-shadow:0 0 8px #f00, 0 0 15px #00f !important}';document.getElementsByTagName('head')[0].appendChild(style)",
     },
-    {
+    /*{
         "title": "I want more stuff!",
         "onclick": "if(typeof additionalData==='undefined')cfreq('js/additionalTiles')"
-    },
+    },*/
 
     {
         "mode": "box",
