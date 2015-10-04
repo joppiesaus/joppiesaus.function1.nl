@@ -252,6 +252,10 @@ var tileData =
         "title": "Blog",
         "url": "http://joppiesaus.github.io",
     },
+    {
+        "title": "Cats!",
+        "url": "dl/examples/igm"
+    },
 
     {
         "mode": "box",
