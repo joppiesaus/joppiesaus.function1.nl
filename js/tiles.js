@@ -122,8 +122,8 @@ var tileData =
     },
     {
         "title": "\"Zombie Game\"",
-        "image": "img/zombiegaem.PNG",
-        "description": "A simple little zombie game I made using <a href=\"\">these</a> tutorials to learn more about C++ game development! It was really fun to make! And the game <em>is</em> really fun too!",
+        "image": "img/zombiegeamzrage.PNG",
+        "description": "A simple little zombie game I made using <a href=\"http://youtu.be/81AcHa15H9c\">these</a> tutorials to learn more about C++ game development! It was really fun to make! And the game <em>is</em> really fun too!",
         "links": [["Page", "dl/zombiegame"]],
         "tags": ["Windows", "Linux", "C++", "Game"]
     },
