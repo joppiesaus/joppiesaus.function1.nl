@@ -41,7 +41,7 @@ var tileData =
     {
         "mode": "box",
         "title": "License",
-        "content": "<p>All stuff on this page - except otherwise noted - is licensed under <a href=\"http://function1.nl/p/unlicense.txt\">the unlicense</a>. This doesn't mean I don't like credit, but it does mean you can quickly \"steal\" stuff without attribution, since most of it is made to learn anyway.</p><p><a href=\"https://github.com/joppiesaus/joppiesaus.function1.nl\">This website</a> however is licensed under the <a href=\"LICENSE.md\">MIT license</a>.</p><p>I encourage to make your software <a href=\"http://www.gnu.org/philosophy/free-sw.html\">free</a>(as in not having to pay for it and as in freedom). Because, who <em>doesn't</em> like <a href=\"https://youtu.be/u6XAPnuFjJc\">freedom</a>?<p>"
+        "content": "<p>All stuff on this page - except otherwise noted - is licensed under <a href=\"http://function1.nl/p/unlicense.txt\">the unlicense</a>. This doesn't mean I don't like credit, but it does mean you can quickly \"steal\" stuff without attribution, since most of it is made to learn anyway.</p><p><a href=\"https://github.com/joppiesaus/joppiesaus.function1.nl\">This website</a> however is licensed under the <a href=\"LICENSE.md\">MIT license</a>.</p><p>I encourage to make your software <a href=\"http://www.gnu.org/philosophy/free-sw.html\">free</a>(as in not having to pay for it and as in freedom, <a href=\"https://static.fsf.org/nosvn/FSF30-video/FSF_30_1080p.webm\">video of that</a>). Because, who <em>doesn't</em> like <a href=\"https://youtu.be/u6XAPnuFjJc\">freedom</a>?<p>"
     },
 
     {
