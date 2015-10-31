@@ -1,19 +1,30 @@
 This is my website!
 
-It's very poor right now, so I'm working on a new one!
-
 Feel free to fork, spinoff, pr, comment.
 
 Have fun here!
 
-## About the new site
-
 ### Building
 `grunt`
 
-If you grunt is not found, install it(could be any package manager) `npm install -g grunt`
+This will generate an index.html in the `build` directory with all the resources to load the page.
+
+If grunt is not found, install it(could be any package manager) `npm install -g grunt`
 
 If modules are not found, install them `npm install --production`
+
+#### Building the archiver
+`nim c -d:release arc.nim`
+
+If you don't have Nim yet, [install it](http://nim-lang.org/download.html)!
+
+#### Archiving the website
+`arc index.html js/*.js css/*.css`
+
+Or archive a build instead:
+`arc index.html`
+
+## About the new site
 
 ### Demands
 * Must be easy to use 
