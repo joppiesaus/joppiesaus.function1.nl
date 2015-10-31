@@ -29,7 +29,7 @@ domElement:     After the initial generation, every tile gets a pointer to the D
 */
 
 // I wonder if the wayback machine will like this
-var tileData = 
+var tileData =
 [
     {
         "mode": "box",
@@ -63,7 +63,7 @@ var tileData =
             }
         ]
     },
- 
+
     {
         "mode": "box",
         "title": "Hopeless console RPG's",
@@ -92,7 +92,7 @@ var tileData =
         "links": [["English", "dl/Pinball_en.zip"], ["Dutch", "dl/Pinball_nl.zip"]],
         "tags": ["Windows", "Game"]
     },
-    {                
+    {
         "title": "I AM A SPACECRAFT",
         "description": "So I browsed my projects directory, and I suddenly saw this! It's my very first (XNA) game! I remember it getting declined on indieDB... I also figured out the comets are stolen from <a href=\"http://defcom1.net/xnalessons/xnalevel1lesson05.php\">here</a>, wait... this whole game is from here! Well not completely(*relieving sigh*), because mine has enemys, and powerups, screenshots, and much, much more!<br>Unfortunatly I lost the source code for that. :( It's actually a playable game(!!!), so I decided to give it a honourfull place like here. My highscore is somewhere arround 3000. Have fun with it!",
         "image": "img/immaspacecraaft.PNG",
@@ -253,6 +253,10 @@ var tileData =
         "url": "http://joppiesaus.github.io",
     },
     {
+        "title": "Archive",
+        "url": "/archive"    
+    },
+    {
         "title": "Cats!",
         "url": "dl/examples/igm"
     },
@@ -273,7 +277,7 @@ function procedureTile(e, tile)
 {
     var parent = tile.parentNode;
     tile.style.cursor = "pointer";
-    
+
     if (e.url)
     {
         var a = document.createElement("a");
@@ -308,7 +312,7 @@ function procedureTile(e, tile)
         tile.innerHTML += '<div style="display:none">' + e.content + '</div>';
         tile.innerHTML += '<span class="title">' + e.title + '</span>';
         if (!e.image) tile.className += " disablePadding";
-        
+
         //tile.style.display = "inline-block"; // to preserve padding
 
         // TODO: Fix for small tiles
@@ -343,7 +347,7 @@ function procedureTile(e, tile)
             this.targetMode = this.prevMode;
         };
     }
-    
+
     if (e.image)
     {
         var img = document.createElement("img");
@@ -398,7 +402,7 @@ function procedureTile(e, tile)
                 // And check if the tag has not be found yet
                 if (tags.every(function(globalTag)
                     {
-                        return (tileTag !== globalTag); 
+                        return (tileTag !== globalTag);
                     }
                 ))
                 {
@@ -474,7 +478,7 @@ document.addEventListener("DOMContentLoaded", function()
     tileData.forEach(addTile);
 
     coupleTiles();
-    
+
     ge("joppiesausesAge").textContent = joppiesausesAge();
 
     var sb = ge("searchBox");
@@ -906,7 +910,7 @@ It's the same as has:variable(value)
                     }
                     else
                     {
-                        return f(e); 
+                        return f(e);
                     }
                 }
             ));
@@ -929,13 +933,13 @@ function filter(ff)
     tileData.forEach(function(e)
         {
             var el = e.domElement;
-            
+
             if (!ff(e))
             {
                 if (e.children)
                 {
                     var canRemove = true;
-                    
+
                     e.children.forEach(function(f)
                         {
                             if (ff(f))
@@ -945,10 +949,10 @@ function filter(ff)
                             else
                             {
                                 f.domElement.style.display = "none";
-                            }   
+                            }
                         }
                     );
-                    
+
                     if (canRemove === true)
                     {
                         el.style.display = "none";
@@ -982,22 +986,22 @@ function restore()
 function openProjectPopup(data)
 {
     var pEl = ge("projectPopup");
-    
+
     pEl.children[0].textContent = data.title;
     pEl.children[2].innerHTML = data.description;
-    
+
     // Erase old data if there's any
     pEl.children[1].innerHTML = "";
     pEl.children[3].innerHTML = "";
-    
-    
+
+
     if (data.links)
     {
         data.links.forEach(function(e){
             pEl.children[1].innerHTML += "<li><a href=\"" + e[1] + "\">" + e[0] + "</a>";
         });
     }
-    
+
     if (data.tags)
     {
         data.tags.forEach(function(e){

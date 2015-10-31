@@ -20,15 +20,14 @@ if not existsDir(loc):
 for fileName in files:
     try:
         let dirs = fileName.split({'/'})
-        if dirs.len > 1:
-            var currentDir = loc
-            for i in 0..dirs.len - 2:
-                currentDir &= dirs[i]
-                if not existsDir(currentDir):
-                    createDir(currentDir)
+        var currentDir = loc
+        for i in 0..dirs.len - 2:
+            currentDir &= dirs[i]
+            if not existsDir(currentDir):
+                createDir(currentDir)
 
         var content = readFile(fileName)
- 
+
         for k in replaceCases:
             content = content.replace(k & "/", "/" & k & "/")
 
