@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Give job something!</title>
+    <meta charset="utf-8">
+    <style>
+    body
+    {
+        background-color: #202020;
+        color: #e0e0e0
+    }
+    h1
+    {
+        color: #ff00a1;
+    }
+    a
+    {
+        color: #8080ff;
+    }
+    a:active, a:focus
+    {
+        color: #fff;
+    }
+    a:visited
+    {
+        color: #a080a0;
+    }
+    code
+    {
+        padding: 2px;
+        border-radius: 2px;
+        color: #fff;
+        background-color: #000;
+    }
+    canvas
+    {
+        display: block;
+    }
+
+    .special
+    {
+        animation: rainbow 1s infinite;
+        font-size: 1.24em;
+        text-shadow: 1px 1px #000;
+        font-style: italic;
+    }
+
+    @keyframes rainbow {
+        0% {color: #ff0000;}
+        10% {color: #ff8000;}
+        20% {color: #ffff00;}
+        30% {color: #80ff00;}
+        40% {color: #00ff00;}
+        50% {color: #00ff80;}
+        60% {color: #00ffff;}
+        70% {color: #0080ff;}
+        80% {color: #0000ff;}
+        90% {color: #8000ff;}
+        100% {color: #ff0080;}
+    }
+        </style>
+</head>
+<body>
+    <h1>Give job something!</h1>
+    <noscript>(interactivity with this page won't work because JavaScript is disabled)</noscript>
+
+    <p>Like, <span class="special">bitcoins</span>!</p>
+    Address: <code id="address">1JkuwWziboMSN9cYfK15hooAEExPFbS7LC</code> <button id="address_clipboard_button" onclick="copyAddressToClipboard()">Copy to clipboard</button>
+    <canvas id="address_qr"></canvas>
+
+    <p>Or... <span class="special">Steam items</span>! <a href="https://steamcommunity.com/tradeoffer/new/?partner=150881846&token=LdOYlDqJ">Trade offer link</a>(also for trading :D)</p>
+
+    <p>Things I accept:</p>
+    <ul>
+        <li><em>Anything</em>. I'll probably love any donation, whether it is:
+            <ul>
+                <li>A miniscule bitcion amount
+                <li>A poor CS:GO skin
+                <li>Ugly steam trading cards
+                <li>A useless TF2 item
+                <li>A StatTrak Souvenir AWP Dragon Lore Factory New
+            </ul>
+            Anything is welcome! This is all for fun!
+        </li>
+    </ul>
+
+    <p>Oh, and if you want to be mentioned here, just drop me a line at <code><a href="mailto:job@function1.nl">job@function1.nl</a></code>!</p>
+    <p>Thanks for visiting this Web 1.0 page! Have a nice day!</p>
+    <script src="js/qr.min.js"></script>
+    <script>
+    var addr = document.getElementById("address").textContent;
+    qr.canvas({
+        canvas: document.getElementById("address_qr"),
+        value: addr,
+        size: 8,
+    });
+
+    var copyAddressToClipboard = function()
+    {
+        // Thanks, stackoverflow!
+        // http://stackoverflow.com/a/30810322
+        var textArea = document.createElement("textarea");
+
+        // Place in top-left corner of screen regardless of scroll position.
+        textArea.style.position = 'fixed';
+        textArea.style.top = 0;
+        textArea.style.left = 0;
+
+        // Ensure it has a small width and height. Setting to 1px / 1em
+        // doesn't work as this gives a negative w/h on some browsers.
+        textArea.style.width = '2em';
+        textArea.style.height = '2em';
+
+        // We don't need padding, reducing the size if it does flash render.
+        textArea.style.padding = 0;
+
+        // Clean up any borders.
+        textArea.style.border = 'none';
+        textArea.style.outline = 'none';
+        textArea.style.boxShadow = 'none';
+
+        // Avoid flash of white box if rendered for any reason.
+        textArea.style.background = 'transparent';
+
+        textArea.value = addr;
+
+        document.body.appendChild(textArea);
+
+        textArea.select();
+
+        var err = false;
+
+        try {
+            err = !document.execCommand('copy');
+        } catch (e) {
+            err = true;
+        }
+
+        document.getElementById("address_clipboard_button").textContent = err ? "That went wrong!" : "Copied to clipboard!";
+
+        document.body.removeChild(textArea);
+    }
+    </script>
+
+</body>
+</html>
