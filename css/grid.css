@@ -61,6 +61,7 @@
 {
     color: #fff;
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 5px;
     font-size: 3.8em;
@@ -80,6 +81,11 @@
 .boxInner .tileImage
 {
     height: 100%;
+    transition: transform 0.25s ease;
+}
+.boxInner:hover > .tileImage
+{
+    transform: scale(1.25);
 }
 
 .boxInner > .titleBox
