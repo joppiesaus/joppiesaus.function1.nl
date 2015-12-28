@@ -264,7 +264,7 @@ var tileData =
     {
         "mode": "box",
         "title": "Donations",
-        "content": "If you <em>really</em> like my work, you can donate me your crappy CSGO skins(I love crappy CSGO skins), give me TF2 items, give me your stupid games, or other trash or not-so-trash on <a href=\"https://steamcommunity.com/tradeoffer/new/?partner=150881846&token=LdOYlDqJ\">steam</a>!<br><br>Or, <a href=\"/donate\">bitcion</a>."
+        "content": "If you <em>really</em> like my work, you can donate me your crappy CSGO skins(I love crappy CSGO skins), give me TF2 items, give me your stupid games, or other trash or not-so-trash on <a href=\"https://steamcommunity.com/tradeoffer/new/?partner=150881846&token=LdOYlDqJ\">steam</a>!<br><br>Or, <a href=\"/donate\">bitcoin</a>."
     }
 ];
 
