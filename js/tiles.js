@@ -202,6 +202,13 @@ var tileData =
         "links": [["Solve that mystery!(or just have fun)", "dl/untitleddotexe.zip"]],
         "tags": ["Windows", "Console", "C#", "Toy"]
     },
+    {
+        "title": "Nim chat",
+        "image": "img/nimchat.PNG",
+        "description": "A bundle of programs which together form a simple chat application, written in Nim! Open your ports, tell your friends, and let the chatting commence!",
+        "links": [["Linux", "dl/nimchat_linux.tar.xz"], ["Source", "dl/nimchat_source.zip"], ["Video", "https://youtu.be/sgROXKcyoxE"]],
+        "tags": ["Windows", "Linux", "Nim"]
+    },
 
 
     {
