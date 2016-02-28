@@ -140,6 +140,11 @@ noscript
     image-rendering: -o-crisp-edges;
     image-rendering:-webkit-optimize-contrast;
 }
+#links img:hover
+{
+    position: relative;
+    top: 5px;
+}
 
 #logoarea
 {
