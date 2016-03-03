@@ -1,146 +1,165 @@
 <!DOCTYPE html>
 <!--
-Oh boy... JavaScript is taking over my site! And soon... the world! PANIC THE USERS PANIC WHAT IF THEY DISABLE PANIC HELP PANIC
-
-TODO:
-* OH MY GOD IT'S SO TRIPPY
-* POLISSSH!
-* Q&A
-* Make rnd a func
-
-* A preview button on my old page?
-
-* And now... STYLE!
-* Wide and tall tiles
-* about large nice style -> click -> about text site -> becomes big,
-* Multiple tile sizes
-* Text tiles big title, and then you click on them, they become big! yey
-* Start parsing content from the old site
-* Fix titleBox
-    ! in a category tile, the bottom subtile isn't displayed properly
-    [] must use relative height
-* Is the title effect to distracting/too confusing/inaccessible?
-* improve popup(links?)
-* Tags!
-    [] style them
-* ordering!
-* Fix responsiveness
-* Fix js directory & archive
-* Other content!!1
+Huge thanks to https://anlucas.neocities.org for letting me use his awesome gifs so I could make this webpage, which is a joke
+I like the webpage tho
 -->
 <html>
 <head>
-    <title>joppiesaus!</title>
+    <title>WELCOME TO THE LAND OF JOPPIESAUS</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="The webpage of Job van der Zweep AKA joppiesaus, it contains a load of information and funny software!">
     <meta name="keywords" content="joppiesaus, software, games, stuff, rainbows, derp, code">
 
-
     <link rel="shortcut icon" type="image/png" href="img/ico/joppiesaus.png">
 
-    <!-- build:css inline build/css/style.css -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/grid.css">
-    <!-- /build -->
 </head>
 <body>
+    <!--[if IE]>
+    <h1>HI I SEE YOU ARE USING A VERY GOOD BROWSER I LIKE YOU :))))</h1>
+    <![endif]-->
+
     <div id="drawCanvas"></div>
 
-    <noscript>JavaScript is disabled! Without it, some functionality of this page is lost. I'm doing nothing sketchy, so it's safe to enable on this page!</noscript>
-
-    <div id="nav">
-        <a href="#about"><div>About</div></a>
-        <a href="#projects"><div>Projects</div></a>
-        <a href="#projects"><div id="menuonoff">Explore</div></a>
-    </div>
+    <audio id="welcome_sound" src="dl/welcome.wav"></audio>
 
     <section id="landing">
 
     <div id="links">
         <a href="http://stackexchange.com/users/3097979/joppiesaus"><img src="img/ico/stackexchange.png" alt="" title="Stack Exchange"/></a>
-        <a href="http://steamcommunity.com/id/joppiesausisok"><img src="img/ico/steam.png" alt="" title="Steam"/></a>
-        <a href="https://www.youtube.com/c/DJoppiesaus"><img src="img/ico/youtube.png" alt="" title="YouTube"/></a>
-        <a href="http://twitch.tv/joppiesausisok/"><img src="img/ico/twitch.png" alt="" title="Twitch"/></a>
-        <a href="http://ludumdare.com/compo/author/job_/"><img src="img/ico/ld.png" alt="" title="Ludum Dare"/></a>
-        <a href="https://www.khanacademy.org/profile/joppiesaus/"><img src="img/ico/khan.png" alt="" title="Khan Academy"/></a>
-        <a href="https://github.com/joppiesaus/"><img src="img/ico/github.png" alt="" title="GitHub"/></a>
-        <a href="mailto:job@function1.nl"><img src="img/ico/email.png" alt="" title="Email me(job@function1.nl)"/></a>
+        <a href="http://steamcommunity.com/id/joppiesausisok"><img src="img/ico/steam.png" alt="" title="gaem store"/></a>
+        <a href="https://www.youtube.com/c/DJoppiesaus"><img src="img/ico/youtube.png" alt="" title="video"/></a>
+        <a href="http://twitch.tv/joppiesausisok/"><img src="img/ico/twitch.png" alt="" title="??? idk magic from futuere"/></a>
+        <a href="http://ludumdare.com/compo/author/job_/"><img src="img/ico/ld.png" alt="" title="vuideo game makers site"/></a>
+        <a href="https://www.khanacademy.org/profile/joppiesaus/"><img src="img/ico/khan.png" alt="" title="fun school"/></a>
+        <a href="https://github.com/joppiesaus/"><img src="img/ico/github.png" alt="" title="age of empires cheat codes"/></a>
+        <a href="mailto:job@function1.nl"><img style="width: initial;" src="img/mailput.gif" alt="" title="EMail ME ;-)"/></a>
     </div>
 
-    <div class="y-align">
-        <div id="logoarea">
-            <p id="sillyquote">That wasn't the best idea, was it?</p>
+    <div id="badge"><img src="img/oldweb/worldwideweb_badge.gif" /></div>
 
-            <a href="#projects">
-                <pre id="logo">░░░░▒▀░░▒███░░▒████░░▒████░░▒▀░▒████░▒████░░▒███░░▒█░░▒█░▒████
-░░░░▒█░▒█░░▒█░▒█░░▒█░▒█░░▒█░▒█░▒█░░░░▒█░░░░▒█░░▒█░▒█░░▒█░▒█░░░
-░░░░▒█░▒█░░▒█░▒████░░▒████░░▒█░▒████░░▒██░░▒█████░▒█░░▒█░░▒██░
-▒█░░▒█░▒█░░▒█░▒█░░░░░▒█░░░░░▒█░▒█░░░░░░░▒█░▒█░░▒█░▒█░░▒█░░░░▒█
-░▒███░░░▒███░░▒█░░░░░▒█░░░░░▒█░▒████░▒████░▒█░░▒█░░▒███░░▒████</pre>
-            </a>
-
-            <p id="logoslogan">I like to program 'n stuff</p>
-        </div>
-    </div>
-    </section>
-
+    <span class="neon">Hello, brave internet surfer, welcome to:</span>
+    <h1 onclick="var e = document.getElementById('welcome_sound'); e.currentTime = 0; e.play();">JOB'S WEB PAGE</h1>
+    <span class="neon">Have fun here</span>
 
     </section>
-    <section id="projects" class="grid">
-        <noscript>I told you nothing would be here without JavaScript!</noscript>
+    <section id="about">
+        <div id="aboutdiv">
+            <p>Hello, my name is <em>Job</em>. Job van der Zweep. I like computers and skeletons. And stuff. I like cats very much also. <img src="img/oldweb/hot.gif" style="height: 1em;" /><a href="img/cat_torture.webm" target="_blank">Here's a cat getting pet :D</a>
+            That brings me to my cat I have a cat but I wouldn't pet her that way because she might then bite or something I don't like that but I can pet her differently I love my cat</p>
 
-        <!-- 2ugly4me -->
-        <div class="searchDialog">
-            <span>
-                <input type="text" id="searchBox" placeholder="Search...">
-                <!--<div class="tooltip">
-                    <h1>Searching tips</h1>
-                    <ul>
-                        <li>Having a property: <code>has:variable</code> Example: <code>has:url</code>
-                        <li>Equals: <code>has:variable(equals)</code> or <code>variable:equals</code> Example: <code>title:foo</code>
-                        <li>Contains: <code>contains:variable(equals)</code> or just no code. Example: <code>contains:title(Sheep)</code> or with arrays: <code>variable:has(property)</code>. Example: <code>tags:has(Web)</code>
-                        <li>Invert stuff with !. Example: <code>!tags:has(Game)</code> will select everything that's not a game.
-                    </ul>
-                </div>-->
-                <input type="button" onclick="applySearchboxFilter()" value="search">
-            </span>
-            <input type="button" onclick="ge('searchBox').value='';restore()" value="clear">
+            <p>You are on my new and improved website on the world wide web. I hope you like it I have put in a lot of effort <img style="height: 1em;" src="img/oldweb/smiley.gif" />. Don't you like it>??? DON'T WORRY! ITS STILL UNDER CONSTTRURCTION!!!@@@@! ;)))))NBSP
+            Oh did I tell you I like bitcoins they're like coins on the internet now you can have a lot o muns using bitcoin TODAY1!!</p>
 
-            <span id="tags"></span>
+            <p class="fact">Egyptians were buried with their arms crossed because they believed there were countless of waterslides to ride in the afterlife?<sup>[citation needed]</sup></p>
+
+            <table id="aboutme">
+                <tr><th colspan="2">Me</th></tr>
+                <tr><td>Name</td><td>Job</td></tr>
+                <tr><td>Gender</td><td>Male</tr>
+                <tr><td>Born</td><td>March 3, 1999</td></tr>
+                <tr><td>Job</td><td>That's my name</td></tr>
+                <tr><td>Height</td><td>Long</td></tr>
+                <tr><td>Weight</td><td>Not very</td></tr>
+                <tr><td>Religion</td><td>None</td></tr>
+                <tr><td>Political views</td><td>Confused</td></tr>
+                <tr><td>Economy</td><td>Ok</td></tr>
+                <tr><td>Intelligence</td><td>Yes</td></tr>
+                <tr><td>Humor</td><td>Bad</td></tr>
+                <tr><td>Seecrets</td><td>Secret</td></tr>
+                <tr><td>E-Mail</td><td><a href="mailto:job@function1.nl"><code>job@function1.nl</code></a></td></tr>
+            </table>
+
+            Games I like to play:
+            <ul>
+                <li>Minecraft
+                <li>Age of Empires
+                <li>Counter-Strike
+                <li>Commander Keen
+            </ul>
+
+            <img style="float: right; display: iblock; animation: skeltal 3.5s linear infinite" title="DON'T LET HIM SNEAK AWAY WITH THE POPCORN" src="img/oldweb/skeltor.gif" />
+
+            Stuff I like to do:
+            <ul>
+                <li>Gaming
+                <li>Programming
+                <li>Longboarding
+                <li>Painting
+                <li>Hang out with friends
+                <li>Eating
+            </ul>
+
+            Stuff I like to eat:
+            <ol>
+                <li>Pizza
+                <li>Pizza
+                <li>Pizza
+            </ol>
+
+
+            <p>You know I once was watching tv early in the morning like 4 am because I was sick and I had temporarily <a href="https://en.wikipedia.org/wiki/Insomnia">insomnia</a> and then this ad popped up it
+                told me I could get very good cooking pans for a little price and I thought of all the possibilities and then it got even better because if you ordered one you would get another one
+                for free plus a small one and some useless napkin or something idk but yeah I thought about it cuz then I could marry someone and i have those pans in the closet secretly then one day
+                she tells me she wants to brake up with me and then I get the pans and throw them at her wouldn't that be wonderful and then we go to a terrace and we get together again and everyone was nice again
+                but then on the terrace I hear someone scream HAIL XENU and then he exploded with great impact and she then dies and I cry as a skeleton because I exploded too but didn't die and many other people survived as skeletons it had something todo
+                with cthulu the nice monster I can't remember that part of the story it's sad because it was really cool yeah but that didn't stop me from chacing my dream of becoming the best ice cream seller of the universe even if I
+                was a widow skeleton so I went to the ISS and became it and I was very happy and stuff and then I die</p>
+
+            <p class="fact">This website is actually not made by a 13-year-old 1996?</p>
+            <p>SECRET MINECRAFT CRAFTING RECIPES</p>
+
         </div>
-        <!--<div class="box">
-            <a href="img/athing.png">
-                <div class="boxInner">
-                    <img src="img/athing.png" alt="a picture created in mtpaint">
-                    <div class="showoffTitle">Doom</div>
-                    <div class="showoffDescription">A 3D First-Person Shooter</div>
-                </div>
-            </a>
-        </div>-->
+    </section>
+    <section id="downloads">
+        <table id="grid">
+            <tr>
+                <td>
+                    <img src="img/oldweb/skeltal.gif" />
+                    HI MI NAME IS SKELTAL
+                </td>
+                <td>
+                    <a href="img/oldweb/skeltal.gif">download <img src="img/oldweb/floppysave.gif" /></a>
+                </td>
+            </tr>
+        </table>
     </section>
     <section id="footer">
+        <div id="footerbuttons">
+            <img src="img/oldweb/button/1dlb.gif" />
+            <img src="img/oldweb/button/800x600.gif" />
+            <img src="img/oldweb/button/bookmark_this_page.gif" />
+            <img src="img/oldweb/button/getacomp.jpg" />
+            <img src="img/oldweb/button/ie_animated.gif" />
+            <img src="img/oldweb/button/ieexplode.gif" />
+            <img src="img/oldweb/button/ie_logo.gif" />
+            <a href="https://anlucas.neocities.org/"><img src="img/oldweb/button/its_good_to_share.gif" /></a>
+            <img src="img/oldweb/button/javalobbybtn.gif" />
+            <img src="img/oldweb/button/javanow.gif" />
+            <img src="img/oldweb/button/noframes.gif" />
+            <img src="img/oldweb/button/noteoth2.gif" />
+            <img src="img/oldweb/button/anticoderun.gif" />
+            <img src="img/oldweb/button/nukeieani.gif" />
+            <img src="img/oldweb/button/quicktime6req.gif" />
+            <img src="img/oldweb/button/schoolsucks.gif" />
+            <img src="img/oldweb/button/sf_logo.gif" />
+            <a href="https://twitter.com/iamdevloper/status/676695839524282368"><img src="img/oldweb/button/vim.gif" /></a>
+            <img src="img/oldweb/button/windows_3_1_no.gif" />
+        </div>
+    </section>
+    <script src="js/stuff.js"></script>
+    <!--<section id="footer">
         <span><a href="mailto:job@function1.nl">job@function1.nl</a></span>
         Programs are licensed under <a href="http://function1.nl/p/unlicense.txt">the unlicense</a> if no license provided, <a href="https://github.com/joppiesaus/joppiesaus.function1.nl">website code</a> under the <a href="LICENSE.md">MIT license</a>. Looking for more stuff? Check out <a href="archive/1/">the old website</a>.
-    </section>
+    </section>-->
 
-
-    <div id="projectPopupLayer" onclick="closeProjectPopup()" style="display: none"></div>
-
-    <!-- WARNING: Selecting goes by element index, not by class name! -->
-    <div id="projectPopup">
-        <h2 class="projectTitle"></h2>
-        <ul class="links"></ul>
-        <p class="projectDescription"></p>
-        <ul class="tags"></ul>
-
-        <div class="closeButton" onclick="closeProjectPopup()">Close</div>
-    </div>
-
-    <!-- build:js inline build/js/build.js -->
-    <script src="js/core.js"></script>
+    <!-- abuild:js inline build/js/build.js -->
+    <!--<script src="js/core.js"></script>
     <script src="js/tiles.js"></script>
     <script async src="js/logo.js"></script>
     <!-- /build -->
+
+    <!--<script src="lib/bsod.js"></script>-->
 </body>
 </html>
