@@ -23,6 +23,10 @@ var tileData =
         "url": "https://www.khanacademy.org/computer-programming/3d-out-of-text/4723472598171648",
         "tags": ["Web", "JavaScript", "Toy"]
     },
+    {
+        "title": "VERY IMPORTANT news about Microsoft FrontPage Express",
+        "content": "Listen, if you really want to reach this level of web development, you've got to learn HTML. FrontPage just can't achieve this level of complexity. And, you'll learn something and you'll be very proud of yourself and you'll have a very beautifol website. Oh and you'll make Richard Stallman very happy, too. It does not take very much html to gain <b><u style=\"color: #f00\">PRO TALENT HTML MASTER</u></b> i have found a very good site for it <a href=\"https://www.khanacademy.org/computing/computer-programming/html-css\">HERE IT IS</a><br>OH and here are some tips on making THE <em>PERFECT</em> website:<ul><li>Don't use frontpage express or dreamweaver also<li>Have fun making it is very importnat. <u style=\"color:#f00\">NO FUN MEANS NO WEBSITE.</u><li>you don't need a gaming pc but if you have one you could use it if you like<li>Start simple<li>Tell something about yourself<li>this step is very optional but it's cool add pictures to your website like this one: <img style=\"float: right\" src=\"img/oldweb/skull.gif\" /><li>tell everyone about your website that is not made with frontpage express but don't tell your parents because they might just think frontpage express is the best way and you'll be into some <em>big</em> trouble</ul>(Oh and <a href=\"//neocities.org\">neocities</a> is a great way to put your pages online)"
+    },
 
     {
         "title": "Motorcycle",
@@ -45,6 +49,10 @@ var tileData =
         "image": "img/Pinball.PNG",
         "links": [["English", "dl/Pinball_en.zip"], ["Dutch", "dl/Pinball_nl.zip"]],
         "tags": ["Windows", "Game"]
+    },
+    {
+        "title": "sleepover tutorial",
+        "content": "okay so it's the time again where suddenly people are on your doorstep and they want a sleepover and you can't remember that you invited them and stuff but you have to have a sleepover well here are some tips: <ul><li>Have too much tasty food and drinks<li>Play a scary movie(beware tho a melachonic one might kill the mood)<li>Organize a LAN and play Counter-Strike competitively<ul><li>Multiple maps<li>Bo5<li>Prize is food<li>losers get also food</ul><li>Forget about the time<li>Bring cuddly things<li>Watch stars<li>WATCH MOVIES WITH DVD XD<li>MAKE MY FAMOUS RECIPE OF POPCORN ^ ^<li>Pizza<li>Talk about interesting topics<li>Have a programming competition<li>Play games<li>Speedrun games<li>Watch live streams/tournaments<li>Browse the great web<li>Board games<li>Don't let your dreams be memes<li>??? ( ͡° ͜ʖ ͡°)<li>Order pizza<li>Bake cookies<li>Make pizza<li>dunno<li>Invite people<li>If everything else is due, play \"truth or dare\", and let the war begin</ul>"
     },
     {
         "title": "I AM A SPACECRAFT",
@@ -213,6 +221,9 @@ var linkpictures = [
     "cellflash.gif",
     "floppysave.gif",
     "hot.gif",
+    "hot2.gif",
+    "eyemove.gif",
+    "bluscrn.gif",
     "point.gif",
     "lavalamp_blue.gif",
 ]
@@ -253,6 +264,7 @@ window.onload = function()
             var image = document.createElement("img");
             image.src = e.image;
             image.alt = e.image;
+            image.className = "thumbnail";
             firstColumn.appendChild(image);
         }
 
