@@ -57,6 +57,7 @@ div
 {
     padding: 5px;
     background-image: url("../img/oldweb/starsbg.gif");
+    /*background-attachment: fixed;*/
 }
 #grid
 {
@@ -97,6 +98,10 @@ div
 {
     border: 1px solid #f0f;
 }
+#grid td:nth-child(2) img
+{
+    display: inline;
+}
 #grid td:nth-child(2) img:hover
 {
     animation: rotatotomato .33s linear;
@@ -128,6 +133,7 @@ div
 #about
 {
     background-image: url("../img/oldweb/starbg.gif");
+    /*background-attachment: fixed;*/
 }
 #aboutdiv
 {
@@ -171,7 +177,7 @@ div
 {
     text-align: center;
     margin: 0 auto;
-    width: 500px;
+    max-width: 500px;
 }
 #footerbuttons img
 {
@@ -293,6 +299,13 @@ media breakpoints
         width: 82%;
     }
 }
+/* SOMETHING SMALL */
+@media only screen and (max-width: 542px) {
+    #grid
+    {
+        width: 96%;
+    }
+}
 
 .neon
 {
@@ -312,29 +325,29 @@ media breakpoints
 /****************
 inline styling
 ****************/
-/*.warning
+.warning
+{
+    cursor: help;
+    font-style: italic;
+}
+.warning:hover
 {
     color: #FFF;
     background-color: #F00;
 }
-.warning:hover
-{
-    color: #F00;
-    background-color: #FFF;
-}
 .warning::before
 {
+    font-style: normal;
     content: "WARNING: ";
     font-weight: bold;
 }
 
-code
+#grid code
 {
     padding: 0;
     padding-top: 0.2em;
     padding-bottom: 0.2em;
     margin: 0;
     border-radius: 3px;
-    background-color: rgba(0,0,0,0.04);
+    background-color: rgba(39, 0, 255, 0.48);
 }
-*/
