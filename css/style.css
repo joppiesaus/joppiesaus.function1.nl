@@ -37,6 +37,44 @@ div
     z-index: 100;
 }
 
+#introacid
+{
+    display: none;
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    bottom: 0;
+    animation: videoacid 4s ease-in-out alternate infinite;
+    font-weight: bold;
+    font-size: 5em;
+    font-family: Comic Sans, Comic Sans MS, cursive;
+}
+
+#introacid > div
+{
+    animation: videoacidinner 0.5s linear alternate infinite;
+}
+
+@keyframes videoacid
+{
+    0% { color: #F00; left: 1%; top: 5%; transform: initial; }
+    25% { color: #0F0; left: 70%; top: 80%; transform: rotateY(180deg); }
+    50% { color: #0FF; left: 1%; top: 80%; transform: rotate3d(0, 0, 1, 180deg); }
+    75% { color: #F1F; left: 70%; top: 5%; transform: rotate3d(1, 1, 1, 360deg); }
+    100% { color: #FF0; left: 22%; top: 42%; transform: rotate3d(0, 0, 1, 10deg); }
+}
+
+@keyframes videoacidinner
+{
+    0% { font-size: 0.9em; text-shadow: 0 0 10px red, 0 0 50px #f0f, rgba(0, 255, 90, 0.78) 4px 4px 0px; }
+    50% { text-shadow: 2px 0 0 rgba(42, 255, 255, .95),
+        4px 0 0 rgba(33, 33, 234, .9),
+        -2px 0 0 rgba(255, 255, 38, .95),
+        -4px 0 0 rgba(245, 12, 12, 7);
+    }
+    100% { font-size: 1.25em; text-shadow: -10px 0 18px rgb(118, 0, 247), 0 3px 4px rgb(0, 0, 0), 15px 0 10px #F00, #ff0 4px 8px 0px; }
+}
+
 #landing
 {
     padding: 10px;

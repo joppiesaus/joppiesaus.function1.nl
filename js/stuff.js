@@ -338,18 +338,13 @@ var playIntro = function()
     vid.style.display = "block";
     vid.currentTime = 0;
     vid.play();
+
+    document.getElementById("introacid").style.display = "block";
 };
 
 var onIntroPause = function()
 {
     var vid = document.getElementById("introvid");
     vid.style.display = "none";
-};
-
-var cancelIntro = function()
-{
-    var vid = document.getElementById("introvid");
-    vid.style.display = "none";
-    vid.currentTime = 0;
-    vid.play();
+    document.getElementById("introacid").style.display = "none";
 };
