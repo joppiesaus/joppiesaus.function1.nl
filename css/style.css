@@ -326,11 +326,13 @@ I feel bad.*/
     image-rendering:-moz-crisp-edges;
     image-rendering: -o-crisp-edges;
     image-rendering:-webkit-optimize-contrast;
+    transition: filter .5s ease-in;
 }
 #links img:hover
 {
     position: relative;
     top: 5px;
+    filter: hue-rotate(360deg) saturate(7);
 }
 
 /****************
